@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
+
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
     private String[] names = {"Banner", "仿QQ小气泡", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画"};
     private Context context;
@@ -36,6 +38,12 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                 switch ((int) v.getTag()) {
                     case 1:
                         context.startActivity(new Intent(context, TestActivity2.class));
+                        break;
+                    case 3:
+                        context.startActivity(new Intent(context, ImageSelectorTestActivity.class));
+                        break;
+                    case 5:
+                        context.startActivity(new Intent(context, VideoCacheTestActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));
