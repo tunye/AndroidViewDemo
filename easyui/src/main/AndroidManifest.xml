@@ -1,2 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.buaa.ct.easyui"/>
+          package="com.buaa.ct.easyui">
+
+    <application>
+        <activity android:name=".DraggableFlag.DraggableFlagTestActivity"/>
+        <activity android:name=".Banner.BannerTestActivity"/>
+    </application>
+</manifest>

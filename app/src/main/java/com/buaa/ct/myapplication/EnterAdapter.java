@@ -10,10 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.buaa.ct.easyui.Banner.BannerTestActivity;
+import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "仿QQ小气泡", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画"};
+    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画"};
     private Context context;
 
     public EnterAdapter(Context context) {
@@ -36,8 +38,11 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
             @Override
             public void onClick(View v) {
                 switch ((int) v.getTag()) {
+                    case 0:
+                        context.startActivity(new Intent(context, BannerTestActivity.class));
+                        break;
                     case 1:
-                        context.startActivity(new Intent(context, TestActivity2.class));
+                        context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
                         break;
                     case 3:
                         context.startActivity(new Intent(context, ImageSelectorTestActivity.class));

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="draggableflag">
+        <attr name="roundcolor" format="color" />
+        <attr name="textcolor" format="color" />
+        <attr name="textsize" format="integer" />
+        <attr name="max_move" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="anim_interval" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="bannerview">
+        <attr name="banner_align">
+            <enum name="LEFT" value="0" />
+            <enum name="CENTER" value="1" />
+            <enum name="RIGHT" value="2" />
+        </attr>
+        <attr name="banner_select_color" format="color" />
+        <attr name="banner_unselected_color" format="color" />
+        <attr name="banner_shadow_color" format="color" />
+        <attr name="banner_auto_start" format="boolean" />
+    </declare-styleable>
+</resources>
