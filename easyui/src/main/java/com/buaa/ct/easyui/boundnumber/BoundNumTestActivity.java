@@ -67,7 +67,7 @@ public class BoundNumTestActivity extends Activity {
         number5.setOnEnd(new RiseNumberTextView.EndListener() {
             @Override
             public void onEndFinish() {
-                Toast.makeText(BoundNumTestActivity.this, number5.getText() + "is faster!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BoundNumTestActivity.this, number5.getText() + " is faster!", Toast.LENGTH_SHORT).show();
             }
         });
     }
