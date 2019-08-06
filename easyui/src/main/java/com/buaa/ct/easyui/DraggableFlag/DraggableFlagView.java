@@ -28,26 +28,9 @@ import android.widget.RelativeLayout;
 import com.buaa.ct.easyui.R;
 
 public class DraggableFlagView extends View {
-    private static final String TAG = DraggableFlagView.class.getSimpleName();
+    public static final int MIN_RADIUS = 2;
     private Context context;
-
-    public static interface OnDraggableFlagViewListener {
-        /**
-         * 拖拽销毁圆点后的回调
-         *
-         * @param view
-         */
-
-        void onFlagUnDismiss(DraggableFlagView view);
-
-        void onFlagDismiss(DraggableFlagView view);
-    }
-
     private OnDraggableFlagViewListener onDraggableFlagViewListener;
-
-    public void setOnDraggableFlagViewListener(OnDraggableFlagViewListener onDraggableFlagViewListener) {
-        this.onDraggableFlagViewListener = onDraggableFlagViewListener;
-    }
 
     private int textColor = Color.WHITE;
     private int patientColor = Color.RED;
@@ -73,12 +56,10 @@ public class DraggableFlagView extends View {
 
     private Paint paint; // 绘制圆形图形
     private Paint textPaint; // 绘制圆形图形
-    private Paint.FontMetrics textFontMetrics;
 
     private float downX = Float.MAX_VALUE;
     private float downY = Float.MAX_VALUE;
     private int[] location;
-    private int[] fixLocation;
     private int[] exposeDrawable = {R.drawable.tips_bubble_idp, R.drawable.tips_bubble_idq, R.drawable.tips_bubble_idr, R.drawable.tips_bubble_ids, R.drawable.tips_bubble_idt};
 
     private Triangle triangle = new Triangle();
@@ -88,37 +69,11 @@ public class DraggableFlagView extends View {
     private ValueAnimator rollBackAnim, exposeAnim;
 
     public DraggableFlagView(Context context) {
-        super(context);
-        init(context);
+        this(context,null);
     }
 
     public DraggableFlagView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        if (attrs != null) {
-            TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.draggableflag);
-            assert a != null;
-            maxMoveLength = a.getDimensionPixelSize(R.styleable.draggableflag_max_move, maxMoveLength);
-            if (maxMoveLength == 0) {
-                maxMoveLength = getDeviceHeight(context) / 6;
-            }
-            patientColor = a.getColor(R.styleable.draggableflag_roundcolor, patientColor);
-            textColor = a.getColor(R.styleable.draggableflag_textcolor, textColor);
-            text = a.getString(R.styleable.draggableflag_text);
-            if (text == null || "".equals(text)) {
-                text = "0";
-            }
-            textSize = a.getInt(R.styleable.draggableflag_textsize, textSize);
-            animInterval = a.getInt(R.styleable.draggableflag_anim_interval, 600);
-            a.recycle();
-        } else {
-            textColor = Color.WHITE;
-            patientColor = Color.RED;
-            textSize = 12;
-            maxMoveLength = getDeviceHeight(context) / 6;
-            text = "0";
-            animInterval = 600;
-        }
-        init(context);
+        this(context,attrs,0);
     }
 
     public DraggableFlagView(Context context, AttributeSet attrs, int defStyle) {
@@ -151,7 +106,6 @@ public class DraggableFlagView extends View {
 
     private void init(Context context) {
         this.context = context;
-        fixLocation = new int[]{0, 0};
         setBackgroundColor(Color.TRANSPARENT);
         // 设置绘制flag的paint
         paint = new Paint();
@@ -164,7 +118,6 @@ public class DraggableFlagView extends View {
         textPaint.setColor(textColor);
         textPaint.setTextSize(ScreenUtil.sp2px(context, textSize));
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textFontMetrics = paint.getFontMetrics();
     }
 
     @Override
@@ -284,7 +237,7 @@ public class DraggableFlagView extends View {
             case MotionEvent.ACTION_DOWN:
                 isTouched = true;
                 this.setLayoutParams(newLp);
-                changeViewHeight(this, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+                changeViewWidthAndHeight(this, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 postInvalidate();
                 endPoint.x = (int) downX;
                 endPoint.y = (int) downY;
@@ -293,7 +246,6 @@ public class DraggableFlagView extends View {
                 postInvalidate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                isTouched = true;
                 // 计算直角边和斜边（用于计算绘制两圆之间的填充去）
                 triangle.deltaX = event.getX() - downX;
                 triangle.deltaY = -1 * (event.getY() - downY); // y轴方向相反，所以需要取反
@@ -309,7 +261,7 @@ public class DraggableFlagView extends View {
                     startExposeAnimation(animInterval);/*ms*/
                 } else { // 触发还原动画
                     this.setLayoutParams(originLp);
-                    changeViewHeight(this, originWidth, originHeight);
+                    changeViewWidthAndHeight(this, originWidth, originHeight);
                     if (null != onDraggableFlagViewListener) {
                         onDraggableFlagViewListener.onFlagUnDismiss(this);
                     }
@@ -331,7 +283,7 @@ public class DraggableFlagView extends View {
         isArrivedMaxMoved = false;
         curRadius = originRadius;
         this.setLayoutParams(originLp);
-        changeViewHeight(this, originWidth, originHeight);
+        changeViewWidthAndHeight(this, originWidth, originHeight);
         postInvalidate();
     }
 
@@ -347,10 +299,9 @@ public class DraggableFlagView extends View {
         } else {
             isArrivedMaxMoved = false;
             float calcRadius = (1 - 1f * distance / maxMoveLength) * originRadius;
-            float maxRadius = ScreenUtil.dip2px(context, 2);
-            curRadius = (int) Math.max(calcRadius, maxRadius);
+            float minRadius = ScreenUtil.dip2px(context, MIN_RADIUS);
+            curRadius = (int) Math.max(calcRadius, minRadius);
         }
-
     }
 
     public void reset() {
@@ -358,19 +309,10 @@ public class DraggableFlagView extends View {
     }
 
     public void dismiss() {
-        this.setLayoutParams(newLp);
-        changeViewHeight(this, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        postInvalidate();
         startExposeAnimation(animInterval);
     }
 
-    /**
-     * 改变某控件的高度
-     *
-     * @param view
-     * @param height
-     */
-    private void changeViewHeight(View view, int width, int height) {
+    private void changeViewWidthAndHeight(View view, int width, int height) {
         ViewGroup.LayoutParams lp = view.getLayoutParams();
         if (null == lp) {
             lp = originLp;
@@ -479,16 +421,15 @@ public class DraggableFlagView extends View {
         textPaint.setTextSize(ScreenUtil.sp2px(context, textSize));
     }
 
-    public void setFixLocation(int[] location) {
-        this.fixLocation[0] = ScreenUtil.dip2px(context, location[0]);
-        this.fixLocation[1] = ScreenUtil.dip2px(context, location[1]);
-    }
-
-    public void setMaxMove(int maxmove) {
-        maxMoveLength = maxmove;
+    public void setMaxMove(int maxMove) {
+        maxMoveLength = maxMove;
     }
 
     public void setAnimInterval(int interval) {
         animInterval = interval;
+    }
+
+    public void setOnDraggableFlagViewListener(OnDraggableFlagViewListener onDraggableFlagViewListener) {
+        this.onDraggableFlagViewListener = onDraggableFlagViewListener;
     }
 }

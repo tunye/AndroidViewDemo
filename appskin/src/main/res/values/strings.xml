@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TestSkin2</string>
+    <!-- 下拉刷新相关字符资源 -->
+    <string name="pull_to_refresh_pull_label">下拉刷新</string>
+    <string name="pull_to_refresh_release_label">松开刷新</string>
+    <string name="pull_to_refresh_refreshing_label">加载中...</string>
+    <string name="pull_to_refresh_tap_label">点击刷新</string>
+    <string name="pull_to_refresh_on_refreshing">加载中...</string>
+    <string name="pull_to_refresh_lastest">最新更新:</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多</string>
+    <string name="pull_to_refresh_footer_release_label">释放加载更多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">加载中...</string>
+
+</resources>

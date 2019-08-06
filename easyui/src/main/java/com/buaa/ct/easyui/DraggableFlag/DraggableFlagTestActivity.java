@@ -2,6 +2,7 @@ package com.buaa.ct.easyui.DraggableFlag;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,7 @@ import android.widget.Toast;
 
 import com.buaa.ct.easyui.R;
 
-public class DraggableFlagTestActivity extends AppCompatActivity implements DraggableFlagView.OnDraggableFlagViewListener {
+public class DraggableFlagTestActivity extends AppCompatActivity implements OnDraggableFlagViewListener {
     DraggableFlagView draggableFlagView, buttonDraggableFlagView;
 
     @Override
@@ -20,11 +21,15 @@ public class DraggableFlagTestActivity extends AppCompatActivity implements Drag
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //buttonDraggableFlagView.reset();
-
+                Snackbar.make(view, "一键退朝已清除", Snackbar.LENGTH_SHORT).setAction("恢复一键退朝", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        buttonDraggableFlagView.reset();
+                        draggableFlagView.reset();
+                    }
+                }).show();
                 draggableFlagView.dismiss();
-//                new UndoBarController.UndoBar(MainActivity.this).message("恢复一键退朝").style(UndoBarController.RETRYSTYLE).duration(3000L).listener(MainActivity.this).show();
-                //draggableFlagView.reset();
+                buttonDraggableFlagView.dismiss();
             }
         });
         draggableFlagView = findViewById(R.id.main_dfv);
@@ -37,7 +42,6 @@ public class DraggableFlagTestActivity extends AppCompatActivity implements Drag
         draggableFlagView.setText("28");
         draggableFlagView.setAnimInterval(500);
         draggableFlagView.setOnDraggableFlagViewListener(this);
-        buttonDraggableFlagView.setOnDraggableFlagViewListener(this);
     }
 
     @Override
@@ -49,10 +53,4 @@ public class DraggableFlagTestActivity extends AppCompatActivity implements Drag
     public void onFlagUnDismiss(DraggableFlagView view) {
         Toast.makeText(this, "more distance", Toast.LENGTH_SHORT).show();
     }
-
-//    @Override
-//    public void onUndo(Parcelable var) {
-//        draggableFlagView.reset();
-//    }
-
 }

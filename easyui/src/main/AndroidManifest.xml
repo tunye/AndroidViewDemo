@@ -4,5 +4,8 @@
     <application>
         <activity android:name=".DraggableFlag.DraggableFlagTestActivity"/>
         <activity android:name=".Banner.BannerTestActivity"/>
+        <activity android:name=".pulldown.FlexibleTestActivity"/>
+        <activity android:name=".listview.ParallaxScollListViewTrestActivity"/>
+        <activity android:name=".pulldoor.PullDoorTestActivity"/>
     </application>
 </manifest>
