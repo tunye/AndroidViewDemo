@@ -7,5 +7,6 @@
         <activity android:name=".pulldown.FlexibleTestActivity"/>
         <activity android:name=".listview.ParallaxScollListViewTrestActivity"/>
         <activity android:name=".pulldoor.PullDoorTestActivity"/>
+        <activity android:name=".boundnumber.BoundNumTestActivity"/>
     </application>
 </manifest>

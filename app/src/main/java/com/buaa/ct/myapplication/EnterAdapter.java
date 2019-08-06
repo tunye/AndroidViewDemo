@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
+import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
@@ -59,6 +60,9 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         break;
                     case 5:
                         context.startActivity(new Intent(context, VideoCacheTestActivity.class));
+                        break;
+                    case 6:
+                        context.startActivity(new Intent(context, BoundNumTestActivity.class));
                         break;
                     case 10:
                         context.startActivity(new Intent(context, ParallaxScollListViewTrestActivity.class));
