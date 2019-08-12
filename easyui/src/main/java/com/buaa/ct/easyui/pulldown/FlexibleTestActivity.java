@@ -20,9 +20,9 @@ public class FlexibleTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.flexible_test);
-        flexibleView =  findViewById(R.id.flexible);
-        web =  findViewById(R.id.webview);
-        source =  findViewById(R.id.source);
+        flexibleView = findViewById(R.id.flexible);
+        web = findViewById(R.id.webview);
+        source = findViewById(R.id.source);
         web.loadUrl("https://www.baidu.com");
         web.setDownloadListener(new DownloadListener() {
             @Override

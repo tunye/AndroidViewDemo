@@ -84,6 +84,25 @@ public class ImageSelectorActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, REQUEST_IMAGE);
     }
 
+    public static String startCameraDirect(Context context) {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (cameraIntent.resolveActivity(context.getPackageManager()) != null) {
+            File cameraFile = FileUtils.createCameraFile(context);
+            Uri uri;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                // android N获取uri的新方式
+                uri = FileProvider.getUriForFile(context, context.getPackageName(), cameraFile);
+            } else {
+                uri = Uri.fromFile(cameraFile);
+            }
+            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+            ((Activity) context).startActivityForResult(cameraIntent, REQUEST_CAMERA);
+            return cameraFile.getAbsolutePath();
+        } else {
+            return null;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -223,7 +242,6 @@ public class ImageSelectorActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -265,25 +283,6 @@ public class ImageSelectorActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putString(BUNDLE_CAMERA_PATH, cameraPath);
-    }
-
-    public static String startCameraDirect(Context context) {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(context.getPackageManager()) != null) {
-            File cameraFile = FileUtils.createCameraFile(context);
-            Uri uri;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                // android N获取uri的新方式
-                uri = FileProvider.getUriForFile(context, context.getPackageName(), cameraFile);
-            } else {
-                uri = Uri.fromFile(cameraFile);
-            }
-            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            ((Activity) context).startActivityForResult(cameraIntent, REQUEST_CAMERA);
-            return cameraFile.getAbsolutePath();
-        } else {
-            return null;
-        }
     }
 
     /**

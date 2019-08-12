@@ -23,7 +23,7 @@ public class ParallaxScollListViewTrestActivity extends AppCompatActivity {
     private void initListView() {
         ParallaxScollListView mListView = findViewById(R.id.layout_listview);
         View header = LayoutInflater.from(this).inflate(R.layout.parallax_listview_header, null);
-        ImageView mImageView =  header.findViewById(R.id.layout_header_image);
+        ImageView mImageView = header.findViewById(R.id.layout_header_image);
 
         mListView.setZoomRatio(ParallaxScollListView.NO_ZOOM);
         mListView.setParallaxImageView(mImageView);

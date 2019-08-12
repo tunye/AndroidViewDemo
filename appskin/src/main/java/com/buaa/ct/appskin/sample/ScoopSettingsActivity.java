@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
-
 import com.buaa.ct.appskin.BaseSkinActivity;
 import com.buaa.ct.appskin.R;
 import com.buaa.ct.appskin.SkinManager;
@@ -90,7 +89,7 @@ public class ScoopSettingsActivity extends BaseSkinActivity implements FlavorRec
         return getResources().getIdentifier(colorName, "color", getPackageName());
     }
 
-    private int getSkinFlg(){
+    private int getSkinFlg() {
         String skinFlg = SkinManager.getInstance().getCurrSkin();
         int position = 0;
         if (!TextUtils.isEmpty(skinFlg)) {

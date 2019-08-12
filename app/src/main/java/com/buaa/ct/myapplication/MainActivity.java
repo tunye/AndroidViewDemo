@@ -13,8 +13,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        recyclerView=findViewById(R.id.enter);
-        enterAdapter=new EnterAdapter(this);
+        recyclerView = findViewById(R.id.enter);
+        enterAdapter = new EnterAdapter(this);
         recyclerView.setAdapter(enterAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

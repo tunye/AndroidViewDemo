@@ -69,11 +69,11 @@ public class DraggableFlagView extends View {
     private ValueAnimator rollBackAnim, exposeAnim;
 
     public DraggableFlagView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public DraggableFlagView(Context context, AttributeSet attrs) {
-        this(context,attrs,0);
+        this(context, attrs, 0);
     }
 
     public DraggableFlagView(Context context, AttributeSet attrs, int defStyle) {
@@ -378,25 +378,6 @@ public class DraggableFlagView extends View {
         exposeAnim.start();
     }
 
-
-    /**
-     * 计算四个坐标的三角边关系
-     */
-    class Triangle {
-        double deltaX;
-        double deltaY;
-        double hypotenuse;
-
-        @Override
-        public String toString() {
-            return "Triangle{" + "deltaX=" + deltaX + ", deltaY=" + deltaY + ", hypotenuse=" + hypotenuse + '}';
-        }
-
-        public void getDistance() {
-            hypotenuse = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-        }
-    }
-
     public String getText() {
         return text;
     }
@@ -431,5 +412,23 @@ public class DraggableFlagView extends View {
 
     public void setOnDraggableFlagViewListener(OnDraggableFlagViewListener onDraggableFlagViewListener) {
         this.onDraggableFlagViewListener = onDraggableFlagViewListener;
+    }
+
+    /**
+     * 计算四个坐标的三角边关系
+     */
+    class Triangle {
+        double deltaX;
+        double deltaY;
+        double hypotenuse;
+
+        @Override
+        public String toString() {
+            return "Triangle{" + "deltaX=" + deltaX + ", deltaY=" + deltaY + ", hypotenuse=" + hypotenuse + '}';
+        }
+
+        public void getDistance() {
+            hypotenuse = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        }
     }
 }

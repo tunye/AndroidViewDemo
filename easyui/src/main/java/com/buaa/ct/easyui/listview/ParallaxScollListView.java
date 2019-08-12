@@ -23,16 +23,43 @@ public class ParallaxScollListView extends ListView implements AbsListView.OnScr
     private int mImageViewHeight = -1;
     private int mDefaultImageViewHeight = 0;
     private double mZoomRatio;
-
-    private interface OnOverScrollByListener {
+    private OnOverScrollByListener scrollByListener = new OnOverScrollByListener() {
+        @Override
         public boolean overScrollBy(int deltaX, int deltaY, int scrollX,
                                     int scrollY, int scrollRangeX, int scrollRangeY,
-                                    int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent);
-    }
-
-    private interface OnTouchEventListener {
-        public void onTouchEvent(MotionEvent ev);
-    }
+                                    int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+            if (mImageView.getHeight() <= mDrawableMaxHeight && isTouchEvent) {
+                if (deltaY < 0) {
+                    if (mImageView.getHeight() - deltaY / 2 >= mImageViewHeight) {
+                        mImageView.getLayoutParams().height = mImageView.getHeight() - deltaY / 2 < mDrawableMaxHeight ?
+                                mImageView.getHeight() - deltaY / 2 : mDrawableMaxHeight;
+                        mImageView.requestLayout();
+                    }
+                } else {
+                    if (mImageView.getHeight() > mImageViewHeight) {
+                        mImageView.getLayoutParams().height = mImageView.getHeight() - deltaY > mImageViewHeight ?
+                                mImageView.getHeight() - deltaY : mImageViewHeight;
+                        mImageView.requestLayout();
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    };
+    private OnTouchEventListener touchListener = new OnTouchEventListener() {
+        @Override
+        public void onTouchEvent(MotionEvent ev) {
+            if (ev.getAction() == MotionEvent.ACTION_UP) {
+                if (mImageViewHeight - 1 < mImageView.getHeight()) {
+                    ResetAnimimation animation = new ResetAnimimation(
+                            mImageView, mImageViewHeight);
+                    animation.setDuration(300);
+                    mImageView.startAnimation(animation);
+                }
+            }
+        }
+    };
 
     public ParallaxScollListView(Context context, AttributeSet attrs,
                                  int defStyle) {
@@ -128,44 +155,15 @@ public class ParallaxScollListView extends ListView implements AbsListView.OnScr
         mZoomRatio = zoomRatio;
     }
 
-    private OnOverScrollByListener scrollByListener = new OnOverScrollByListener() {
-        @Override
+    private interface OnOverScrollByListener {
         public boolean overScrollBy(int deltaX, int deltaY, int scrollX,
                                     int scrollY, int scrollRangeX, int scrollRangeY,
-                                    int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
-            if (mImageView.getHeight() <= mDrawableMaxHeight && isTouchEvent) {
-                if (deltaY < 0) {
-                    if (mImageView.getHeight() - deltaY / 2 >= mImageViewHeight) {
-                        mImageView.getLayoutParams().height = mImageView.getHeight() - deltaY / 2 < mDrawableMaxHeight ?
-                                mImageView.getHeight() - deltaY / 2 : mDrawableMaxHeight;
-                        mImageView.requestLayout();
-                    }
-                } else {
-                    if (mImageView.getHeight() > mImageViewHeight) {
-                        mImageView.getLayoutParams().height = mImageView.getHeight() - deltaY > mImageViewHeight ?
-                                mImageView.getHeight() - deltaY : mImageViewHeight;
-                        mImageView.requestLayout();
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-    };
+                                    int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent);
+    }
 
-    private OnTouchEventListener touchListener = new OnTouchEventListener() {
-        @Override
-        public void onTouchEvent(MotionEvent ev) {
-            if (ev.getAction() == MotionEvent.ACTION_UP) {
-                if (mImageViewHeight - 1 < mImageView.getHeight()) {
-                    ResetAnimimation animation = new ResetAnimimation(
-                            mImageView, mImageViewHeight);
-                    animation.setDuration(300);
-                    mImageView.startAnimation(animation);
-                }
-            }
-        }
-    };
+    private interface OnTouchEventListener {
+        public void onTouchEvent(MotionEvent ev);
+    }
 
     public class ResetAnimimation extends Animation {
         int targetHeight;

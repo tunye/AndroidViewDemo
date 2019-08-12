@@ -52,9 +52,6 @@ public class BannerView extends FrameLayout {
     private int shadowColor = 0x66000000;
     private boolean isAutoStart;
     private Align align;
-
-    public enum Align {LEFT, CENTER, RIGHT}
-
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -219,6 +216,8 @@ public class BannerView extends FrameLayout {
         }
         return super.dispatchTouchEvent(ev);
     }
+
+    public enum Align {LEFT, CENTER, RIGHT}
 
     private class ScrollTask implements Runnable {
 

@@ -14,10 +14,6 @@ public class ScaleImage {
     private final int FIT = 0;
     private final int CROP = 1;
 
-    public enum ScalingLogic {
-        FIT, CROP
-    }
-
     public static Bitmap decodeFile(String pathName, int dstWidth, int dstHeight, ScalingLogic scalingLogic) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
@@ -98,5 +94,9 @@ public class ScaleImage {
         Canvas canvas = new Canvas(scaledBitmap);
         canvas.drawBitmap(unscaledBitmap, srcRect, dstRect, new Paint(Paint.FILTER_BITMAP_FLAG));
         return scaledBitmap;
+    }
+
+    public enum ScalingLogic {
+        FIT, CROP
     }
 }

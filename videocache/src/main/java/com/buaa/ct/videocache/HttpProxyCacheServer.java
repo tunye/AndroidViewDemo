@@ -3,7 +3,6 @@ package com.buaa.ct.videocache;
 import android.content.Context;
 import android.net.Uri;
 
-
 import com.buaa.ct.videocache.file.DiskUsage;
 import com.buaa.ct.videocache.file.FileNameGenerator;
 import com.buaa.ct.videocache.file.Md5FileNameGenerator;

@@ -13,7 +13,6 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 
-
 import com.buaa.ct.appskin.attr.SkinAttr;
 import com.buaa.ct.appskin.attr.SkinAttrSupport;
 import com.buaa.ct.appskin.attr.SkinView;

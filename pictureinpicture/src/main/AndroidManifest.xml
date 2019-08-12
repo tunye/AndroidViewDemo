@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.buaa.ct.pictureinpicture"/>
+          package="com.buaa.ct.pictureinpicture">
+
+    <application>
+        <activity
+            android:name=".PinpTestActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:supportsPictureInPicture="true"/>
+    </application>
+</manifest>

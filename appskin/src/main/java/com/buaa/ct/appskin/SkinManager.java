@@ -8,7 +8,6 @@ import android.os.AsyncTask;
 import android.support.v4.util.ArrayMap;
 import android.text.TextUtils;
 
-
 import com.buaa.ct.appskin.attr.SkinView;
 import com.buaa.ct.appskin.callback.ISkinChangedListener;
 import com.buaa.ct.appskin.callback.ISkinChangingCallback;

@@ -18,9 +18,11 @@ import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
+import com.buaa.ct.pictureinpicture.PinpTestActivity;
+import com.buaa.ct.stickydot.StickyDotTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果"};
+    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝"};
     private Context context;
 
     public EnterAdapter(Context context) {
@@ -47,7 +49,7 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         context.startActivity(new Intent(context, BannerTestActivity.class));
                         break;
                     case 1:
-                        context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
+                        context.startActivity(new Intent(context, StickyDotTestActivity.class));
                         break;
                     case 2:
                         context.startActivity(new Intent(context, FlexibleTestActivity.class));
@@ -64,11 +66,17 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                     case 6:
                         context.startActivity(new Intent(context, BoundNumTestActivity.class));
                         break;
+                    case 9:
+                        context.startActivity(new Intent(context, PinpTestActivity.class));
+                        break;
                     case 10:
                         context.startActivity(new Intent(context, ParallaxScollListViewTrestActivity.class));
                         break;
                     case 11:
                         context.startActivity(new Intent(context, PullDoorTestActivity.class));
+                        break;
+                    case 12:
+                        context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));

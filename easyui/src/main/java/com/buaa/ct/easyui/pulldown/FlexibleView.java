@@ -32,7 +32,7 @@ public class FlexibleView extends RelativeLayout {
     }
 
     public FlexibleView(Context context) {
-       this(context,null);
+        this(context, null);
     }
 
     private void init() {
