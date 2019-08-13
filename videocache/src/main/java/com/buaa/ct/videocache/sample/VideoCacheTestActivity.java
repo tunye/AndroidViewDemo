@@ -1,4 +1,4 @@
-package com.buaa.ct.myapplication;
+package com.buaa.ct.videocache.sample;
 
 
 import android.media.MediaPlayer;
@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.buaa.ct.videocache.CacheListener;
-import com.buaa.ct.videocache.HttpProxyCacheServer;
+import com.buaa.ct.videocache.R;
+import com.buaa.ct.videocache.core.CacheListener;
+import com.buaa.ct.videocache.httpproxy.HttpProxyCacheServer;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,6 +32,7 @@ public class VideoCacheTestActivity extends AppCompatActivity implements CacheLi
         startPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(view.getContext(), "已经开始播放", Toast.LENGTH_SHORT).show();
                 HttpProxyCacheServer proxy = getProxy();
                 proxy.registerCacheListener(VideoCacheTestActivity.this, url);
                 String proxyUrl = proxy.getProxyUrl(url);

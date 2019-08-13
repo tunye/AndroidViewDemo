@@ -6,10 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.buaa.ct.videocache.SourceInfo;
-
-import static com.buaa.ct.videocache.Preconditions.checkAllNotNull;
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkAllNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 
 /**
  * Database based {@link SourceInfoStorage}.

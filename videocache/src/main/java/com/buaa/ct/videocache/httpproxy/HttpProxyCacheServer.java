@@ -1,8 +1,13 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.httpproxy;
 
 import android.content.Context;
 import android.net.Uri;
 
+import com.buaa.ct.videocache.core.CacheListener;
+import com.buaa.ct.videocache.core.Config;
+import com.buaa.ct.videocache.core.GetRequest;
+import com.buaa.ct.videocache.core.Pinger;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 import com.buaa.ct.videocache.file.DiskUsage;
 import com.buaa.ct.videocache.file.FileNameGenerator;
 import com.buaa.ct.videocache.file.Md5FileNameGenerator;
@@ -10,6 +15,8 @@ import com.buaa.ct.videocache.file.TotalCountLruDiskUsage;
 import com.buaa.ct.videocache.file.TotalSizeLruDiskUsage;
 import com.buaa.ct.videocache.sourcestorage.SourceInfoStorage;
 import com.buaa.ct.videocache.sourcestorage.SourceInfoStorageFactory;
+import com.buaa.ct.videocache.util.ProxyCacheUtils;
+import com.buaa.ct.videocache.util.StorageUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,8 +31,8 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static com.buaa.ct.videocache.Preconditions.checkAllNotNull;
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkAllNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 
 
 /**

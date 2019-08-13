@@ -1,4 +1,6 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.exception;
+
+import com.buaa.ct.videocache.httpproxy.ProxyCache;
 
 /**
  * Indicates interruption error in work of {@link ProxyCache} fired by user.

@@ -20,6 +20,7 @@ import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.pictureinpicture.PinpTestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
+import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
     private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "进度条", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝"};

@@ -1,4 +1,6 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.sourcestorage;
+
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 
 /**
  * Source for proxy.

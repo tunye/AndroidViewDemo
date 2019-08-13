@@ -1,2 +1,8 @@
 <manifest
-    package="com.buaa.ct.videocache"/>
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.buaa.ct.videocache">
+
+    <application>
+        <activity android:name=".sample.VideoCacheTestActivity"/>
+    </application>
+</manifest>

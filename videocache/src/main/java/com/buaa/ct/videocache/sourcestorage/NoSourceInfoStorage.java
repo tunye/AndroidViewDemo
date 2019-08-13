@@ -1,7 +1,5 @@
 package com.buaa.ct.videocache.sourcestorage;
 
-import com.buaa.ct.videocache.SourceInfo;
-
 /**
  * {@link SourceInfoStorage} that does nothing.
  *

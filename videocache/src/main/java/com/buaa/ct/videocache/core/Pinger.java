@@ -1,4 +1,8 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.core;
+
+import com.buaa.ct.videocache.exception.ProxyCacheException;
+import com.buaa.ct.videocache.httpproxy.HttpProxyCacheServer;
+import com.buaa.ct.videocache.httpproxy.HttpUrlSource;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -12,8 +16,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeoutException;
 
-import static com.buaa.ct.videocache.Preconditions.checkArgument;
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkArgument;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
@@ -22,7 +26,7 @@ import static java.util.concurrent.TimeUnit.MILLISECONDS;
  * @author Alexey Danilov (danikula@gmail.com).
  */
 
-class Pinger {
+public class Pinger {
 
     private static final String PING_REQUEST = "ping";
     private static final String PING_RESPONSE = "ping ok";
@@ -31,12 +35,12 @@ class Pinger {
     private final String host;
     private final int port;
 
-    Pinger(String host, int port) {
+    public Pinger(String host, int port) {
         this.host = checkNotNull(host);
         this.port = port;
     }
 
-    boolean ping(int maxAttempts, int startTimeout) {
+    public boolean ping(int maxAttempts, int startTimeout) {
         checkArgument(maxAttempts >= 1);
         checkArgument(startTimeout > 0);
 
@@ -61,11 +65,11 @@ class Pinger {
         return false;
     }
 
-    boolean isPingRequest(String request) {
+    public boolean isPingRequest(String request) {
         return PING_REQUEST.equals(request);
     }
 
-    void responseToPing(Socket socket) throws IOException {
+    public void responseToPing(Socket socket) throws IOException {
         OutputStream out = socket.getOutputStream();
         out.write("HTTP/1.1 200 OK\n\n".getBytes());
         out.write(PING_RESPONSE.getBytes());

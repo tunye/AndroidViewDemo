@@ -1,7 +1,10 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.httpproxy;
 
 import android.text.TextUtils;
 
+import com.buaa.ct.videocache.core.CacheListener;
+import com.buaa.ct.videocache.core.GetRequest;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 import com.buaa.ct.videocache.file.FileCache;
 
 import java.io.BufferedOutputStream;
@@ -9,7 +12,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
-import static com.buaa.ct.videocache.ProxyCacheUtils.DEFAULT_BUFFER_SIZE;
+import static com.buaa.ct.videocache.util.ProxyCacheUtils.DEFAULT_BUFFER_SIZE;
 
 /**
  * {@link ProxyCache} that read http url and writes data to {@link Socket}

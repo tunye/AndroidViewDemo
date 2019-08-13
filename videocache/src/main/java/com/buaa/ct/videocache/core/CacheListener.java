@@ -1,4 +1,4 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.core;
 
 import java.io.File;
 

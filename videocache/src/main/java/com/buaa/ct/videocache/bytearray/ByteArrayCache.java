@@ -1,4 +1,8 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.bytearray;
+
+import com.buaa.ct.videocache.core.Cache;
+import com.buaa.ct.videocache.core.Preconditions;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 
 import java.io.ByteArrayInputStream;
 import java.util.Arrays;

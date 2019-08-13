@@ -1,9 +1,13 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.httpproxy;
 
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.buaa.ct.videocache.core.CacheListener;
+import com.buaa.ct.videocache.core.Config;
+import com.buaa.ct.videocache.core.GetRequest;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 import com.buaa.ct.videocache.file.FileCache;
 
 import java.io.File;
@@ -13,7 +17,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 
 /**
  * Client for {@link HttpProxyCacheServer}

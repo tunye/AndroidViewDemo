@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.webkit.WebView;
 import android.widget.AdapterView;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
 /**
@@ -17,9 +17,9 @@ import android.widget.ScrollView;
  *
  * @author 陈彤
  */
-public class FlexibleView extends RelativeLayout {
+public class FlexibleView extends FrameLayout {
+    private final static int MAX_MOVE = 480;
     private int mLastMotionY;
-    private int maxMove = 480;
     private int actualDistance;
     private ScrollView scrollView;
     private AdapterView<?> adapterView;
@@ -88,10 +88,6 @@ public class FlexibleView extends RelativeLayout {
         return false;
     }
 
-    /*
-     * 如果在onInterceptTouchEvent()方法中没有拦截(即onInterceptTouchEvent()方法中 return
-     * false)则由PullToRefreshView 的子View来处理;否则由下面的方法来处理(即由PullToRefreshView自己来处理)
-     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         int y = (int) event.getRawY();
@@ -110,12 +106,6 @@ public class FlexibleView extends RelativeLayout {
         return super.onTouchEvent(event);
     }
 
-    /**
-     * 是否应该到了父View,即PullToRefreshView滑动
-     *
-     * @param deltaY , deltaY > 0 是向下运动,< 0是向上运动
-     * @return
-     */
     private boolean isRefreshViewScroll(int deltaY) {
         if (scrollView != null) {
             // 子scroll view滑动到最顶端
@@ -159,13 +149,8 @@ public class FlexibleView extends RelativeLayout {
         }
     }
 
-    /**
-     * header 准备刷新,手指移动过程,还没有释放
-     *
-     * @param deltaY ,手指滑动的距离
-     */
     private void moveTargetView(int deltaY) {
-        deltaY = Math.min(maxMove * deltaY / getContext().getResources().getDisplayMetrics().heightPixels, maxMove);
+        deltaY = Math.min(MAX_MOVE * deltaY / getContext().getResources().getDisplayMetrics().heightPixels, MAX_MOVE);
         actualDistance = Math.max(deltaY, actualDistance);
         if (scrollView != null) {
             scrollView.setY(deltaY);
@@ -182,83 +167,45 @@ public class FlexibleView extends RelativeLayout {
         TranslateAnimation translateAnimation = new TranslateAnimation(0, 0, 0, -actualDistance);
         translateAnimation.setInterpolator(new AccelerateInterpolator());
         translateAnimation.setDuration(600);
+        translateAnimation.setAnimationListener(animationListener);
         actualDistance = 0;
         if (webView != null) {
             webView.startAnimation(translateAnimation);
-            translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    webView.clearAnimation();
-                    webView.setY(0);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
         } else if (scrollView != null) {
             scrollView.startAnimation(translateAnimation);
-            translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    scrollView.clearAnimation();
-                    scrollView.setY(0);
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
         } else if (adapterView != null) {
             adapterView.startAnimation(translateAnimation);
-            translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    adapterView.clearAnimation();
-                    adapterView.setY(0);
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
         } else {
             customView.startAnimation(translateAnimation);
-            translateAnimation.setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    customView.clearAnimation();
-                    customView.setY(0);
-                }
-
-                @Override
-                public void onAnimationEnd(Animation animation) {
-
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-
-                }
-            });
         }
     }
+
+    Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if (webView != null) {
+                webView.clearAnimation();
+                webView.setY(0);
+            } else if (scrollView != null) {
+                scrollView.clearAnimation();
+                scrollView.setY(0);
+            } else if (adapterView != null) {
+                adapterView.clearAnimation();
+                adapterView.setY(0);
+            } else {
+                customView.clearAnimation();
+                customView.setY(0);
+            }
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    };
 }

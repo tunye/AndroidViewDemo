@@ -1,4 +1,4 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.core;
 
 import android.text.TextUtils;
 
@@ -9,14 +9,14 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 
 /**
  * Model for Http GET request.
  *
  * @author Alexey Danilov (danikula@gmail.com).
  */
-class GetRequest {
+public class GetRequest {
 
     private static final Pattern RANGE_HEADER_PATTERN = Pattern.compile("[R,r]ange:[ ]?bytes=(\\d*)-");
     private static final Pattern URL_PATTERN = Pattern.compile("GET /(.*) HTTP");

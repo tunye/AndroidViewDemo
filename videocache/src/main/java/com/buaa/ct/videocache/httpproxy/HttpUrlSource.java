@@ -1,9 +1,14 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.httpproxy;
 
 import android.text.TextUtils;
 
+import com.buaa.ct.videocache.exception.InterruptedProxyCacheException;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
+import com.buaa.ct.videocache.sourcestorage.Source;
+import com.buaa.ct.videocache.sourcestorage.SourceInfo;
 import com.buaa.ct.videocache.sourcestorage.SourceInfoStorage;
 import com.buaa.ct.videocache.sourcestorage.SourceInfoStorageFactory;
+import com.buaa.ct.videocache.util.ProxyCacheUtils;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -12,8 +17,8 @@ import java.io.InterruptedIOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
-import static com.buaa.ct.videocache.ProxyCacheUtils.DEFAULT_BUFFER_SIZE;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.util.ProxyCacheUtils.DEFAULT_BUFFER_SIZE;
 import static java.net.HttpURLConnection.HTTP_MOVED_PERM;
 import static java.net.HttpURLConnection.HTTP_MOVED_TEMP;
 import static java.net.HttpURLConnection.HTTP_OK;

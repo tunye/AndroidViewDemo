@@ -1,10 +1,16 @@
-package com.buaa.ct.videocache;
+package com.buaa.ct.videocache.httpproxy;
 
 import android.util.Log;
 
+import com.buaa.ct.videocache.core.Cache;
+import com.buaa.ct.videocache.exception.InterruptedProxyCacheException;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
+import com.buaa.ct.videocache.sourcestorage.Source;
+import com.buaa.ct.videocache.util.ProxyCacheUtils;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.buaa.ct.videocache.Preconditions.checkNotNull;
+import static com.buaa.ct.videocache.core.Preconditions.checkNotNull;
 
 /**
  * Proxy for {@link Source} with caching support ({@link Cache}).
@@ -15,7 +21,7 @@ import static com.buaa.ct.videocache.Preconditions.checkNotNull;
  *
  * @author Alexey Danilov (danikula@gmail.com).
  */
-class ProxyCache {
+public class ProxyCache {
 
     private static final int MAX_READ_SOURCE_ATTEMPTS = 1;
 

@@ -1,7 +1,7 @@
 package com.buaa.ct.videocache.file;
 
-import com.buaa.ct.videocache.Cache;
-import com.buaa.ct.videocache.ProxyCacheException;
+import com.buaa.ct.videocache.core.Cache;
+import com.buaa.ct.videocache.exception.ProxyCacheException;
 
 import java.io.File;
 import java.io.IOException;

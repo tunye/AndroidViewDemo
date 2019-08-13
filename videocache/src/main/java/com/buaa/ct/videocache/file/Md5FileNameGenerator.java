@@ -2,7 +2,7 @@ package com.buaa.ct.videocache.file;
 
 import android.text.TextUtils;
 
-import com.buaa.ct.videocache.ProxyCacheUtils;
+import com.buaa.ct.videocache.util.ProxyCacheUtils;
 
 /**
  * Implementation of {@link FileNameGenerator} that uses MD5 of url as file name

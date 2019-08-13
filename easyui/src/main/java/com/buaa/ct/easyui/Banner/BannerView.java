@@ -7,9 +7,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Message;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -51,25 +51,15 @@ public class BannerView extends FrameLayout {
     private int selectItemColor = 0xffffffff, unselectedItemColor = 0xff808080;
     private int shadowColor = 0x66000000;
     private boolean isAutoStart;
-    private Align align;
-    private Handler handler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case 0:
-                    bannerViewPager.setCurrentItem(currentItem, currentItem != 0);
-                    break;
-            }
-        }
-    };
+    private @Align
+    int align;
 
     public BannerView(Context context) {
-        super(context);
-        init();
+        this(context, null);
     }
 
     public BannerView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        setAttr(context, attrs);
+        this(context, attrs, 0);
     }
 
     public BannerView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -86,13 +76,13 @@ public class BannerView extends FrameLayout {
         int alignInt = a.getInt(R.styleable.bannerview_banner_align, 1);
         switch (alignInt) {
             case 0:
-                align = Align.LEFT;
+                align = LEFT;
                 break;
             case 1:
-                align = Align.CENTER;
+                align = CENTER;
                 break;
             case 2:
-                align = Align.RIGHT;
+                align = RIGHT;
                 break;
         }
         a.recycle();
@@ -112,7 +102,7 @@ public class BannerView extends FrameLayout {
         myAdapter = new MyAdapter();
         bannerViewPager.setAdapter(myAdapter);// 设置填充ViewPager页面的适配器
         bannerViewPager.addOnPageChangeListener(new MyPageChangeListener());
-        bannerViewPager.setPageTransformer(true, new DepthPageTransformer());
+        bannerViewPager.setPageTransformer(false, new DepthPageTransformer());
 
         LayoutParams params;
         switch (align) {
@@ -145,7 +135,6 @@ public class BannerView extends FrameLayout {
 
     public void initData(List<Integer> mDatas) {
         bannerData = mDatas;
-
 
         for (int count = 0; count < mDatas.size(); count++) {
             // 翻页指示的点
@@ -217,14 +206,26 @@ public class BannerView extends FrameLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    public enum Align {LEFT, CENTER, RIGHT}
+    public final static int LEFT = 1;
+    public final static int RIGHT = 2;
+    public final static int CENTER = 0;
+
+    @IntDef(flag = true, value = {LEFT, RIGHT, CENTER})
+    @interface Align {
+
+    }
 
     private class ScrollTask implements Runnable {
 
         @Override
         public void run() {
             currentItem = (currentItem + 1) % (bannerImages.size() - 2);
-            handler.sendEmptyMessage(0);
+            BannerView.this.post(new Runnable() {
+                @Override
+                public void run() {
+                    bannerViewPager.setCurrentItem(currentItem, currentItem != 0);
+                }
+            });
         }
     }
 
@@ -265,7 +266,7 @@ public class BannerView extends FrameLayout {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
             ImageView iv = bannerImages.get(position);
             container.addView(iv);
             // 在这个方法里面设置图片的点击事件
@@ -273,7 +274,7 @@ public class BannerView extends FrameLayout {
 
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "" + position % bannerData.size(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "第" + position % bannerData.size() + "张图", Toast.LENGTH_SHORT).show();
                 }
             });
             return iv;
