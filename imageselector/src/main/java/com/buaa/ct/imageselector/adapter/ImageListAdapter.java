@@ -2,6 +2,7 @@ package com.buaa.ct.imageselector.adapter;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == TYPE_CAMERA) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_camera, parent, false);
             return new HeaderViewHolder(view);
@@ -77,7 +78,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_CAMERA) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
             headerHolder.headerView.setOnClickListener(new View.OnClickListener() {
@@ -120,7 +121,7 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 @Override
                 public void onClick(View v) {
                     if ((selectMode == ImageSelectorActivity.MODE_SINGLE || enablePreview) && imageSelectChangedListener != null) {
-                        imageSelectChangedListener.onPictureClick(image, showCamera ? position - 1 : position);
+                        imageSelectChangedListener.onPictureClick(image, showCamera ? holder.getAdapterPosition() - 1 : holder.getAdapterPosition());
                     } else {
                         changeCheckboxState(contentHolder, image);
                     }
@@ -212,9 +213,8 @@ public class ImageListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             contentView = itemView;
-            picture = (ImageView) itemView.findViewById(R.id.picture);
-            check = (ImageView) itemView.findViewById(R.id.check);
+            picture = itemView.findViewById(R.id.picture);
+            check = itemView.findViewById(R.id.check);
         }
-
     }
 }

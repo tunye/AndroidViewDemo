@@ -14,29 +14,32 @@ import com.buaa.ct.appskin.SkinManager;
 /**
  * Created by zhy on 15/9/28.
  */
-public enum SkinAttrType {
-    BACKGROUD("background") {
+public class SkinAttrType implements ISkinAttrType {
+    public static final SkinAttrType BACKGROUD = new SkinAttrType("background") {
         @Override
         public void apply(View view, String resName) {
             Drawable drawable = getResourceManager().getDrawableByName(resName);
             if (drawable == null) return;
             view.setBackgroundDrawable(drawable);
         }
-    }, COLOR("textColor") {
+    };
+    public static final SkinAttrType COLOR = new SkinAttrType("textColor") {
         @Override
         public void apply(View view, String resName) {
             ColorStateList colorlist = getResourceManager().getColorStateList(resName);
             if (colorlist == null) return;
             ((TextView) view).setTextColor(colorlist);
         }
-    }, PROGRESS("progressDrawable") {
+    };
+    public static final SkinAttrType PROGRESS = new SkinAttrType("progressDrawable") {
         @Override
         public void apply(View view, String resName) {
             Drawable drawable = getResourceManager().getDrawableByName(resName);
             if (drawable == null) return;
             ((ProgressBar) view).setProgressDrawable(drawable);
         }
-    }, SRC("src") {
+    };
+    public static final SkinAttrType SRC = new SkinAttrType("src") {
         @Override
         public void apply(View view, String resName) {
             if (view instanceof ImageView) {
@@ -47,7 +50,8 @@ public enum SkinAttrType {
         }
     };
 
-    String attrType;
+    private String attrType;
+    private static SkinAttrType[] types = new SkinAttrType[]{BACKGROUD, COLOR, PROGRESS, SRC};
 
     SkinAttrType(String attrType) {
         this.attrType = attrType;
@@ -57,11 +61,16 @@ public enum SkinAttrType {
         return attrType;
     }
 
-
-    public abstract void apply(View view, String resName);
-
-    public ResourceManager getResourceManager() {
+    ResourceManager getResourceManager() {
         return SkinManager.getInstance().getResourceManager();
     }
 
+    public static SkinAttrType[] values() {
+        return types;
+    }
+
+    @Override
+    public void apply(View view, String resName) {
+
+    }
 }

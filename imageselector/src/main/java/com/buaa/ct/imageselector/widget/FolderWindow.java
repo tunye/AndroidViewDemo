@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -128,7 +129,7 @@ public class FolderWindow extends PopupWindow {
         }
 
         @Override
-        public void onDrawOver(Canvas c, RecyclerView parent) {
+        public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent) {
             final int left = ScreenUtils.dip2px(parent.getContext(), 16);
             final int right = parent.getWidth() - left;
 
@@ -144,7 +145,7 @@ public class FolderWindow extends PopupWindow {
         }
 
         @Override
-        public void getItemOffsets(Rect outRect, int position, RecyclerView parent) {
+        public void getItemOffsets(@NonNull Rect outRect, int position, @NonNull RecyclerView parent) {
             outRect.set(0, 0, 0, mDrawable.getIntrinsicWidth());
         }
 

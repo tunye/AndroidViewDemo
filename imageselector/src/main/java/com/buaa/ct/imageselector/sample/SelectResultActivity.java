@@ -1,6 +1,7 @@
 package com.buaa.ct.imageselector.sample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,13 +54,13 @@ public class SelectResultActivity extends AppCompatActivity {
     private class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_result, parent, false);
             return new ViewHolder(itemView);
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             Glide.with(SelectResultActivity.this)
                     .load(new File(images.get(position)))
                     .centerCrop()

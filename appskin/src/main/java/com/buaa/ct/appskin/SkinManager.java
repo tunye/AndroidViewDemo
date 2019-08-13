@@ -157,7 +157,7 @@ public class SkinManager {
             return;
         }
 
-        new AsyncTask<Void, Void, Void>() {
+        AsyncTask<Void, Void, Void> skinPluginExecutor = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
                 try {

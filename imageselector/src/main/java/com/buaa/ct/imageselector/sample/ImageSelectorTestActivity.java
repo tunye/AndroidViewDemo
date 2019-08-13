@@ -106,7 +106,7 @@ public class ImageSelectorTestActivity extends AppCompatActivity {
             ArrayList<String> images = (ArrayList<String>) data.getSerializableExtra(ImageSelectorActivity.REQUEST_OUTPUT);
             startActivity(new Intent(this, SelectResultActivity.class).putExtra(SelectResultActivity.EXTRA_IMAGES, images));
         } else if (resultCode == RESULT_CANCELED) {
-            Toast.makeText(this, fileUrl, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "取消选择照片", Toast.LENGTH_SHORT).show();
         } else if (resultCode == -2) {
             Toast.makeText(this, "无权限", Toast.LENGTH_SHORT).show();
         }

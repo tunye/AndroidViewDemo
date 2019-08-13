@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.model.LocalMedia;
 import com.buaa.ct.imageselector.widget.PreviewViewPager;
@@ -54,9 +55,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
     private boolean isShowBar = true;
 
 
-    public static void startPreview(Activity context, List<LocalMedia> images, List<LocalMedia> selectImages, int maxSelectNum, int position) {
+    public static void startPreview(Activity context, List<LocalMedia> selectImages, int maxSelectNum, int position) {
         Intent intent = new Intent(context, ImagePreviewActivity.class);
-        intent.putExtra(EXTRA_PREVIEW_LIST, (ArrayList) images);
         intent.putExtra(EXTRA_PREVIEW_SELECT_LIST, (ArrayList) selectImages);
         intent.putExtra(EXTRA_POSITION, position);
         intent.putExtra(EXTRA_MAX_SELECT_NUM, maxSelectNum);
@@ -73,7 +73,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     public void initView() {
-        images = (List<LocalMedia>) getIntent().getSerializableExtra(EXTRA_PREVIEW_LIST);
+        images = MediaListManager.getInstance().getMediaList();
         selectImages = (List<LocalMedia>) getIntent().getSerializableExtra(EXTRA_PREVIEW_SELECT_LIST);
         maxSelectNum = getIntent().getIntExtra(EXTRA_MAX_SELECT_NUM, 9);
         position = getIntent().getIntExtra(EXTRA_POSITION, 1);

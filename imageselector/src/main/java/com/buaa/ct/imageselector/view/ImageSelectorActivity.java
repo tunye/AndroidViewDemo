@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.adapter.ImageFolderAdapter;
 import com.buaa.ct.imageselector.adapter.ImageListAdapter;
@@ -134,6 +135,7 @@ public class ImageSelectorActivity extends AppCompatActivity {
                 public void loadComplete(List<LocalMediaFolder> folders) {
                     folderWindow.bindFolder(folders);
                     imageAdapter.bindImages(folders.get(0).getImages());
+                    MediaListManager.getInstance().setMediaList(imageAdapter.getImages());
                 }
             });
         }
@@ -212,7 +214,7 @@ public class ImageSelectorActivity extends AppCompatActivity {
             @Override
             public void onPictureClick(LocalMedia media, int position) {
                 if (enablePreview) {
-                    startPreview(imageAdapter.getImages(), position);
+                    startPreview(position);
                 } else if (enableCrop) {
                     startCrop(media.getPath());
                 } else {
@@ -237,7 +239,7 @@ public class ImageSelectorActivity extends AppCompatActivity {
         previewText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startPreview(imageAdapter.getSelectedImages(), 0);
+                startPreview(0);
             }
         });
     }
@@ -305,8 +307,8 @@ public class ImageSelectorActivity extends AppCompatActivity {
         }
     }
 
-    public void startPreview(List<LocalMedia> previewImages, int position) {
-        ImagePreviewActivity.startPreview(this, previewImages, imageAdapter.getSelectedImages(), maxSelectNum, position);
+    public void startPreview(int position) {
+        ImagePreviewActivity.startPreview(this, imageAdapter.getSelectedImages(), maxSelectNum, position);
     }
 
     public void startCrop(String path) {

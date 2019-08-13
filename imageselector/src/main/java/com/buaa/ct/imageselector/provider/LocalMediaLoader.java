@@ -3,6 +3,7 @@ package com.buaa.ct.imageselector.provider;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -79,7 +80,9 @@ public class LocalMediaLoader {
                     do {
                         String path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]));
                         // 如原图路径不存在或者路径存在但文件不存在,就结束当前循环
-                        if (TextUtils.isEmpty(path) || !new File(path).exists()) {
+                        if (TextUtils.isEmpty(path)) {
+                            continue;
+                        } else if (!new File(path).exists() || new File(path).length() < 30720) {
                             continue;
                         } else if (path.contains("/.") || path.contains("/Android/data/")) {
                             continue;
@@ -109,7 +112,7 @@ public class LocalMediaLoader {
             }
 
             @Override
-            public void onLoaderReset(Loader<Cursor> loader) {
+            public void onLoaderReset(@NonNull Loader<Cursor> loader) {
             }
         });
     }
@@ -124,7 +127,7 @@ public class LocalMediaLoader {
                 }
                 int lsize = lhs.getImageNum();
                 int rsize = rhs.getImageNum();
-                return lsize == rsize ? 0 : (lsize < rsize ? 1 : -1);
+                return Integer.compare(rsize, lsize);
             }
         });
     }
@@ -149,5 +152,4 @@ public class LocalMediaLoader {
     public interface LocalMediaLoadListener {
         void loadComplete(List<LocalMediaFolder> folders);
     }
-
 }
