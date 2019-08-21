@@ -20,7 +20,7 @@ import android.widget.TextView;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.utils.CropUtil;
 import com.buaa.ct.imageselector.utils.FileUtils;
-import com.isseiaoki.simplecropview.CropImageView;
+import com.buaa.ct.imageselector.widget.CropImageView;
 
 import java.io.File;
 import java.io.IOException;

@@ -26,7 +26,7 @@
             android:textSize="@dimen/small_text_size"/>
     </android.support.v7.widget.Toolbar>
 
-    <com.isseiaoki.simplecropview.CropImageView
+    <com.buaa.ct.imageselector.widget.CropImageView
         android:id="@+id/cropImageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
