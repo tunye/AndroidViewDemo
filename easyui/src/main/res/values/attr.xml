@@ -20,4 +20,29 @@
         <attr name="banner_shadow_color" format="color"/>
         <attr name="banner_auto_start" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="PageIndicator">
+        <attr name="pi_strokecolor" format="color" />
+        <attr name="pi_fillcolor" format="color" />
+        <attr name="pi_hightlightcolor" format="color" />
+        <attr name="pi_stroke" format="dimension" />
+        <attr name="pi_radius" format="dimension" />
+        <attr name="pi_count" format="integer" />
+        <attr name="pi_circlepadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="MaterialRippleLayout">
+        <attr name="mrl_rippleColor" format="color" localization="suggested" />
+        <attr name="mrl_rippleDimension" format="dimension" localization="suggested" />
+        <attr name="mrl_rippleOverlay" format="boolean" localization="suggested" />
+        <attr name="mrl_rippleAlpha" format="float" localization="suggested" />
+        <attr name="mrl_rippleDuration" format="integer" localization="suggested" />
+        <attr name="mrl_rippleFadeDuration" format="integer" localization="suggested" />
+        <attr name="mrl_rippleHover" format="boolean" localization="suggested" />
+        <attr name="mrl_rippleBackground" format="color" localization="suggested" />
+        <attr name="mrl_rippleDelayClick" format="boolean" localization="suggested" />
+        <attr name="mrl_ripplePersistent" format="boolean" localization="suggested" />
+        <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
+        <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
+    </declare-styleable>
 </resources>

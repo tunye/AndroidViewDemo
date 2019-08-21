@@ -8,5 +8,6 @@
         <activity android:name=".listview.ParallaxScollListViewTrestActivity"/>
         <activity android:name=".pulldoor.PullDoorTestActivity"/>
         <activity android:name=".boundnumber.BoundNumTestActivity"/>
+        <activity android:name=".share.ShareDialogTestActivity" />
     </application>
 </manifest>

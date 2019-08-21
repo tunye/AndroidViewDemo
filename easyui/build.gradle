@@ -25,4 +25,10 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
+
+    implementation 'com.daimajia.easing:library:2.1@aar'
+    implementation 'com.daimajia.androidanimations:library:2.3@aar'
+    //待反解的代码库
+    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+    implementation 'com.bignerdranch.android:expandablerecyclerview:2.0.4'
 }
