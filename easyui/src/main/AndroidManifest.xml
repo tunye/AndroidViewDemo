@@ -9,5 +9,6 @@
         <activity android:name=".pulldoor.PullDoorTestActivity"/>
         <activity android:name=".boundnumber.BoundNumTestActivity"/>
         <activity android:name=".share.ShareDialogTestActivity" />
+        <activity android:name=".progresssbar.NumberProgressbarTestActivity" />
     </application>
 </manifest>

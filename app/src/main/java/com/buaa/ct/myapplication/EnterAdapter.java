@@ -15,6 +15,7 @@ import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
+import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
@@ -24,7 +25,7 @@ import com.buaa.ct.stickydot.StickyDotTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "分享气泡", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝"};
+    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "另类进度条", "分享气泡", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝"};
     private Context context;
 
     public EnterAdapter(Context context) {
@@ -69,6 +70,9 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         context.startActivity(new Intent(context, BoundNumTestActivity.class));
                         break;
                     case 7:
+                        context.startActivity(new Intent(context, NumberProgressbarTestActivity.class));
+                        break;
+                    case 8:
                         context.startActivity(new Intent(context, ShareDialogTestActivity.class));
                         break;
                     case 9:
