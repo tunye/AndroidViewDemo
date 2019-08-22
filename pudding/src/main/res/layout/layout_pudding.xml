@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/warn_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:foreground="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:indeterminateTint="@android:color/white"
+                android:progressTint="@android:color/white"
+                android:visibility="invisible" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/big_margin"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/textSize" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/subText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginTop="@dimen/mini_margin"
+                android:text="@string/app_name"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/subTextSize"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/buttonContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end|bottom"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+</FrameLayout>
