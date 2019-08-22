@@ -27,6 +27,8 @@ dependencies {
     implementation project(path: ':easyui')
     implementation project(path: ':appskin')
     implementation project(path: ':comment')
+    implementation project(path: ':pudding')
+    implementation project(path: ':copyboard')
     implementation project(path: ':pictureinpicture')
     implementation project(path: ':stickydot')
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.buaa.ct.copyboard.ViewContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66000000">
+
+    <LinearLayout
+        android:id="@+id/pop_view_content_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ededed"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tip"
+            android:textColor="#565656"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/pop_view_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="#343434"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</com.buaa.ct.copyboard.ViewContainer>

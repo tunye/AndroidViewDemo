@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
 import com.buaa.ct.comment.sample.CommentTestActivity;
+import com.buaa.ct.copyboard.CopyboardTestActivity;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
@@ -24,11 +25,12 @@ import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.pictureinpicture.PinpTestActivity;
+import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "另类进度条", "分享气泡", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝", "微信评论框"};
+    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "另类进度条", "分享气泡", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝", "微信评论框", "应用内toast通知", "UC剪贴板"};
     private Context context;
 
     public EnterAdapter(Context context) {
@@ -96,6 +98,12 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         break;
                     case 13:
                         context.startActivity(new Intent(context, CommentTestActivity.class));
+                        break;
+                    case 14:
+                        context.startActivity(new Intent(context, PuddingTestActivity.class));
+                        break;
+                    case 15:
+                        context.startActivity(new Intent(context, CopyboardTestActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));
