@@ -14,7 +14,7 @@
         layout="@layout/sticky_dot_test_item_include"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="15dp"/>
+        android:layout_marginEnd="15dp"/>
 </RelativeLayout>

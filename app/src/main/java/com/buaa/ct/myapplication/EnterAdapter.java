@@ -2,6 +2,7 @@ package com.buaa.ct.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,8 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
+import com.buaa.ct.comment.sample.CommentTestActivity;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
@@ -25,7 +28,7 @@ import com.buaa.ct.stickydot.StickyDotTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "另类进度条", "分享气泡", "动画效果", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝"};
+    private String[] names = {"Banner", "一键退朝", "回弹效果", "照片选择器", "皮肤效果", "视频缓存", "数字效果", "另类进度条", "分享气泡", "画中画", "仿雅虎digest阅读效果", "推门效果", "另一种一键退朝", "微信评论框"};
     private Context context;
 
     public EnterAdapter(Context context) {
@@ -76,7 +79,11 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         context.startActivity(new Intent(context, ShareDialogTestActivity.class));
                         break;
                     case 9:
-                        context.startActivity(new Intent(context, PinpTestActivity.class));
+                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                            Toast.makeText(context, "8系统以下无法使用这个功能", Toast.LENGTH_SHORT).show();
+                        } else {
+                            context.startActivity(new Intent(context, PinpTestActivity.class));
+                        }
                         break;
                     case 10:
                         context.startActivity(new Intent(context, ParallaxScollListViewTrestActivity.class));
@@ -86,6 +93,9 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         break;
                     case 12:
                         context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
+                        break;
+                    case 13:
+                        context.startActivity(new Intent(context, CommentTestActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));

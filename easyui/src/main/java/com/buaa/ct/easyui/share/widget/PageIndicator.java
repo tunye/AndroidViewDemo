@@ -97,7 +97,7 @@ public class PageIndicator extends View {
             result = specSize;
         } else {
             // Calculate the width according the views count
-            result = (int) (getPaddingLeft() + getPaddingRight()
+            result = (int) (getPaddingStart() + getPaddingEnd()
                     + (circleCount * 2 * (radius + stroke)) + (circleCount - 1) * circlePadding);
             // Respect AT_MOST value if that was what is called for by
             // measureSpec

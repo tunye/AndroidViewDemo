@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.buaa.ct.comment" >
+
+    <application>
+        <activity android:name=".sample.CommentTestActivity" />
+        <activity android:name=".sample.EmojiTestActivity" />
+    </application>
+</manifest>

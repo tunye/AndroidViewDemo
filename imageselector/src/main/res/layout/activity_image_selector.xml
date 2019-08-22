@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/btn_height"
             android:layout_gravity="right"
-            android:layout_marginRight="@dimen/margin_text"
+            android:layout_marginEnd="@dimen/margin_text"
             android:background="@drawable/btn_round_green_selector"
             android:enabled="false"
             android:gravity="center"
@@ -46,8 +46,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="@dimen/margin_layout"
-            android:paddingRight="@dimen/margin_layout">
+            android:paddingStart="@dimen/margin_layout"
+            android:paddingEnd="@dimen/margin_layout">
 
 
             <TextView
@@ -61,7 +61,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_text"
+                android:layout_marginStart="@dimen/margin_text"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_arrow"/>
         </LinearLayout>
@@ -70,11 +70,11 @@
             android:id="@+id/preview_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:enabled="false"
             android:gravity="center"
-            android:paddingLeft="@dimen/margin_layout"
-            android:paddingRight="@dimen/margin_layout"
+            android:paddingStart="@dimen/margin_layout"
+            android:paddingEnd="@dimen/margin_layout"
             android:text="@string/preview"
             android:textColor="@color/white_text_selector"
             android:textSize="@dimen/middle_text_size"/>

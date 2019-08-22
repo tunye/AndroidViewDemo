@@ -189,7 +189,7 @@ public class CropImageView extends ImageView {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        mViewWidth = r - l - getPaddingLeft() - getPaddingRight();
+        mViewWidth = r - l - getPaddingStart() - getPaddingEnd();
         mViewHeight = b - t - getPaddingTop() - getPaddingBottom();
         if (getDrawable() != null) initLayout(mViewWidth, mViewHeight);
     }
@@ -343,7 +343,7 @@ public class CropImageView extends ImageView {
         } else if (imgRatio < viewRatio) {
             scale = h / mImgHeight;
         }
-        setCenter(new PointF(getPaddingLeft() + w * 0.5f, getPaddingTop() + h * 0.5f));
+        setCenter(new PointF(getPaddingStart() + w * 0.5f, getPaddingTop() + h * 0.5f));
         setScale(scale);
         initCropFrame();
         adjustRatio();

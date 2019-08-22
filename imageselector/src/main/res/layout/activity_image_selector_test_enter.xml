@@ -41,7 +41,7 @@
             android:id="@+id/mode_single"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginStart="@dimen/margin_text"
             android:layout_weight="1.5"
             android:text="@string/single"/>
     </RadioGroup>
@@ -73,7 +73,7 @@
             android:id="@+id/camera_no"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginStart="@dimen/margin_text"
             android:layout_weight="1.5"
             android:text="@string/no"/>
     </RadioGroup>
@@ -105,7 +105,7 @@
             android:id="@+id/preview_disable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginStart="@dimen/margin_text"
             android:layout_weight="1.5"
             android:text="@string/disable"/>
     </RadioGroup>
@@ -138,7 +138,7 @@
             android:id="@+id/crop_disable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_text"
+            android:layout_marginStart="@dimen/margin_text"
             android:layout_weight="1.5"
             android:text="@string/disable"/>
     </RadioGroup>

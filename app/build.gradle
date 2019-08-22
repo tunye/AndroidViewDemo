@@ -26,6 +26,7 @@ dependencies {
     implementation project(path: ':imageselector')
     implementation project(path: ':easyui')
     implementation project(path: ':appskin')
+    implementation project(path: ':comment')
     implementation project(path: ':pictureinpicture')
     implementation project(path: ':stickydot')
 }
