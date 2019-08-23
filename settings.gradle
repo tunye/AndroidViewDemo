@@ -1,1 +1,1 @@
-include ':app', ':pictureinpicture', ':easyui', ':videocache', ':imageselector', ':appskin', ':stickydot', ':comment', ':pudding', ':copyboard'
+include ':app', ':easyui', ':videocache', ':imageselector', ':appskin', ':stickydot', ':comment', ':pudding', ':copyboard'

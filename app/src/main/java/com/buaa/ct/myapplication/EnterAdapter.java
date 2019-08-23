@@ -2,7 +2,6 @@ package com.buaa.ct.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
 import com.buaa.ct.comment.sample.CommentTestActivity;
@@ -24,7 +22,6 @@ import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
-import com.buaa.ct.pictureinpicture.PinpTestActivity;
 import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
@@ -80,13 +77,8 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                     case 8:
                         context.startActivity(new Intent(context, ShareDialogTestActivity.class));
                         break;
-                    case 9:
-                        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                            Toast.makeText(context, "8系统以下无法使用这个功能", Toast.LENGTH_SHORT).show();
-                        } else {
-                            context.startActivity(new Intent(context, PinpTestActivity.class));
-                        }
-                        break;
+//                    case 9:
+//                        break;
                     case 10:
                         context.startActivity(new Intent(context, ParallaxScollListViewTrestActivity.class));
                         break;

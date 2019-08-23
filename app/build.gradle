@@ -29,6 +29,5 @@ dependencies {
     implementation project(path: ':comment')
     implementation project(path: ':pudding')
     implementation project(path: ':copyboard')
-    implementation project(path: ':pictureinpicture')
     implementation project(path: ':stickydot')
 }
