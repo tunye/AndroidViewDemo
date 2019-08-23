@@ -39,6 +39,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TestActivity"/>
+        <activity android:name=".UIActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

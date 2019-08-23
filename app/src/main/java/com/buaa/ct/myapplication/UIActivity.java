@@ -5,13 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
 
-import com.buaa.ct.myapplication.adapter.EnterAdapter;
+import com.buaa.ct.myapplication.adapter.UIEnterAdapter;
 
-public class MainActivity extends AppCompatActivity {
+public class UIActivity extends AppCompatActivity {
     RecyclerView recyclerView;
-    EnterAdapter enterAdapter;
+    UIEnterAdapter enterAdapter;
     Toolbar toolbar;
 
     @Override
@@ -19,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
+        toolbar.setTitle(R.string.ui);
         recyclerView = findViewById(R.id.enter);
-        enterAdapter = new EnterAdapter(this);
+        enterAdapter = new UIEnterAdapter(this);
         recyclerView.setAdapter(enterAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true));
     }
 }
