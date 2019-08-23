@@ -62,7 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:onClick="click8"
+            android:onClick="click7"
             android:text="@string/swipe_dismiss"
             android:textAllCaps="false" />
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:onClick="click9"
+            android:onClick="click8"
             android:text="@string/listener"
             android:textAllCaps="false" />
 
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/small_margin"
-            android:onClick="click7"
+            android:onClick="click9"
             android:text="@string/with_button"
             android:textAllCaps="false" />
 

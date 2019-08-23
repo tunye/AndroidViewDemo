@@ -3,5 +3,6 @@
 
     <application>
         <activity android:name=".PuddingTestActivity" />
+        <activity android:name=".TestActivity" />
     </application>
 </manifest>
