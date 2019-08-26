@@ -21,6 +21,7 @@ import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.TestActivity;
 import com.buaa.ct.myapplication.UIActivity;
 import com.buaa.ct.pudding.PuddingTestActivity;
+import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 import java.util.ArrayList;
@@ -28,14 +29,14 @@ import java.util.Arrays;
 import java.util.List;
 
 public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
-    private static final int count = 10;
+    private static final int count = 11;
     private List<String> names = new ArrayList<>();
 
     private Context context;
 
     public EnterAdapter(Context context) {
         this.context = context;
-        String[] nameList = {"网页回弹效果", "照片选择器", "皮肤效果", "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "推门效果"};
+        String[] nameList = {"网页回弹效果", "照片选择器", "皮肤效果", "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "推门效果", "二维码"};
         names.addAll(Arrays.asList(nameList));
         names.add(context.getResources().getString(R.string.ui));
     }
@@ -82,6 +83,9 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         break;
                     case 8:
                         context.startActivity(new Intent(context, PullDoorTestActivity.class));
+                        break;
+                    case 9:
+                        context.startActivity(new Intent(context, QRCodeTestActivity.class));
                         break;
                     case count - 1:
                         context.startActivity(new Intent(context, UIActivity.class));

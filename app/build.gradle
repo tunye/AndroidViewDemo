@@ -28,6 +28,7 @@ dependencies {
     implementation project(path: ':appskin')
     implementation project(path: ':comment')
     implementation project(path: ':pudding')
+    implementation project(path: ':qrcode')
     implementation project(path: ':copyboard')
     implementation project(path: ':stickydot')
 }

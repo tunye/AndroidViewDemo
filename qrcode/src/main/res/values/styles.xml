@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="QRCodeTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="inner_corner_color">@color/default_inner_corner_color</item>
+        <item name="inner_corner_length">@dimen/default_inner_corner_length</item>
+        <item name="inner_corner_width">@dimen/default_inner_corner_width</item>
+        <item name="inner_scan_bitmap">@drawable/ic_scan_light</item>
+        <item name="inner_scan_speed">@dimen/default_inner_scan_speed</item>
+        <item name="inner_scan_animation_interval">25</item>
+        <item name="inner_scan_isCircle">true</item>
+        <item name="inner_result_color">@color/default_result_color</item>
+        <item name="inner_result_point_color">@color/default_result_point_color</item>
+        <item name="inner_mask_color">@color/default_mask_color</item>
+    </style>
+
+    <!-- 自定义默认二维码扫描界面的主题. -->
+    <style name="QRCodeTheme.Custom">
+        <item name="inner_corner_color">#FF9900</item>
+        <!--<item name="inner_scan_bitmap">@drawable/ic_qrcode_scanning</item>-->
+        <item name="inner_corner_width">6dp</item>
+        <item name="inner_scan_bitmap_tint">#FF9900</item>
+        <item name="inner_scan_animation_interval">25</item>
+    </style>
+</resources>

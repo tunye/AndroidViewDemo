@@ -1,0 +1,26 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.buaa.ct.qrcode" >
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission-group.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application>
+        <activity android:name=".ui.CaptureActivity"
+            android:theme="@style/QRCodeTheme"
+            android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="com.buaa.ct.qrcode.ui.captureactivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".sample.CustomQRCodeTestActivity" />
+        <activity android:name=".sample.QRCodeProduceActivity" />
+        <activity android:name=".sample.QRCodeTestActivity" />
+    </application>
+</manifest>
