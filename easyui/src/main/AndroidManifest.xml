@@ -10,5 +10,6 @@
         <activity android:name=".boundnumber.BoundNumTestActivity"/>
         <activity android:name=".share.ShareDialogTestActivity" />
         <activity android:name=".progresssbar.NumberProgressbarTestActivity" />
+        <activity android:name=".progressimage.ProgressImageTestActivity" />
     </application>
 </manifest>

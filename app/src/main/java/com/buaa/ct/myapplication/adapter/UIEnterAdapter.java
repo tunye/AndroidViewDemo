@@ -17,6 +17,7 @@ import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
+import com.buaa.ct.easyui.progressimage.ProgressImageTestActivity;
 import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
@@ -29,7 +30,7 @@ import com.buaa.ct.stickydot.StickyDotTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝"};
+    private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝","推门效果","QQ发图效果"};
     private Context context;
 
     public UIEnterAdapter(Context context) {
@@ -69,6 +70,12 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
                         break;
                     case 5:
                         context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
+                        break;
+                    case 6:
+                        context.startActivity(new Intent(context, PullDoorTestActivity.class));
+                        break;
+                    case 7:
+                        context.startActivity(new Intent(context, ProgressImageTestActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));
