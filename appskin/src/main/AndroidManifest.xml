@@ -3,6 +3,5 @@
 
     <application>
         <activity android:name=".BaseSkinActivity"/>
-        <activity android:name=".sample.ScoopSettingsActivity"/>
     </application>
 </manifest>

@@ -3,8 +3,9 @@ package com.buaa.ct.appskin.attr;
 import android.view.View;
 
 /**
- * Created by zhy on 15/9/22.
+ * Created by ct on 19/9/2.
  */
+
 public class SkinAttr {
     String resName;
     SkinAttrType attrType;

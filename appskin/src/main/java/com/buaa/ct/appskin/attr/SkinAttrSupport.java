@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zhy on 15/9/23.
+ * Created by ct on 19/9/2.
  */
+
 public class SkinAttrSupport {
     public static List<SkinAttr> getSkinAttrs(AttributeSet attrs, Context context) {
         List<SkinAttr> skinAttrs = new ArrayList<>();
@@ -34,7 +35,6 @@ public class SkinAttrSupport {
             }
         }
         return skinAttrs;
-
     }
 
     private static SkinAttrType getSupportAttrType(String attrName) {
@@ -44,5 +44,4 @@ public class SkinAttrSupport {
         }
         return null;
     }
-
 }

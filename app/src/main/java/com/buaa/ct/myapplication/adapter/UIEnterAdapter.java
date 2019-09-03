@@ -10,24 +10,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
-import com.buaa.ct.comment.sample.CommentTestActivity;
-import com.buaa.ct.copyboard.CopyboardTestActivity;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
-import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.progressimage.ProgressImageTestActivity;
 import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
-import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
-import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.TestActivity;
-import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
-import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemViewHolder> {
     private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝","推门效果","QQ发图效果"};
@@ -48,8 +40,8 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
     public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
         viewHolder.name.setText(names[i]);
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
-        viewHolder.itemView.setTag(i);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.root.setTag(i);
+        viewHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch ((int) v.getTag()) {
@@ -81,9 +73,9 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
                         context.startActivity(new Intent(context, TestActivity.class));
                         break;
                 }
-
             }
         });
+//        AddRippleEffect.addRippleEffect(viewHolder.itemView, 300);
     }
 
     @Override
@@ -94,9 +86,11 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
     class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
         TextView name;
+        View root;
 
         ItemViewHolder(View itemView) {
             super(itemView);
+            root = itemView.findViewById(R.id.root);
             icon = itemView.findViewById(R.id.enter_item_icon);
             name = itemView.findViewById(R.id.enter_item_name);
         }

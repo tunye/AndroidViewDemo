@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="ui">For UI Show</string>
+
+    <string name="app_no_change">The app skin color is not changed.</string>
+    <string name="test_skin">APP skin test</string>
+    <string name="test_skin_oper">Use</string>
 </resources>

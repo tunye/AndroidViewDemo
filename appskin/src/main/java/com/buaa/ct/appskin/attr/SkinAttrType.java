@@ -10,9 +10,8 @@ import android.widget.TextView;
 import com.buaa.ct.appskin.ResourceManager;
 import com.buaa.ct.appskin.SkinManager;
 
-
 /**
- * Created by zhy on 15/9/28.
+ * Created by ct on 19/9/2.
  */
 public class SkinAttrType implements ISkinAttrType {
     public static final SkinAttrType BACKGROUD = new SkinAttrType("background") {

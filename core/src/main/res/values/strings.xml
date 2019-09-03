@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">core</string>
+
+    <string name="permission">Request Permission</string>
+    <string name="sure">sure</string>
+    <string name="cancel">cancel</string>
+    <string name="storage_permission_content">This app needs your phone storage</string>
+
+</resources>

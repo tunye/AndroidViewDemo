@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/skin_app_color"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/toolbar_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textColor="@color/textcolor_on_appcolor"
+            android:textSize="@dimen/title_text" />
+
+        <com.buaa.ct.core.view.MaterialRippleLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/row_space_big"
+            app:mrl_rippleColor="@color/toolbar_ripple_color"
+            app:mrl_rippleDuration="100">
+
+            <ImageView
+                android:id="@+id/back_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/back" />
+        </com.buaa.ct.core.view.MaterialRippleLayout>
+
+        <TextView
+            android:id="@+id/toolbar_oper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:paddingEnd="@dimen/row_space_big"
+            android:textColor="@color/textcolor_on_appcolor"
+            android:textSize="@dimen/large_text" />
+    </FrameLayout>
+</FrameLayout>

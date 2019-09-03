@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by ct on 15/9/22.
+ * Created by ct on 19/9/2.
  */
 public class BaseSkinActivity extends AppCompatActivity implements ISkinChangedListener, LayoutInflaterFactory {
     static final Class<?>[] sConstructorSignature = new Class[]{Context.class, AttributeSet.class};
@@ -45,11 +45,7 @@ public class BaseSkinActivity extends AppCompatActivity implements ISkinChangedL
             }
             Object object = sCreateViewMethod.invoke(delegate, parent, name, context, attrs);
             view = (View) object;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
         List<SkinAttr> skinAttrList = SkinAttrSupport.getSkinAttrs(attrs, context);
@@ -101,14 +97,12 @@ public class BaseSkinActivity extends AppCompatActivity implements ISkinChangedL
         }
     }
 
-    private View createView(Context context, String name, String prefix)
-            throws ClassNotFoundException, InflateException {
+    private View createView(Context context, String name, String prefix) throws InflateException {
         Constructor<? extends View> constructor = sConstructorMap.get(name);
         try {
             if (constructor == null) {
                 Class<? extends View> clazz = context.getClassLoader().loadClass(
                         prefix != null ? (prefix + name) : name).asSubclass(View.class);
-
                 constructor = clazz.getConstructor(sConstructorSignature);
                 sConstructorMap.put(name, constructor);
             }
@@ -131,7 +125,6 @@ public class BaseSkinActivity extends AppCompatActivity implements ISkinChangedL
         super.onDestroy();
         SkinManager.getInstance().removeChangedListener(this);
     }
-
 
     @Override
     public void onSkinChanged() {

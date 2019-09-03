@@ -1,28 +1,31 @@
 package com.buaa.ct.myapplication;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.widget.LinearLayout;
+import android.view.View;
 
 import com.buaa.ct.myapplication.adapter.EnterAdapter;
+import com.buaa.ct.myapplication.sample.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     RecyclerView recyclerView;
-    EnterAdapter enterAdapter;
-    Toolbar toolbar;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle(R.string.app_name);
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         recyclerView = findViewById(R.id.enter);
-        enterAdapter = new EnterAdapter(this);
-        recyclerView.setAdapter(enterAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayout.VERTICAL, true));
+        setRecyclerViewProperty(recyclerView);
+    }
+
+    @Override
+    protected void onActivityCreated() {
+        super.onActivityCreated();
+        recyclerView.setAdapter(new EnterAdapter(this));
+        title.setText(R.string.app_name);
+        back.setVisibility(View.INVISIBLE);
     }
 }

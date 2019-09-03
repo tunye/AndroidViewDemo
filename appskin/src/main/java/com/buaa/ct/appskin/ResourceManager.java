@@ -6,7 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 
 /**
- * Created by zhy on 15/9/22.
+ * Created by ct on 19/9/2.
  */
 public class ResourceManager {
     private static final String DEFTYPE_DRAWABLE = "drawable";

@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.appskin.sample.ScoopSettingsActivity;
 import com.buaa.ct.comment.sample.CommentTestActivity;
 import com.buaa.ct.copyboard.CopyboardTestActivity;
+import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
@@ -20,6 +20,7 @@ import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.TestActivity;
 import com.buaa.ct.myapplication.UIActivity;
+import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
@@ -36,7 +37,7 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
 
     public EnterAdapter(Context context) {
         this.context = context;
-        String[] nameList = {"网页回弹效果", "照片选择器", "皮肤效果", "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "录屏", "二维码"};
+        String[] nameList = {"网页回弹效果", "照片选择器", RuntimeManager.getInstance().getString(R.string.test_skin), "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "录屏", "二维码"};
         names.addAll(Arrays.asList(nameList));
         names.add(context.getResources().getString(R.string.ui));
     }
@@ -52,8 +53,8 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
     public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
         viewHolder.name.setText(names.get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
-        viewHolder.itemView.setTag(i);
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        viewHolder.root.setTag(i);
+        viewHolder.root.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch ((int) v.getTag()) {
@@ -64,7 +65,7 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         context.startActivity(new Intent(context, ImageSelectorTestActivity.class));
                         break;
                     case 2:
-                        context.startActivity(new Intent(context, ScoopSettingsActivity.class));
+                        context.startActivity(new Intent(context, SkinActivity.class));
                         break;
                     case 3:
                         context.startActivity(new Intent(context, VideoCacheTestActivity.class));
@@ -94,9 +95,9 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                         context.startActivity(new Intent(context, TestActivity.class));
                         break;
                 }
-
             }
         });
+//        AddRippleEffect.addRippleEffect(viewHolder.itemView, 300);
     }
 
     @Override
@@ -107,9 +108,11 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
     class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView icon;
         TextView name;
+        View root;
 
         ItemViewHolder(View itemView) {
             super(itemView);
+            root=itemView.findViewById(R.id.root);
             icon = itemView.findViewById(R.id.enter_item_icon);
             name = itemView.findViewById(R.id.enter_item_name);
         }

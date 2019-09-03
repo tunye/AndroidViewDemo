@@ -1,7 +1,7 @@
 package com.buaa.ct.appskin.callback;
 
 /**
- * Created by zhy on 15/9/22.
+ * Created by ct on 19/9/2.
  */
 public interface ISkinChangedListener {
     void onSkinChanged();

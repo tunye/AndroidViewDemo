@@ -3,49 +3,35 @@ package com.buaa.ct.appskin.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.buaa.ct.appskin.SkinManager;
 
 /**
- * Created by zhy on 15/9/22.
+ * Created by ct on 19/9/2.
  */
 public class PrefUtils {
-    private Context mContext;
+    private SharedPreferences sp;
 
-    public PrefUtils(Context context) {
-        this.mContext = context;
+    public PrefUtils() {
+        sp = SkinManager.getInstance().getmContext().getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    public String getPluginPath() {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        return sp.getString(SkinConfig.KEY_PLUGIN_PATH, "");
+    public static PrefUtils getInstance() {
+        return InstanceHelper.instance;
     }
 
     public String getSuffix() {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
         return sp.getString(SkinConfig.KEY_PLUGIN_SUFFIX, "");
     }
 
-    public boolean clear() {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        return sp.edit().clear().commit();
-    }
-
-    public void putPluginPath(String path) {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        sp.edit().putString(SkinConfig.KEY_PLUGIN_PATH, path).apply();
-    }
-
-    public void putPluginPkg(String pkgName) {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        sp.edit().putString(SkinConfig.KEY_PLUGIN_PKG, pkgName).apply();
-    }
-
-    public String getPluginPkgName() {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
-        return sp.getString(SkinConfig.KEY_PLUGIN_PKG, "");
+    public void clear() {
+        sp.edit().clear().apply();
     }
 
     public void putPluginSuffix(String suffix) {
-        SharedPreferences sp = mContext.getSharedPreferences(SkinConfig.PREF_NAME, Context.MODE_PRIVATE);
         sp.edit().putString(SkinConfig.KEY_PLUGIN_SUFFIX, suffix).apply();
+    }
+
+    private static class InstanceHelper {
+        private static PrefUtils instance = new PrefUtils();
     }
 }

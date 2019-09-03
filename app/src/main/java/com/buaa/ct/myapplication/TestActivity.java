@@ -1,12 +1,16 @@
 package com.buaa.ct.myapplication;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import com.buaa.ct.myapplication.sample.base.BaseActivity;
 
-public class TestActivity extends AppCompatActivity {
+public class TestActivity extends BaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
+    public int getLayoutId() {
+        return R.layout.activity_test;
+    }
+
+    @Override
+    protected void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText("测试页面");
     }
 }
