@@ -22,7 +22,7 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityCreated() {
+    public void onActivityCreated() {
         super.onActivityCreated();
         recyclerView.setAdapter(new EnterAdapter(this));
         title.setText(R.string.app_name);

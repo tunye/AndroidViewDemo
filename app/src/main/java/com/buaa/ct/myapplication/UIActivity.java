@@ -21,7 +21,7 @@ public class UIActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityCreated() {
+    public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.ui);
         recyclerView.setAdapter(new UIEnterAdapter(this));

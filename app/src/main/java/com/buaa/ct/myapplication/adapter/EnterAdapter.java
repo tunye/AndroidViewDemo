@@ -3,7 +3,6 @@ package com.buaa.ct.myapplication.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import com.buaa.ct.comment.sample.CommentTestActivity;
 import com.buaa.ct.copyboard.CopyboardTestActivity;
+import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
@@ -25,33 +25,28 @@ import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHolder> {
+public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.ItemViewHolder> {
     private static final int count = 11;
-    private List<String> names = new ArrayList<>();
-
-    private Context context;
 
     public EnterAdapter(Context context) {
-        this.context = context;
+        super(context);
         String[] nameList = {"网页回弹效果", "照片选择器", RuntimeManager.getInstance().getString(R.string.test_skin), "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "录屏", "二维码"};
-        names.addAll(Arrays.asList(nameList));
-        names.add(context.getResources().getString(R.string.ui));
+        addDatas(Arrays.asList(nameList));
+        addData(context.getResources().getString(R.string.ui));
     }
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.enter_item_view, viewGroup, false);
-        return new ItemViewHolder(view);
+    public EnterAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new EnterAdapter.ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.enter_item_view, parent, false));
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
-        viewHolder.name.setText(names.get(i));
+        viewHolder.name.setText(getDatas().get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
         viewHolder.root.setTag(i);
         viewHolder.root.setOnClickListener(new View.OnClickListener() {
@@ -97,7 +92,6 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
                 }
             }
         });
-//        AddRippleEffect.addRippleEffect(viewHolder.itemView, 300);
     }
 
     @Override
@@ -105,12 +99,12 @@ public class EnterAdapter extends RecyclerView.Adapter<EnterAdapter.ItemViewHold
         return count;
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    public static class ItemViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
         ImageView icon;
         TextView name;
         View root;
 
-        ItemViewHolder(View itemView) {
+        public ItemViewHolder(View itemView) {
             super(itemView);
             root=itemView.findViewById(R.id.root);
             icon = itemView.findViewById(R.id.enter_item_icon);

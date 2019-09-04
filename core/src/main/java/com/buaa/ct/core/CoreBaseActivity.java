@@ -21,6 +21,7 @@ import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.MaterialRippleLayout;
 import com.buaa.ct.core.view.image.DividerItemDecoration;
+import com.buaa.ct.core.view.swiperefresh.MySwipeRefreshLayout;
 
 public class CoreBaseActivity extends BaseSkinActivity {
     protected Context context;
@@ -60,7 +61,7 @@ public class CoreBaseActivity extends BaseSkinActivity {
         toolbarOper = findViewById(R.id.toolbar_oper);
     }
 
-    protected void setListener() {
+    public void setListener() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,17 +70,25 @@ public class CoreBaseActivity extends BaseSkinActivity {
         });
     }
 
-    protected void onActivityCreated() {
+    public void onActivityCreated() {
 
     }
 
-    protected void onActivityResumed() {
+    public void onActivityResumed() {
 
     }
 
-    protected void setRecyclerViewProperty(RecyclerView recyclerView) {
+    public void setRecyclerViewProperty(RecyclerView recyclerView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.addItemDecoration(new DividerItemDecoration());
+    }
+
+    public MySwipeRefreshLayout findSwipeRefresh() {
+        MySwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe_refresh_widget);
+        swipeRefreshLayout.setColorSchemeColors(0xff259CF7, 0xff2ABB51, 0xffE10000, 0xfffaaa3c);
+        swipeRefreshLayout.setFirstIndex(0);
+        swipeRefreshLayout.setRefreshing(true);
+        return swipeRefreshLayout;
     }
 
     @Override

@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
@@ -19,16 +18,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-
-    implementation project(path: ':core')
+    api project(path: ':core')
 
     implementation project(path: ':videocache')
     implementation project(path: ':imageselector')
     implementation project(path: ':easyui')
-    implementation project(path: ':appskin')
     implementation project(path: ':comment')
     implementation project(path: ':pudding')
     implementation project(path: ':qrcode')

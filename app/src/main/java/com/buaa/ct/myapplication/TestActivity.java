@@ -9,7 +9,7 @@ public class TestActivity extends BaseActivity {
     }
 
     @Override
-    protected void onActivityCreated() {
+    public void onActivityCreated() {
         super.onActivityCreated();
         title.setText("测试页面");
     }

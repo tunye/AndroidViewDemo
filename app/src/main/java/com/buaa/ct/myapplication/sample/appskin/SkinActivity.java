@@ -37,7 +37,7 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
     }
 
     @Override
-    protected void onActivityCreated() {
+    public void onActivityCreated() {
         super.onActivityCreated();
         setRecyclerViewProperty(recyclerView);
         title.setText(R.string.test_skin);
@@ -46,7 +46,7 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
     }
 
     @Override
-    protected void setListener() {
+    public void setListener() {
         super.setListener();
         toolbarOper.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,12 +59,6 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
                 }
             }
         });
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        finish();
     }
 
     @Override

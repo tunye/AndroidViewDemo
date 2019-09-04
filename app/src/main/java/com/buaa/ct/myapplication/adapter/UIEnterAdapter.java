@@ -3,13 +3,13 @@ package com.buaa.ct.myapplication.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
@@ -21,24 +21,25 @@ import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.TestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 
-public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemViewHolder> {
+import java.util.Arrays;
+
+public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapter.ItemViewHolder> {
     private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝","推门效果","QQ发图效果"};
-    private Context context;
 
     public UIEnterAdapter(Context context) {
-        this.context = context;
+        super(context);
+        addDatas(Arrays.asList(names));
     }
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.enter_item_view, viewGroup, false);
-        return new ItemViewHolder(view);
+    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.enter_item_view, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
-        viewHolder.name.setText(names[i]);
+        viewHolder.name.setText(getDatas().get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
         viewHolder.root.setTag(i);
         viewHolder.root.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +76,6 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
                 }
             }
         });
-//        AddRippleEffect.addRippleEffect(viewHolder.itemView, 300);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class UIEnterAdapter extends RecyclerView.Adapter<UIEnterAdapter.ItemView
         return names.length;
     }
 
-    class ItemViewHolder extends RecyclerView.ViewHolder {
+    class ItemViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
         ImageView icon;
         TextView name;
         View root;

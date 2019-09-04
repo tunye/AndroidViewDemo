@@ -6,4 +6,6 @@
     <string name="cancel">cancel</string>
     <string name="storage_permission_content">This app needs your phone storage</string>
 
+    <string name="swipe_hint">Swipe more harder</string>
+    <string name="list_double">Double click to return list top</string>
 </resources>
