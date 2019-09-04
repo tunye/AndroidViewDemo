@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
-    android:paddingTop="4dp">
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <LinearLayout
         android:id="@+id/ly_normal"
@@ -36,8 +36,8 @@
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="手指上划，取消发送"
-            android:textColor="@color/white"
+            android:text="@string/uptocancelsend"
+            android:textColor="@color/textcolor_on_appcolor"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -60,8 +60,8 @@
             android:background="@drawable/chat_voice_cancel_bg"
             android:gravity="center"
             android:padding="4dp"
-            android:text="手指松开，取消发送"
-            android:textColor="@color/white"
+            android:text="@string/cancelsend"
+            android:textColor="@color/textcolor_on_appcolor"
             android:textSize="15sp" />
     </LinearLayout>
 
@@ -82,8 +82,8 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:gravity="center"
-            android:text="录音时间太短"
-            android:textColor="@color/white"
+            android:text="@string/recordshort"
+            android:textColor="@color/textcolor_on_appcolor"
             android:textSize="15sp" />
     </LinearLayout>
-</RelativeLayout>
+</FrameLayout>

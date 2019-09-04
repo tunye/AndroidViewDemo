@@ -5,68 +5,62 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Handler;
-import android.os.Message;
+
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.ThreadUtils;
 
 public class ProximitySensorListener implements SensorEventListener {
 
-    private Handler handler;
-    private Context context;
     private SensorManager sensorManager;
     private float maxRange;
     private boolean hasChange; //
     private Sensor sensor; //
 
-    public ProximitySensorListener(Context context, Handler handler) {
-        this.context = context;
-        this.handler = handler;
-        if (context == null || handler == null) {
-            throw new IllegalArgumentException();
-        } else {
-            init();
-            return;
-        }
+    public ProximitySensorListener() {
+        init();
     }
 
     private void init() {//
         try {
-            sensorManager = (SensorManager) context
-                    .getSystemService(Context.SENSOR_SERVICE);
+            sensorManager = (SensorManager) RuntimeManager.getInstance().getContext().getSystemService(Context.SENSOR_SERVICE);
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
             maxRange = sensor.getMaximumRange();
             if (maxRange > 10.0F) {
                 maxRange = 10.0F;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Error e) {
-            e.printStackTrace();
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 
     private void sendMessage() {
-        Message message = Message.obtain();
-        message.what = 2449;
-        handler.dispatchMessage(message);
+        ThreadUtils.postOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                byte mode = 0;
+                boolean flag = hasChange();
+                if (flag)
+                    AudioMediaPlayer.getInstance().seekTo(0);
+                if (flag)
+                    mode = 2;
+                AudioFocusChangeManager.updateMode(mode);
+            }
+        });
     }
 
     public void registerListener() {//
         try {
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Error e) {
-            e.printStackTrace();
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 
     public void unregisterListener() {//
         try {
             sensorManager.unregisterListener(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } catch (Error e) {
-            e.printStackTrace();
+        } catch (Throwable t) {
+            t.printStackTrace();
         }
     }
 

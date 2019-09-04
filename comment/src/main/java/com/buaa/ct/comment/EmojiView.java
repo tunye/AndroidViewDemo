@@ -8,15 +8,15 @@ import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.buaa.ct.comment.emoji.EmojiIcon;
 import com.buaa.ct.comment.emoji.EmojiViewPagerAdapter;
 import com.buaa.ct.comment.emoji.People;
-import com.buaa.ct.comment.util.SystemUtil;
 import com.buaa.ct.comment.viewpage.CirclePageIndicator;
+import com.buaa.ct.core.manager.RuntimeManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +25,8 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
 
     private ImageView mIvEmoji;
     private EditText mEtText;
-    private OnComposeOperationDelegate mDelegate;
     private ViewPager mViewPager;
     private EmojiViewPagerAdapter mPagerAdapter;
-    private int mCurrentKeyboardHeight;
     private View mLyEmoji;
 
 
@@ -76,11 +74,11 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
     private void init(Context context) {
         inflate(context, R.layout.view_emoji, this);
 
-        mIvEmoji = (ImageView) findViewById(R.id.iv_emoji);
+        mIvEmoji = findViewById(R.id.iv_emoji);
         mIvEmoji.setOnClickListener(this);
         mLyEmoji = findViewById(R.id.ly_emoji);
 
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager = findViewById(R.id.view_pager);
 
         int emojiHeight = caculateEmojiPanelHeight();
 
@@ -137,13 +135,11 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
     }
 
     private int caculateEmojiPanelHeight() {
-        mCurrentKeyboardHeight = (int) SystemUtil.dpToPixel(210);
+        int mCurrentKeyboardHeight = RuntimeManager.getInstance().dip2px(210);
 
-        mLyEmoji.setLayoutParams(new RelativeLayout
-                .LayoutParams(LayoutParams.MATCH_PARENT, mCurrentKeyboardHeight));
+        mLyEmoji.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, mCurrentKeyboardHeight));
 
-        int emojiPanelHeight = (int) (mCurrentKeyboardHeight - SystemUtil
-                .dpToPixel(20));
+        int emojiPanelHeight = mCurrentKeyboardHeight - RuntimeManager.getInstance().dip2px(20);
         int emojiHeight = (emojiPanelHeight / 4);
 
         LayoutParams lp = new LayoutParams(
@@ -178,12 +174,12 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
     }
 
     private void hideKeyboard() {
-        SystemUtil.hideSoftKeyboard(mEtText);
+        RuntimeManager.getInstance().hideSoftKeyboard(mEtText);
     }
 
     public void showKeyboard() {
         mEtText.requestFocus();
-        SystemUtil.showSoftKeyboard(mEtText);
+        RuntimeManager.getInstance().showSoftKeyboard(mEtText);
     }
 
     public void setmEtText(EditText mEtText) {
@@ -221,15 +217,5 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
         } else {
             return true;
         }
-    }
-
-    public interface OnComposeOperationDelegate {
-        void onSendText(String text);
-
-        void onSendVoice(String file, int length);
-
-        void onSendImageClicked(View v);
-
-        void onSendLocationClicked(View v);
     }
 }

@@ -3,52 +3,36 @@ package com.buaa.ct.comment.recoder;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
-import android.os.Handler;
-import android.os.Message;
 import android.util.SparseIntArray;
-import android.widget.Toast;
 
-import com.buaa.ct.comment.ContextManager;
 import com.buaa.ct.comment.R;
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.view.CustomToast;
 
 
 public class AudioFocusChangeManager {//
 
-    public static ProximitySensorListener sensorListener;
+    private static ProximitySensorListener sensorListener;
     private static AudioManager audioManger;
     private static Object c;
     private static int d = AudioManager.AUDIOFOCUS_LOSS_TRANSIENT;
     private static SparseIntArray volumeArray = new SparseIntArray(); //
-    private static Handler handler = new Handler() {
-
-        public void handleMessage(Message msg) {
-            byte mode = 0;
-            boolean flag = hasChange();
-            if (flag)
-                AudioMediaPlayer.getInstance().seekTo(0);
-            if (flag)
-                mode = 2;
-            updateMode(ContextManager.getInstance(), mode);
-        }
-
-    };
 
     static {
-        audioManger = (AudioManager) ContextManager.getInstance().getSystemService(
+        audioManger = (AudioManager) RuntimeManager.getInstance().getContext().getSystemService(
                 Context.AUDIO_SERVICE);
     }
 
     public static void checkVolume() {//
         if (audioManger.getStreamVolume(AudioManager.STREAM_MUSIC) == 0) {
-            Toast.makeText(ContextManager.getInstance(), R.string.volumeTips, Toast.LENGTH_SHORT).show();
+            CustomToast.getInstance().showToast(R.string.volumeTips);
         }
     }
 
-    public static void updateMode(Context context, int mode) {//
+    public static void updateMode(int mode) {//
         try {
             if (audioManger.getMode() == 0) {
-                volumeArray.put(0,
-                        audioManger.getStreamVolume(AudioManager.STREAM_MUSIC));
+                volumeArray.put(0, audioManger.getStreamVolume(AudioManager.STREAM_MUSIC));
             }
             audioManger.setMode(mode);
             switch (mode) {
@@ -63,9 +47,7 @@ public class AudioFocusChangeManager {//
                 case AudioManager.MODE_RINGTONE:
                 case AudioManager.MODE_IN_CALL:
                     audioManger.setStreamVolume(AudioManager.STREAM_MUSIC,
-                            audioManger
-                                    .getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-                            AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
+                            audioManger.getStreamMaxVolume(AudioManager.STREAM_MUSIC), AudioManager.FLAG_REMOVE_SOUND_AND_VIBRATE);
 
             }
         } catch (Exception e) {
@@ -74,7 +56,7 @@ public class AudioFocusChangeManager {//
     }
 
     public static void updateToNormalMode() {//
-        updateMode(ContextManager.getInstance(), AudioManager.MODE_NORMAL);
+        updateMode(AudioManager.MODE_NORMAL);
     }
 
     public static int requestAudioFocus() {//
@@ -86,12 +68,10 @@ public class AudioFocusChangeManager {//
                     if (focusChange != d
                             && focusChange != AudioManager.AUDIOFOCUS_GAIN
                             && focusChange == AudioManager.AUDIOFOCUS_LOSS)
-                        audioManger
-                                .abandonAudioFocus((OnAudioFocusChangeListener) c);
+                        audioManger.abandonAudioFocus((OnAudioFocusChangeListener) c);
                 }
             };// b();
-            return audioManger.requestAudioFocus(
-                    (OnAudioFocusChangeListener) c, 3, 1);
+            return audioManger.requestAudioFocus((OnAudioFocusChangeListener) c, 3, 1);
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -109,15 +89,11 @@ public class AudioFocusChangeManager {//
     }
 
     public static boolean registerListener() {
-        if (sensorListener == null)
-            sensorListener = new ProximitySensorListener(ContextManager.getInstance(),
-                    handler);
         if (sensorListener == null) {
-            return false;
-        } else {
-            sensorListener.registerListener();
-            return true;
+            sensorListener = new ProximitySensorListener();
         }
+        sensorListener.registerListener();
+        return true;
     }
 
     public static boolean unregisterListener() {//
@@ -130,9 +106,10 @@ public class AudioFocusChangeManager {//
     }
 
     public static boolean hasChange() {
-        if (sensorListener == null)
+        if (sensorListener == null) {
             return false;
-        else
+        } else {
             return sensorListener.hasChange();
+        }
     }
 }

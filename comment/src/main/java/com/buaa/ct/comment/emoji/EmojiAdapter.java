@@ -18,13 +18,14 @@ package com.buaa.ct.comment.emoji;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
 
 import com.buaa.ct.comment.R;
+import com.buaa.ct.core.manager.RuntimeManager;
 
 import java.util.List;
 
@@ -57,27 +58,33 @@ class EmojiAdapter extends ArrayAdapter<EmojiIcon> {
         this.mEmojiHeight = emojiHeight;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         View v = convertView;
         if (v == null) {
             v = View.inflate(getContext(), R.layout.item_emoji, null);
             ViewHolder holder = new ViewHolder();
-            holder.icon = (EmojiconTextView) v.findViewById(R.id.emojicon_icon);
+            holder.icon = v.findViewById(R.id.emojicon_icon);
             holder.icon.setUseSystemDefault(mUseSystemDefault);
             v.setTag(holder);
         }
         EmojiIcon emoji = getItem(position);
 
         ViewHolder holder = (ViewHolder) v.getTag();
-        holder.icon.setText(emoji.getEmoji());
+        if (emoji != null) {
+            holder.icon.setText(emoji.getEmoji());
+        }
         if (position == 27) {
             holder.icon.setBackgroundResource(R.drawable.btn_del_selector);
+            int padding = RuntimeManager.getInstance().dip2px(6);
+            holder.icon.setPadding(padding, padding, padding, padding);
         } else {
-            holder.icon.setBackgroundResource(Color.TRANSPARENT);
+            holder.icon.setBackgroundColor(Color.TRANSPARENT);
+            holder.icon.setPadding(0, 0, 0, 0);
         }
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
-                RelativeLayout.LayoutParams.MATCH_PARENT, mEmojiHeight);
+                FrameLayout.LayoutParams.MATCH_PARENT, mEmojiHeight);
         holder.icon.setLayoutParams(lp);
         return v;
     }

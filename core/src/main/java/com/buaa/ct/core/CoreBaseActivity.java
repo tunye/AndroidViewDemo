@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.buaa.ct.appskin.BaseSkinActivity;
+import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.MaterialRippleLayout;
@@ -33,6 +34,7 @@ public class CoreBaseActivity extends BaseSkinActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = this;
+        ImmersiveManager.getInstance().updateImmersiveStatus(this);
         beforeSetLayout();
         setContentView(getLayoutId());
         afterSetLayout();

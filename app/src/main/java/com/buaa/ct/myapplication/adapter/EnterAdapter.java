@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.comment.sample.CommentTestActivity;
 import com.buaa.ct.copyboard.CopyboardTestActivity;
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
@@ -21,6 +20,7 @@ import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.TestActivity;
 import com.buaa.ct.myapplication.UIActivity;
 import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
+import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
 import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
@@ -106,7 +106,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
 
         public ItemViewHolder(View itemView) {
             super(itemView);
-            root=itemView.findViewById(R.id.root);
+            root = itemView.findViewById(R.id.root);
             icon = itemView.findViewById(R.id.enter_item_icon);
             name = itemView.findViewById(R.id.enter_item_name);
         }

@@ -3,14 +3,14 @@
     xmlns:emoji="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/background"
     android:gravity="bottom"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
+        android:layout_height="@dimen/line_thin"
+        android:background="@color/background_complementary" />
 
     <LinearLayout
         android:id="@+id/ly_input"
@@ -23,10 +23,9 @@
             android:id="@+id/iv_voice_text"
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:clickable="true"
+            android:layout_marginBottom="8dp"
             android:scaleType="centerInside"
             android:src="@drawable/btn_to_voice_selector" />
 
@@ -34,9 +33,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1">
 
             <com.buaa.ct.comment.emoji.RecordButton
@@ -46,7 +45,7 @@
                 android:layout_centerVertical="true"
                 android:background="@drawable/btn_chat_voice_selector"
                 android:text="按住 说话"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_color"
                 android:textSize="15sp"
                 android:visibility="gone" />
 
@@ -57,13 +56,13 @@
                 android:background="@drawable/chat_textfield_selector"
                 android:gravity="start|center_vertical"
                 android:minHeight="35dp"
-                android:paddingBottom="2dp"
                 android:paddingStart="4dp"
-                android:paddingEnd="40dp"
                 android:paddingTop="2dp"
+                android:paddingEnd="40dp"
+                android:paddingBottom="2dp"
                 android:text=""
-                android:textColor="@color/text_black"
-                android:textColorHint="@color/text_gray_light"
+                android:textColor="@color/text_color"
+                android:textColorHint="@color/text_gray_color"
                 android:textCursorDrawable="@null"
                 android:textSize="16sp"
                 android:visibility="visible"
@@ -75,8 +74,8 @@
                 android:layout_height="32dp"
                 android:layout_alignBottom="@+id/et_text"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="3dp"
                 android:layout_marginEnd="4dp"
+                android:layout_marginBottom="3dp"
                 android:clickable="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/btn_chat_emoji_selector"
@@ -85,20 +84,19 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="8dp">
 
             <ImageView
                 android:id="@+id/iv_more"
                 android:layout_width="50dp"
                 android:layout_height="35dp"
-                android:clickable="true"
                 android:scaleType="centerInside"
                 android:src="@drawable/btn_chat_more_selector"
                 android:visibility="visible" />
@@ -109,19 +107,19 @@
                 android:layout_height="35dp"
                 android:background="@drawable/btn_chat_send_selector"
                 android:text="发送"
-                android:textColor="@color/white"
+                android:textColor="@color/textcolor_on_appcolor"
                 android:textSize="16sp"
                 android:visibility="gone" />
-        </RelativeLayout>
+        </FrameLayout>
     </LinearLayout>
 
     <View
         android:id="@+id/split"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
+        android:layout_height="@dimen/line_thin"
+        android:background="@color/background_complementary" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -146,14 +144,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/btn_chat_voice_selector"
-                    android:clickable="true"
                     android:src="@drawable/ic_chat_opt_picture" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="图片"
-                    android:textColor="@color/text_gray_light"
+                    android:textColor="@color/text_gray_color"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -173,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal">
@@ -182,9 +179,9 @@
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:padding="4dp" />
-            </RelativeLayout>
+            </FrameLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

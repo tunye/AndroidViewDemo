@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.buaa.ct.appskin.SkinManager;
 import com.buaa.ct.appskin.sample.FlavorAdapter;
+import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.myapplication.R;
@@ -22,7 +23,7 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_skin;
+        return R.layout.skin_test;
     }
 
     @Override
@@ -66,8 +67,10 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
         SkinManager.getInstance().changeSkin(item);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             if (position == 0) {
+                ImmersiveManager.getInstance().updateImmersiveStatus(this, true);
                 getWindow().setStatusBarColor(getResources().getColor(R.color.skin_app_color));
             } else {
+                ImmersiveManager.getInstance().updateImmersiveStatus(this, ImmersiveManager.getInstance().isBrightTheme(getResource("skin_app_color_" + item)));
                 getWindow().setStatusBarColor(getResources().getColor(getResource("skin_app_color_" + item)));
             }
         }

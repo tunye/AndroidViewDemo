@@ -6,7 +6,9 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.Display;
+import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
 import static android.content.Context.WINDOW_SERVICE;
 
@@ -128,6 +130,18 @@ public class RuntimeManager {
     public int sp2px(float spValue) {
         float fontScale = getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5F);
+    }
+
+    public void hideSoftKeyboard(View view) {
+        if (view == null)
+            return;
+        ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                .hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public void showSoftKeyboard(View view) {
+        ((InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
+                .showSoftInput(view, InputMethodManager.SHOW_FORCED);
     }
 
     private static class InstanceHelper {

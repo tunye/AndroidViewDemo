@@ -1,30 +1,36 @@
-package com.buaa.ct.comment.sample;
+package com.buaa.ct.myapplication.sample.comment;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.buaa.ct.comment.CommentView;
-import com.buaa.ct.comment.ContextManager;
-import com.buaa.ct.comment.R;
+import com.buaa.ct.myapplication.R;
+import com.buaa.ct.myapplication.sample.base.BaseActivity;
 
 import java.net.URLDecoder;
 
-public class CommentTestActivity extends AppCompatActivity {
+public class CommentTestActivity extends BaseActivity {
     CommentView commentView;
     TextView textView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ContextManager.setInstance(this);
-        setContentView(R.layout.comment_test);
-        textView =  findViewById(R.id.test);
-        commentView =  findViewById(R.id.compose);
+    public int getLayoutId() {
+        return R.layout.comment_test;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        textView = findViewById(R.id.test);
+        commentView = findViewById(R.id.compose);
+    }
+
+    @Override
+    public void setListener() {
+        super.setListener();
         commentView.setOperationDelegate(new CommentView.OnComposeOperationDelegate() {
             @Override
             public void onSendText(String text) {

@@ -1,7 +1,7 @@
 package com.buaa.ct.comment.emoji;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +11,19 @@ import android.widget.GridView;
 
 import com.buaa.ct.comment.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class EmojiViewPagerAdapter extends RecyclingPagerAdapter {
 
-    private LayoutInflater infalter;
+    private LayoutInflater inflater;
     private int mEmojiHeight;
-    private List<List<EmojiIcon>> mPagers = new ArrayList<List<EmojiIcon>>();
+    private List<List<EmojiIcon>> mPagers;
     private OnClickEmojiListener mListener;
     private int mChildCount = 0;
 
-    public EmojiViewPagerAdapter(Context context, List<List<EmojiIcon>> pager,
-                                 int emojiHeight, OnClickEmojiListener listener) {
-        infalter = LayoutInflater.from(context);
+    public EmojiViewPagerAdapter(Context context, List<List<EmojiIcon>> pager, int emojiHeight, OnClickEmojiListener listener) {
+        inflater = LayoutInflater.from(context);
         mPagers = pager;
         mEmojiHeight = emojiHeight;
         mListener = listener;
@@ -36,19 +34,17 @@ public class EmojiViewPagerAdapter extends RecyclingPagerAdapter {
         notifyDataSetChanged();
     }
 
-    @SuppressLint("InflateParams")
     @Override
     public View getView(int position, View convertView, ViewGroup container) {
-        ViewHolder vh = null;
+        ViewHolder vh;
         if (convertView == null) {
-            convertView = infalter.inflate(R.layout.view_pager_emoji, null);
+            convertView = inflater.inflate(R.layout.view_pager_emoji, null);
             vh = new ViewHolder(convertView);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
-        final EmojiAdapter adapter = new EmojiAdapter(container.getContext(),
-                mPagers.get(position), mEmojiHeight);
+        final EmojiAdapter adapter = new EmojiAdapter(container.getContext(), mPagers.get(position), mEmojiHeight);
         vh.gv.setAdapter(adapter);
         vh.gv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -60,7 +56,7 @@ public class EmojiViewPagerAdapter extends RecyclingPagerAdapter {
                 if (position == adapter.getCount() - 1) {
                     mListener.onDelete();
                 } else {
-                    mListener.onEmojiClick((EmojiIcon) adapter.getItem(position));
+                    mListener.onEmojiClick(adapter.getItem(position));
                 }
             }
         });
@@ -80,7 +76,7 @@ public class EmojiViewPagerAdapter extends RecyclingPagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         if (mChildCount > 0) {
             mChildCount--;
             return POSITION_NONE;
@@ -98,7 +94,7 @@ public class EmojiViewPagerAdapter extends RecyclingPagerAdapter {
         GridView gv;
 
         public ViewHolder(View v) {
-            gv = (GridView) v.findViewById(R.id.gv_emoji);
+            gv = v.findViewById(R.id.gv_emoji);
         }
     }
 }

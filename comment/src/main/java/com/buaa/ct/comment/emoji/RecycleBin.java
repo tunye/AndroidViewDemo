@@ -1,6 +1,5 @@
 package com.buaa.ct.comment.emoji;
 
-import android.os.Build;
 import android.util.SparseArray;
 import android.view.View;
 
@@ -96,9 +95,7 @@ public class RecycleBin {
             scrapViews[viewType].put(position, scrap);
         }
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-            scrap.setAccessibilityDelegate(null);
-        }
+        scrap.setAccessibilityDelegate(null);
     }
 
     /**
@@ -128,9 +125,7 @@ public class RecycleBin {
                 }
                 scrapViews.put(i, victim);
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-                    victim.setAccessibilityDelegate(null);
-                }
+                victim.setAccessibilityDelegate(null);
             }
         }
 

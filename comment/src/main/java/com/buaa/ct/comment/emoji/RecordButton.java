@@ -1,20 +1,18 @@
 package com.buaa.ct.comment.emoji;
 
-import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Rect;
 import android.media.MediaRecorder;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 
 import com.buaa.ct.comment.R;
@@ -22,12 +20,12 @@ import com.buaa.ct.comment.recoder.AudioMediaRecorder;
 import com.buaa.ct.comment.recoder.MediaRecorderOnErrorListener;
 import com.buaa.ct.comment.recoder.MediaRecorderOnProgressListener;
 import com.buaa.ct.comment.recoder.RecordUtils;
-import com.buaa.ct.comment.util.LogUtil;
+import com.buaa.ct.core.util.ThreadUtils;
 
 import java.io.File;
 
 
-public class RecordButton extends Button {
+public class RecordButton extends AppCompatButton {
     private static final double MAX_RECORD_AUDIO_TIME = 120 * 1000;
     private static final String TAG = "RecordButton";
     private static final int STATE_INIT = 0;
@@ -92,11 +90,6 @@ public class RecordButton extends Button {
         super(context, attrs, defStyleAttr);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public RecordButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.dialog_recorder, null);
         mLyNormal = view.findViewById(R.id.ly_normal);
@@ -107,7 +100,7 @@ public class RecordButton extends Button {
         WindowManager.LayoutParams lp = mTipDialog.getWindow().getAttributes();
         lp.gravity = Gravity.CENTER;
 
-        ImageView mAnimView = (ImageView) view.findViewById(R.id.iv_anim);
+        ImageView mAnimView = view.findViewById(R.id.iv_anim);
         mAnimHandler = new ShowVolumeHandler(mAnimView);
 
         mMediaRecorder = new AudioMediaRecorder();
@@ -161,7 +154,6 @@ public class RecordButton extends Button {
                 mState = STATE_INIT;
                 break;
             case MotionEvent.ACTION_CANCEL:// 当手指移动到view外面，会cancel
-                LogUtil.v(TAG, "cancel");
                 //cancelRecord();
                 mAnimThread.exit();
                 mMediaRecorder.stop();
@@ -196,7 +188,7 @@ public class RecordButton extends Button {
                 mLyNormal.setVisibility(View.INVISIBLE);
                 mLyUpToCancel.setVisibility(View.INVISIBLE);
                 mLyTooShort.setVisibility(View.VISIBLE);
-                new Handler().postDelayed(new Runnable() {
+                ThreadUtils.postOnUiThreadDelay(new Runnable() {
                     @Override
                     public void run() {
                         mTipDialog.dismiss();
@@ -223,7 +215,7 @@ public class RecordButton extends Button {
     }
 
     public interface OnFinishedRecordListener {
-        public void onFinishedRecord(String audioPath, int length);
+        void onFinishedRecord(String audioPath, int length);
     }
 
     static class ShowVolumeHandler extends Handler {

@@ -16,9 +16,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.buaa.ct.comment.emoji.EmojiIcon;
 import com.buaa.ct.comment.emoji.EmojiViewPagerAdapter;
@@ -26,8 +26,9 @@ import com.buaa.ct.comment.emoji.EmojiconEditText;
 import com.buaa.ct.comment.emoji.People;
 import com.buaa.ct.comment.emoji.RecordButton;
 import com.buaa.ct.comment.emoji.SoftKeyboardStateHelper;
-import com.buaa.ct.comment.util.SystemUtil;
 import com.buaa.ct.comment.viewpage.CirclePageIndicator;
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.GetAppColor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -132,10 +133,10 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.ComposeView);
-        showVoice = typedArray.getBoolean(R.styleable.ComposeView_showVoice, true);
-        showMore = typedArray.getBoolean(R.styleable.ComposeView_showMore, true);
-        voiceOnly = typedArray.getBoolean(R.styleable.ComposeView_voiceOnly, false);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CommentView);
+        showVoice = typedArray.getBoolean(R.styleable.CommentView_showVoice, true);
+        showMore = typedArray.getBoolean(R.styleable.CommentView_showMore, true);
+        voiceOnly = typedArray.getBoolean(R.styleable.CommentView_voiceOnly, false);
         typedArray.recycle();
         initAnim(context);
         initView(context);
@@ -210,12 +211,11 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
             pagers.add(es);
         }
 
-        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), pagers,
-                emojiHeight, this);
+        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), pagers, emojiHeight, this);
         mViewPager.setAdapter(mPagerAdapter);
 
-        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        indicator.setFillColor(0xff45B91C);
+        CirclePageIndicator indicator = findViewById(R.id.indicator);
+        indicator.setFillColor(GetAppColor.getInstance().getAppColor());
         indicator.setViewPager(mViewPager);
         if (voiceOnly) {
             mIvVoiceText.setVisibility(View.GONE);
@@ -323,13 +323,11 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
     }
 
     private int calculateEmiliPanelHeight() {
-        int mCurrentKeyboardHeight = (int) SystemUtil.dpToPixel(180);
+        int mCurrentKeyboardHeight = RuntimeManager.getInstance().dip2px(180);
 
-        mLyOpt.setLayoutParams(new RelativeLayout
-                .LayoutParams(LayoutParams.MATCH_PARENT, mCurrentKeyboardHeight));
+        mLyOpt.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, mCurrentKeyboardHeight));
 
-        int emojiPanelHeight = (int) (mCurrentKeyboardHeight - SystemUtil
-                .dpToPixel(20));
+        int emojiPanelHeight = mCurrentKeyboardHeight - RuntimeManager.getInstance().dip2px(20);
         int emojiHeight = emojiPanelHeight / 4;
 
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, emojiPanelHeight);
@@ -369,7 +367,7 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
     public void hideEmojiOptAndKeyboard() {
         hideEmojiPanel();
         hideOptPanel();
-        SystemUtil.hideSoftKeyboard(mEtText);
+        RuntimeManager.getInstance().hideSoftKeyboard(mEtText);
     }
 
     private void tryHideOptPanel() {
@@ -397,12 +395,12 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
     }
 
     private void hideKeyboard() {
-        SystemUtil.hideSoftKeyboard(mEtText);
+        RuntimeManager.getInstance().hideSoftKeyboard(mEtText);
     }
 
     public void showKeyboard() {
         mEtText.requestFocus();
-        SystemUtil.showSoftKeyboard(mEtText);
+        RuntimeManager.getInstance().showSoftKeyboard(mEtText);
     }
 
     public EmojiconEditText getmEtText() {

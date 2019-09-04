@@ -21,6 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.text.style.DynamicDrawableSpan;
 
 
@@ -38,7 +39,7 @@ class EmojiconSpan extends DynamicDrawableSpan {
     }
 
     @Override
-    public int getSize(Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
+    public int getSize(@NonNull Paint paint, CharSequence text, int start, int end, Paint.FontMetricsInt fm) {
         Drawable drawable = getDrawable();
         Rect rect = drawable.getBounds();
         if (fm != null) {
@@ -55,7 +56,6 @@ class EmojiconSpan extends DynamicDrawableSpan {
             fm.descent = top;
         }
         return rect.right;
-        //return super.getSize(paint, text, start, end, fm);
     }
 
     @Override

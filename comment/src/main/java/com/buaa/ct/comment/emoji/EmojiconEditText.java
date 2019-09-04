@@ -18,20 +18,19 @@ package com.buaa.ct.comment.emoji;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
-import android.widget.EditText;
 
 import com.buaa.ct.comment.R;
 
 
-public class EmojiconEditText extends EditText {
+public class EmojiconEditText extends AppCompatEditText {
     private int mEmojiconSize;
     private boolean mUseSystemDefault = false;
 
     public EmojiconEditText(Context context) {
         super(context);
         mEmojiconSize = (int) getTextSize();
-
     }
 
     public EmojiconEditText(Context context, AttributeSet attrs) {
@@ -45,10 +44,14 @@ public class EmojiconEditText extends EditText {
     }
 
     private void init(AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmojiIcon);
-        mEmojiconSize = (int) a.getDimension(R.styleable.EmojiIcon_emojiconSize, getTextSize());
-        mUseSystemDefault = a.getBoolean(R.styleable.EmojiIcon_emojiconUseSystemDefault, false);
-        a.recycle();
+        if (attrs == null) {
+            mEmojiconSize = (int) getTextSize();
+        } else {
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmojiconEditText);
+            mEmojiconSize = (int) a.getDimension(R.styleable.EmojiconEditText_emojiconSize, getTextSize());
+            mUseSystemDefault = a.getBoolean(R.styleable.EmojiconEditText_emojiconUseSystemDefault, false);
+            a.recycle();
+        }
         setText(getText());
     }
 

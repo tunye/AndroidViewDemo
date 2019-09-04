@@ -34,9 +34,9 @@
 
     <declare-styleable name="MySwipeRefreshLayout">
         <attr name="direction">
-            <enum name="top" value="0"/>
-            <enum name="bottom" value="1"/>
-            <enum name="both" value="2"/>
+            <enum name="top" value="0" />
+            <enum name="bottom" value="1" />
+            <enum name="both" value="2" />
         </attr>
     </declare-styleable>
 </resources>

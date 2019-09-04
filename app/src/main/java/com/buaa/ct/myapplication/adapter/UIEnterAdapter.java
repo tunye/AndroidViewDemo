@@ -24,7 +24,7 @@ import com.buaa.ct.stickydot.StickyDotTestActivity;
 import java.util.Arrays;
 
 public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝","推门效果","QQ发图效果"};
+    private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝", "推门效果", "QQ发图效果"};
 
     public UIEnterAdapter(Context context) {
         super(context);

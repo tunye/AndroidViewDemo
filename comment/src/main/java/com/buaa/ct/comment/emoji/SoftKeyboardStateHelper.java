@@ -9,7 +9,7 @@ import java.util.List;
 
 public class SoftKeyboardStateHelper implements ViewTreeObserver.OnGlobalLayoutListener {
 
-    private final List<SoftKeyboardStateListener> listeners = new LinkedList<SoftKeyboardStateListener>();
+    private final List<SoftKeyboardStateListener> listeners = new LinkedList<>();
     private final View activityRootView;
     private int lastSoftKeyboardHeightInPx;
     private boolean isSoftKeyboardOpened;

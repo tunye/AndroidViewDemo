@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
+    android:background="@color/background"
     android:gravity="bottom"
     android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
+        android:layout_height="@dimen/line_thin"
+        android:background="@color/background_complementary" />
 
     <LinearLayout
         android:id="@+id/ly_input"
@@ -22,10 +22,9 @@
             android:id="@+id/iv_emoji"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="8dp"
-            android:clickable="true"
+            android:layout_marginBottom="8dp"
             android:scaleType="centerInside"
             android:src="@drawable/btn_chat_emoji_selector" />
 
@@ -34,10 +33,10 @@
     <View
         android:id="@+id/split"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/line" />
+        android:layout_height="@dimen/line_thin"
+        android:background="@color/background_complementary" />
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -55,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp" />
 
-            <RelativeLayout
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
                 android:layout_gravity="center_horizontal">
@@ -64,9 +63,9 @@
                     android:id="@+id/indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
                     android:padding="4dp" />
-            </RelativeLayout>
+            </FrameLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

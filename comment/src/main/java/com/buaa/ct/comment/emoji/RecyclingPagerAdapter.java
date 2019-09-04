@@ -1,5 +1,6 @@
 package com.buaa.ct.comment.emoji;
 
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
         this(new RecycleBin());
     }
 
-    RecyclingPagerAdapter(RecycleBin recycleBin) {
+    private RecyclingPagerAdapter(RecycleBin recycleBin) {
         this.recycleBin = recycleBin;
         recycleBin.setViewTypeCount(getViewTypeCount());
     }
@@ -29,8 +30,9 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
         super.notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
-    public final Object instantiateItem(ViewGroup container, int position) {
+    public final Object instantiateItem(@NonNull ViewGroup container, int position) {
         int viewType = getItemViewType(position);
         View view = null;
         if (viewType != IGNORE_ITEM_VIEW_TYPE) {
@@ -42,7 +44,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public final void destroyItem(ViewGroup container, int position, Object object) {
+    public final void destroyItem(ViewGroup container, int position, @NonNull Object object) {
         View view = (View) object;
         container.removeView(view);
         int viewType = getItemViewType(position);
@@ -52,7 +54,7 @@ public abstract class RecyclingPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public final boolean isViewFromObject(View view, Object object) {
+    public final boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 

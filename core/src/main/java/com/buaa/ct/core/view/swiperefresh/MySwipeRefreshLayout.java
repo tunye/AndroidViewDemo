@@ -20,7 +20,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 import android.widget.AbsListView;
 
-
 import com.buaa.ct.core.R;
 import com.buaa.ct.core.view.CustomToast;
 

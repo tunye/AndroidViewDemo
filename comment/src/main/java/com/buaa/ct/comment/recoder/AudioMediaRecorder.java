@@ -4,9 +4,8 @@ import android.media.MediaRecorder;
 import android.os.Handler;
 import android.text.TextUtils;
 
-import com.buaa.ct.comment.ContextManager;
 import com.buaa.ct.comment.R;
-import com.buaa.ct.comment.util.LogUtil;
+import com.buaa.ct.core.manager.RuntimeManager;
 
 import java.io.IOException;
 
@@ -18,7 +17,7 @@ public class AudioMediaRecorder {
     private MediaRecorder mediaRecorder;
     private long startTime;
     private long endTime;
-    private Handler handler = new Handler(ContextManager.getInstance().getMainLooper());
+    private Handler handler = new Handler(RuntimeManager.getInstance().getContext().getMainLooper());
     private MediaRecorderOnProgressListener onProgressListener;
     private MediaRecorderOnErrorListener onErrorListener;
     private boolean isRecording = false;
@@ -33,7 +32,7 @@ public class AudioMediaRecorder {
             }
             if (maxRecordTime > 0.0D && pro > maxRecordTime) {
                 stop();
-                handleStateError(3, ContextManager.getInstance().getString(R.string.recordfinish));
+                handleStateError(3, RuntimeManager.getInstance().getString(R.string.recordfinish));
             }
             if (isRecording) {
                 handler.postDelayed(progress, 1000);
@@ -47,16 +46,13 @@ public class AudioMediaRecorder {
 
     private void handleStateError(int i1, String message) {//a
         state = 5;
-        LogUtil.v(TAG, "handleStateError:" + message);
         if (onErrorListener != null) {
             onErrorListener.onError(i1, message);
         }
     }
 
     private void recoverRecorder() {//g
-        LogUtil.v(TAG, "recoverRecorder");
         if (state != 0 && state != 5) {
-            LogUtil.v(TAG, "recoverRecorder  can be recovered only at initialization or Error");
         } else {
             release();
             state = 0;
@@ -76,21 +72,18 @@ public class AudioMediaRecorder {
     }
 
     private void startCountRecordTime() {
-        LogUtil.v(TAG, "startCountRecordTime");
         isRecording = true;
         startTime = System.currentTimeMillis();
         handler.postDelayed(progress, 0);
     }
 
     private void stopCountRecordTime() {
-        LogUtil.v(TAG, "stopCountRecordTime");
         isRecording = false;
         endTime = System.currentTimeMillis();
         handler.removeCallbacks(progress);
     }
 
     public void stop() {//
-        LogUtil.v(TAG, "stop");
         if (mediaRecorder != null && state != 0 && state != 3 && state != 5) {
             try {
                 stopCountRecordTime();
@@ -98,7 +91,7 @@ public class AudioMediaRecorder {
                 state = 3;
             } catch (Exception e) {
                 e.printStackTrace();
-                handleStateError(0, ContextManager.getInstance().getString(R.string.stopRecordFail));
+                handleStateError(0, RuntimeManager.getInstance().getString(R.string.stopRecordFail));
             } finally {
                 AudioFocusChangeManager.abandonAudioFocus();
             }
@@ -118,7 +111,6 @@ public class AudioMediaRecorder {
     }
 
     public void start(String filePath) {//
-        LogUtil.v(TAG, "start");
         if (mediaRecorder != null) {
             int initState = state;
             int retryCount = 0;
@@ -137,7 +129,7 @@ public class AudioMediaRecorder {
                     e.printStackTrace();
                     if (retryCount >= 1) {
                         AudioFocusChangeManager.abandonAudioFocus();
-                        handleStateError(0, ContextManager.getInstance().getString(R.string.recordError));
+                        handleStateError(0, RuntimeManager.getInstance().getString(R.string.recordError));
                         break;
                     }
                     state = initState;
@@ -148,7 +140,6 @@ public class AudioMediaRecorder {
     }
 
     public void reset() {//
-        LogUtil.v(TAG, "reset");
         if (mediaRecorder != null) {
             mediaRecorder.reset();
             endTime = 0;
@@ -159,7 +150,6 @@ public class AudioMediaRecorder {
     }
 
     public void prepare(String outputFile) throws IOException {
-        LogUtil.v(TAG, "prepare");
         if (mediaRecorder != null) {
             if (TextUtils.isEmpty(outputFile))
                 throw new IOException();
@@ -173,22 +163,21 @@ public class AudioMediaRecorder {
                 state = 1;
             } catch (IllegalStateException e) {
                 e.printStackTrace();
-                handleStateError(0, ContextManager.getInstance().getString(R.string.prepardError));
+                handleStateError(0, RuntimeManager.getInstance().getString(R.string.prepardError));
                 recoverRecorder();
             } catch (IOException e) {
                 e.printStackTrace();
-                handleStateError(2, ContextManager.getInstance().getString(R.string.storageError));
+                handleStateError(2, RuntimeManager.getInstance().getString(R.string.storageError));
                 recoverRecorder();
             } catch (Exception e) {
                 e.printStackTrace();
-                handleStateError(2, ContextManager.getInstance().getString(R.string.storageError));
+                handleStateError(2, RuntimeManager.getInstance().getString(R.string.storageError));
                 recoverRecorder();
             }
         }
     }
 
     public void release() {//
-        LogUtil.v(TAG, "release");
         reset();
         if (mediaRecorder != null) {
             mediaRecorder.release();

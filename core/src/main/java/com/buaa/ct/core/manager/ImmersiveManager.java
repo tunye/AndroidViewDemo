@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-
 import com.buaa.ct.core.R;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.ThreadPoolUtil;
@@ -101,7 +100,7 @@ public class ImmersiveManager {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         }
         try {
-            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setStatusBarColor(GetAppColor.getInstance().getAppColor());
         } catch (NoSuchMethodError e) {
             e.printStackTrace();
         }

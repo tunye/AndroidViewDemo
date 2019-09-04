@@ -18,15 +18,15 @@ package com.buaa.ct.comment.emoji;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.widget.TextView;
 
 import com.buaa.ct.comment.R;
 
 
-public class EmojiconTextView extends TextView {
+public class EmojiconTextView extends AppCompatTextView {
     private int mEmojiconSize;
     private int mTextStart = 0;
     private int mTextLength = -1;
@@ -51,11 +51,11 @@ public class EmojiconTextView extends TextView {
         if (attrs == null) {
             mEmojiconSize = (int) getTextSize();
         } else {
-            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmojiIcon);
-            mEmojiconSize = (int) a.getDimension(R.styleable.EmojiIcon_emojiconSize, getTextSize());
-            mTextStart = a.getInteger(R.styleable.EmojiIcon_emojiconTextStart, 0);
-            mTextLength = a.getInteger(R.styleable.EmojiIcon_emojiconTextLength, -1);
-            mUseSystemDefault = a.getBoolean(R.styleable.EmojiIcon_emojiconUseSystemDefault, false);
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.EmojiconTextView);
+            mEmojiconSize = (int) a.getDimension(R.styleable.EmojiconTextView_emojiconSize, getTextSize());
+            mTextStart = a.getInteger(R.styleable.EmojiconTextView_emojiconTextStart, 0);
+            mTextLength = a.getInteger(R.styleable.EmojiconTextView_emojiconTextLength, -1);
+            mUseSystemDefault = a.getBoolean(R.styleable.EmojiconTextView_emojiconUseSystemDefault, false);
             a.recycle();
         }
         setText(getText());
