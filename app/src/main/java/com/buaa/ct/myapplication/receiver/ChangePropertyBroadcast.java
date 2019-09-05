@@ -21,6 +21,7 @@ public class ChangePropertyBroadcast extends BroadcastReceiver {
         ((MyApplication) RuntimeManager.getInstance().getApplication()).clearActivityList();
         Intent target = new Intent();
         target.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        target.setPackage(RuntimeManager.getInstance().getContext().getPackageName());
         target.setClass(context, MainActivity.class);
         context.startActivity(target);
     }

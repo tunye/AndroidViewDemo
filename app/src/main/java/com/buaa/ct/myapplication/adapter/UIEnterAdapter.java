@@ -18,7 +18,7 @@ import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
 import com.buaa.ct.myapplication.R;
-import com.buaa.ct.myapplication.TestActivity;
+import com.buaa.ct.myapplication.activity.TestActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 
 import java.util.Arrays;

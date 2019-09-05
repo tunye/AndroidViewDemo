@@ -1,7 +1,8 @@
-package com.buaa.ct.myapplication;
+package com.buaa.ct.myapplication.activity;
 
 import android.support.v7.widget.RecyclerView;
 
+import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.adapter.UIEnterAdapter;
 import com.buaa.ct.myapplication.sample.base.BaseActivity;
 

@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="ui">For UI Show</string>
+    <string name="setting">Setting</string>
 
     <string name="app_no_change">The app skin color is not changed.</string>
     <string name="test_skin">APP skin test</string>
     <string name="test_skin_oper">Use</string>
+
+    <string name="setting_app_color">App Color</string>
+    <string name="setting_app_language">Language</string>
+    <string name="setting_app_night">Night</string>
+    <string name="setting_app_night_on">On</string>
+    <string name="setting_app_night_off">Off</string>
+    <string name="setting_app_language_zh">Chinese</string>
+    <string name="setting_app_language_en">English</string>
 </resources>

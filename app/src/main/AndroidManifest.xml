@@ -38,10 +38,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity" />
-        <activity android:name=".UIActivity" />
+        <activity android:name=".activity.TestActivity" />
+        <activity android:name=".activity.UIActivity" />
         <activity android:name=".sample.base.BaseActivity" />
         <activity android:name=".sample.appskin.SkinActivity" />
+        <activity android:name=".activity.SettingActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
