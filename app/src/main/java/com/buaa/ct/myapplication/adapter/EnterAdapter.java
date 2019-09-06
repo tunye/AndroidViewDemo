@@ -32,7 +32,8 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
 
     public EnterAdapter(Context context) {
         super(context);
-        String[] nameList = {"网页回弹效果", "照片选择器",
+        String[] nameList = {"网页回弹效果",
+                RuntimeManager.getInstance().getString(R.string.test_select_image),
                 RuntimeManager.getInstance().getString(R.string.test_skin),
                 "视频缓存", "仿雅虎digest阅读效果",
                 RuntimeManager.getInstance().getString(R.string.test_comment),

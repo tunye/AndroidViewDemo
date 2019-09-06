@@ -85,10 +85,15 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    onItemClick(holder.getAdapterPosition());
                     onRecycleViewItemClickListener.onItemClick(holder.itemView, holder.getAdapterPosition());
                 }
             });
         }
+    }
+
+    public void onItemClick(int pos){
+
     }
 
     @Override

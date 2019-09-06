@@ -51,7 +51,7 @@ public class LocalMediaLoader {
     }
 
     public void loadAllImage(final LocalMediaLoadListener imageLoadListener) {
-        activity.getSupportLoaderManager().initLoader(type, null, new LoaderManager.LoaderCallbacks<Cursor>() {
+        LoaderManager.getInstance(activity).initLoader(type, null, new LoaderManager.LoaderCallbacks<Cursor>() {
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
                 CursorLoader cursorLoader = null;

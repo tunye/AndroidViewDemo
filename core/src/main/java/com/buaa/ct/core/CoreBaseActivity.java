@@ -35,7 +35,7 @@ public class CoreBaseActivity extends BaseSkinActivity {
         super.onCreate(savedInstanceState);
         context = this;
         ImmersiveManager.getInstance().updateImmersiveStatus(this);
-        beforeSetLayout();
+        beforeSetLayout(savedInstanceState);
         setContentView(getLayoutId());
         afterSetLayout();
         initWidget();
@@ -43,7 +43,7 @@ public class CoreBaseActivity extends BaseSkinActivity {
         onActivityCreated();
     }
 
-    public void beforeSetLayout() {
+    public void beforeSetLayout(Bundle savedInstanceState) {
 
     }
 

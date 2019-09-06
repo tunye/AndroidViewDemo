@@ -1,6 +1,5 @@
 package com.buaa.ct.imageselector.view;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.buaa.ct.core.util.ImageUtil;
 import com.buaa.ct.imageselector.R;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.animation.GlideAnimation;
-import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.RequestOptions;
 import com.github.chrisbanes.photoview.OnPhotoTapListener;
 import com.github.chrisbanes.photoview.PhotoView;
 
@@ -37,15 +35,7 @@ public class ImagePreviewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_image_preview, container, false);
         final PhotoView photoView = contentView.findViewById(R.id.preview_image);
-        Glide.with(container.getContext())
-                .load(getArguments().getString(PATH))
-                .asBitmap()
-                .into(new SimpleTarget<Bitmap>(480, 800) {
-                    @Override
-                    public void onResourceReady(Bitmap resource, GlideAnimation<? super Bitmap> glideAnimation) {
-                        photoView.setImageBitmap(resource);
-                    }
-                });
+        ImageUtil.loadImage(getArguments().getString(PATH), photoView, new RequestOptions().override(480, 810));
         photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
             @Override
             public void onPhotoTap(ImageView view, float x, float y) {

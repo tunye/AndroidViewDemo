@@ -1,41 +1,39 @@
 package com.buaa.ct.imageselector.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
+import com.buaa.ct.core.util.GetAppColor;
+import com.buaa.ct.core.util.ImageUtil;
 import com.buaa.ct.imageselector.R;
-import com.buaa.ct.imageselector.model.LocalMedia;
 import com.buaa.ct.imageselector.model.LocalMediaFolder;
-import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by dee on 15/11/20.
  */
-public class ImageFolderAdapter extends RecyclerView.Adapter<ImageFolderAdapter.ViewHolder> {
-    private Context context;
-    private List<LocalMediaFolder> folders = new ArrayList<>();
+public class ImageFolderAdapter extends CoreRecyclerViewAdapter<LocalMediaFolder, ImageFolderAdapter.ViewHolder> {
     private int checkedIndex = 0;
 
-    private OnItemClickListener onItemClickListener;
-
     public ImageFolderAdapter(Context context) {
-        this.context = context;
+        super(context);
     }
 
-    public void bindFolder(List<LocalMediaFolder> folders) {
-        this.folders = folders;
-        notifyDataSetChanged();
+    public void setFolders(List<LocalMediaFolder> folders) {
+        addDatas(folders);
     }
 
+    @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_folder, parent, false);
@@ -43,59 +41,38 @@ public class ImageFolderAdapter extends RecyclerView.Adapter<ImageFolderAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final LocalMediaFolder folder = folders.get(position);
-        Glide.with(context)
-                .load(folder.getFirstImagePath())
-                .placeholder(R.drawable.ic_placeholder)
-                .error(R.drawable.ic_placeholder)
-                .centerCrop()
-                .into(holder.firstImage);
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        super.onBindViewHolder(holder, position);
+        final LocalMediaFolder folder = getDatas().get(position);
+        ImageUtil.loadImage(folder.getFirstImagePath(), holder.firstImage, ImageUtil.getRequestOptions(R.drawable.ic_placeholder));
         holder.folderName.setText(folder.getName());
         holder.imageNum.setText(context.getString(R.string.num_postfix, folder.getImageNum()));
-
         holder.isSelected.setVisibility(checkedIndex == position ? View.VISIBLE : View.GONE);
-
-        holder.contentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onItemClickListener != null) {
-                    checkedIndex = position;
-                    notifyDataSetChanged();
-                    onItemClickListener.onItemClick(folder.getName(), folder.getImages());
-                }
-            }
-        });
     }
 
     @Override
-    public int getItemCount() {
-        return folders.size();
+    public void onItemClick(int pos) {
+        int lastPos = checkedIndex;
+        checkedIndex = pos;
+        notifyItemChanged(pos);
+        notifyItemChanged(lastPos);
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public interface OnItemClickListener {
-        void onItemClick(String folderName, List<LocalMedia> images);
-    }
-
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
         ImageView firstImage;
         TextView folderName;
         TextView imageNum;
         ImageView isSelected;
 
-        View contentView;
-
         public ViewHolder(View itemView) {
             super(itemView);
-            contentView = itemView;
             firstImage = itemView.findViewById(R.id.first_image);
             folderName = itemView.findViewById(R.id.folder_name);
             imageNum = itemView.findViewById(R.id.image_num);
             isSelected = itemView.findViewById(R.id.is_selected);
+            Drawable selectDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(itemView.getContext(), R.drawable.ic_radio_button));
+            DrawableCompat.setTint(selectDrawable, GetAppColor.getInstance().getAppColor());
+            isSelected.setImageDrawable(selectDrawable);
         }
     }
 }

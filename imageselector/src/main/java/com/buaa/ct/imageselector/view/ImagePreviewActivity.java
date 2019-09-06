@@ -2,21 +2,25 @@ package com.buaa.ct.imageselector.view;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.GetAppColor;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.model.LocalMedia;
@@ -28,7 +32,7 @@ import java.util.List;
 /**
  * Created by dee on 15/11/24.
  */
-public class ImagePreviewActivity extends AppCompatActivity {
+public class ImagePreviewActivity extends CoreBaseActivity {
     public static final int REQUEST_PREVIEW = 68;
     public static final String EXTRA_PREVIEW_LIST = "previewList";
     public static final String EXTRA_PREVIEW_SELECT_LIST = "previewSelectList";
@@ -38,10 +42,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
     public static final String OUTPUT_LIST = "outputList";
     public static final String OUTPUT_ISDONE = "isDone";
 
-    private LinearLayout barLayout;
-    private RelativeLayout selectBarLayout;
-    private Toolbar toolbar;
-    private TextView doneText;
+    private View selectBarLayout;
     private CheckBox checkboxSelect;
     private PreviewViewPager viewPager;
 
@@ -64,42 +65,20 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN | WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        setContentView(R.layout.activity_image_preview);
-        initView();
-        registerListener();
+    public int getLayoutId() {
+        return R.layout.activity_image_preview;
     }
 
-    public void initView() {
-        images = MediaListManager.getInstance().getMediaList();
-        selectImages = (List<LocalMedia>) getIntent().getSerializableExtra(EXTRA_PREVIEW_SELECT_LIST);
-        maxSelectNum = getIntent().getIntExtra(EXTRA_MAX_SELECT_NUM, 9);
-        position = getIntent().getIntExtra(EXTRA_POSITION, 1);
-
-        barLayout = (LinearLayout) findViewById(R.id.bar_layout);
-        selectBarLayout = (RelativeLayout) findViewById(R.id.select_bar_layout);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle((position + 1) + "/" + images.size());
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
-
-
-        doneText = (TextView) findViewById(R.id.done_text);
-        onSelectNumChange();
-
-        checkboxSelect = (CheckBox) findViewById(R.id.checkbox_select);
-        onImageSwitch(position);
-
-
-        viewPager = (PreviewViewPager) findViewById(R.id.preview_pager);
-        viewPager.setAdapter(new SimpleFragmentAdapter(getSupportFragmentManager()));
-        viewPager.setCurrentItem(position);
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        checkboxSelect = findViewById(R.id.checkbox_select);
+        viewPager = findViewById(R.id.preview_pager);
+        selectBarLayout = findViewById(R.id.select_bar_layout);
     }
 
-    public void registerListener() {
+    @Override
+    public void setListener() {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -107,7 +86,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                toolbar.setTitle(position + 1 + "/" + images.size());
+                title.setText(position + 1 + "/" + images.size());
                 onImageSwitch(position);
             }
 
@@ -115,25 +94,21 @@ public class ImagePreviewActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onDoneClick(false);
-            }
-        });
         checkboxSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 boolean isChecked = checkboxSelect.isChecked();
                 if (selectImages.size() >= maxSelectNum && isChecked) {
-                    Toast.makeText(ImagePreviewActivity.this, getString(R.string.message_max_num, maxSelectNum), Toast.LENGTH_LONG).show();
+                    CustomToast.getInstance().showToast(getString(R.string.message_max_num, maxSelectNum), Toast.LENGTH_LONG);
                     checkboxSelect.setChecked(false);
                     return;
                 }
                 LocalMedia image = images.get(viewPager.getCurrentItem());
                 if (isChecked) {
+                    setCheckBoxCheckedIcon();
                     selectImages.add(image);
                 } else {
+                    setCheckBoxUnCheckedIcon();
                     for (LocalMedia media : selectImages) {
                         if (media.getPath().equals(image.getPath())) {
                             selectImages.remove(media);
@@ -144,7 +119,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
                 onSelectNumChange();
             }
         });
-        doneText.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onDoneClick(true);
@@ -152,14 +127,54 @@ public class ImagePreviewActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void beforeSetLayout(Bundle saveBundle) {
+        super.beforeSetLayout(saveBundle);
+        images = MediaListManager.getInstance().getMediaList();
+        selectImages = (List<LocalMedia>) getIntent().getSerializableExtra(EXTRA_PREVIEW_SELECT_LIST);
+        maxSelectNum = getIntent().getIntExtra(EXTRA_MAX_SELECT_NUM, 9);
+        position = getIntent().getIntExtra(EXTRA_POSITION, 1);
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) title.getLayoutParams();
+        layoutParams.gravity = Gravity.START;
+        layoutParams.setMargins(RuntimeManager.getInstance().dip2px(44), 0, 0, 0);
+        title.setText((position + 1) + "/" + images.size());
+
+        toolbarOper.setText(R.string.done);
+        onSelectNumChange();
+        onImageSwitch(position);
+        viewPager.setAdapter(new SimpleFragmentAdapter(getSupportFragmentManager()));
+        viewPager.setCurrentItem(position);
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        onDoneClick(false);
+    }
+
     public void onSelectNumChange() {
         boolean enable = selectImages.size() != 0;
-        doneText.setEnabled(enable);
+        toolbarOper.setEnabled(enable);
         if (enable) {
-            doneText.setText(getString(R.string.done_num, selectImages.size(), maxSelectNum));
+            toolbarOper.setText(getString(R.string.done_num, selectImages.size(), maxSelectNum));
         } else {
-            doneText.setText(R.string.done);
+            toolbarOper.setText(R.string.done);
         }
+    }
+
+    public void setCheckBoxCheckedIcon(){
+        Drawable selectDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_checked));
+        DrawableCompat.setTint(selectDrawable, GetAppColor.getInstance().getAppColor());
+        checkboxSelect.setBackground(selectDrawable);
+    }
+
+    public void setCheckBoxUnCheckedIcon(){
+        checkboxSelect.setBackgroundResource(R.drawable.ic_check);
     }
 
     public void onImageSwitch(int position) {
@@ -188,8 +203,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     public void switchBarVisibility() {
-        barLayout.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
-        toolbar.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
+        // todo  add anim
+        toolBarLayout.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
         selectBarLayout.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
         if (isShowBar) {
             hideStatusBar();

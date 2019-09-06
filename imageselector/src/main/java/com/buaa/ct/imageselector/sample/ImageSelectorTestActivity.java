@@ -10,12 +10,13 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.view.ImageSelectorActivity;
 
 import java.util.ArrayList;
 
-public class ImageSelectorTestActivity extends AppCompatActivity {
+public class ImageSelectorTestActivity extends CoreBaseActivity {
     private ImageButton minus;
     private ImageButton plus;
     private EditText selectNumText;
@@ -31,15 +32,13 @@ public class ImageSelectorTestActivity extends AppCompatActivity {
     private String fileUrl;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_selector_test_enter);
-        initView();
-        registerListener();
-
+    public int getLayoutId() {
+        return R.layout.activity_image_selector_test_enter;
     }
 
-    public void initView() {
+    @Override
+    public void initWidget() {
+        super.initWidget();
         minus = findViewById(R.id.minus);
         plus = findViewById(R.id.plus);
         selectNumText = findViewById(R.id.select_num);
@@ -52,7 +51,9 @@ public class ImageSelectorTestActivity extends AppCompatActivity {
         selectPicture = findViewById(R.id.select_picture);
     }
 
-    public void registerListener() {
+    @Override
+    public void setListener() {
+        super.setListener();
         selectMode.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -95,6 +96,12 @@ public class ImageSelectorTestActivity extends AppCompatActivity {
                 ImageSelectorActivity.start(ImageSelectorTestActivity.this, maxSelectNum, mode, isShow, isPreview, isCrop);
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.test_select_image);
     }
 
     @Override

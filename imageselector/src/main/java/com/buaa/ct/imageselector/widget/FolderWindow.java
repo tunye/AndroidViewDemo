@@ -15,10 +15,11 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.PopupWindow;
 
+import com.buaa.ct.core.listener.OnRecycleViewItemClickListener;
+import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.adapter.ImageFolderAdapter;
 import com.buaa.ct.imageselector.model.LocalMediaFolder;
-import com.buaa.ct.imageselector.utils.ScreenUtils;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -38,8 +39,8 @@ public class FolderWindow extends PopupWindow {
         this.context = context;
         window = LayoutInflater.from(context).inflate(R.layout.window_folder, null);
         this.setContentView(window);
-        this.setWidth(ScreenUtils.getScreenWidth(context));
-        this.setHeight(ScreenUtils.getScreenHeight(context) - ScreenUtils.dip2px(context, 96));
+        this.setWidth(RuntimeManager.getInstance().getScreenWidth());
+        this.setHeight(RuntimeManager.getInstance().getScreenHeight() - RuntimeManager.getInstance().dip2px(96));
         setPopupWindowTouchModal(this, false);
         this.setAnimationStyle(R.style.WindowStyle);
         this.setFocusable(true);
@@ -68,7 +69,7 @@ public class FolderWindow extends PopupWindow {
     public void initView() {
         adapter = new ImageFolderAdapter(context);
 
-        recyclerView = (RecyclerView) window.findViewById(R.id.folder_list);
+        recyclerView = window.findViewById(R.id.folder_list);
         recyclerView.addItemDecoration(new ItemDivider(context));
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(adapter);
@@ -79,7 +80,7 @@ public class FolderWindow extends PopupWindow {
     }
 
     public void bindFolder(List<LocalMediaFolder> folders) {
-        adapter.bindFolder(folders);
+        adapter.setFolders(folders);
     }
 
     @Override
@@ -89,8 +90,12 @@ public class FolderWindow extends PopupWindow {
         recyclerView.startAnimation(animation);
     }
 
-    public void setOnItemClickListener(ImageFolderAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(OnRecycleViewItemClickListener onItemClickListener) {
         adapter.setOnItemClickListener(onItemClickListener);
+    }
+
+    public LocalMediaFolder getCurFolderInfo(int pos) {
+        return adapter.getDatas().get(pos);
     }
 
     @Override
@@ -130,7 +135,7 @@ public class FolderWindow extends PopupWindow {
 
         @Override
         public void onDrawOver(@NonNull Canvas c, @NonNull RecyclerView parent) {
-            final int left = ScreenUtils.dip2px(parent.getContext(), 16);
+            final int left = RuntimeManager.getInstance().dip2px(16);
             final int right = parent.getWidth() - left;
 
             final int childCount = parent.getChildCount();
@@ -148,7 +153,5 @@ public class FolderWindow extends PopupWindow {
         public void getItemOffsets(@NonNull Rect outRect, int position, @NonNull RecyclerView parent) {
             outRect.set(0, 0, 0, mDrawable.getIntrinsicWidth());
         }
-
     }
-
 }

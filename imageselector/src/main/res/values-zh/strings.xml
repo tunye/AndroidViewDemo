@@ -27,4 +27,6 @@
     <string name="enable_crop">打开剪切选项</string>
     <string name="enable">打开</string>
     <string name="disable">关闭</string>
+
+    <string name="test_select_image">照片选择器</string>
 </resources>

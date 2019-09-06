@@ -10,13 +10,11 @@ import android.net.Uri;
 import android.opengl.GLES10;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.content.FileProvider;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.utils.CropUtil;
 import com.buaa.ct.imageselector.utils.FileUtils;
@@ -30,15 +28,13 @@ import java.io.OutputStream;
 /**
  * Created by dee on 15/11/26.
  */
-public class ImageCropActivity extends AppCompatActivity {
+public class ImageCropActivity extends CoreBaseActivity {
     public static final String EXTRA_PATH = "extraPath";
     public static final String OUTPUT_PATH = "outputPath";
     public static final int REQUEST_CROP = 69;
     private static final int SIZE_DEFAULT = 2048;
     private static final int SIZE_LIMIT = 4096;
-    private final Handler handler = new Handler();
-    private Toolbar toolbar;
-    private TextView doneText;
+
     private CropImageView cropImageView;
     private Uri sourceUri;
     private Uri saveUri;
@@ -50,9 +46,13 @@ public class ImageCropActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_crop);
+    public int getLayoutId() {
+        return R.layout.activity_image_crop;
+    }
+
+    @Override
+    public void beforeSetLayout(Bundle saveBundle) {
+        super.beforeSetLayout(saveBundle);
         String path = getIntent().getStringExtra(EXTRA_PATH);
         File f = new File(path);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -61,21 +61,34 @@ public class ImageCropActivity extends AppCompatActivity {
         } else {
             sourceUri = Uri.fromFile(f);
         }
-        initView();
-        registerListener();
     }
 
-    public void initView() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_back);
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        cropImageView = findViewById(R.id.cropImageView);
+    }
 
-        doneText = (TextView) findViewById(R.id.done_text);
-        cropImageView = (CropImageView) findViewById(R.id.cropImageView);
+    @Override
+    public void setListener() {
+        super.setListener();
+        toolbarOper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog.show(
+                        ImageCropActivity.this, null, getString(R.string.save_ing), true, false);
+
+                saveUri = Uri.fromFile(FileUtils.createCropFile(ImageCropActivity.this));
+                saveOutput(cropImageView.getCroppedBitmap());
+            }
+        });
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
         cropImageView.setHandleSizeInDp(10);
-
-
+        toolbarOper.setText(R.string.use);
         int exifRotation = CropUtil.getExifRotation(CropUtil.getFromMediaUri(this, getContentResolver(), sourceUri));
 
         InputStream is = null;
@@ -88,33 +101,11 @@ public class ImageCropActivity extends AppCompatActivity {
             Matrix matrix = getRotateMatrix(sizeBitmap, exifRotation % 360);
             Bitmap rotated = Bitmap.createBitmap(sizeBitmap, 0, 0, sizeBitmap.getWidth(), sizeBitmap.getHeight(), matrix, true);
             cropImageView.setImageBitmap(rotated);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (OutOfMemoryError e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         } finally {
             CropUtil.closeSilently(is);
         }
-    }
-
-
-    public void registerListener() {
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        doneText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ProgressDialog.show(
-                        ImageCropActivity.this, null, getString(R.string.save_ing), true, false);
-
-                saveUri = Uri.fromFile(FileUtils.createCropFile(ImageCropActivity.this));
-                saveOutput(cropImageView.getCroppedBitmap());
-            }
-        });
     }
 
     public Matrix getRotateMatrix(Bitmap bitmap, int rotation) {
@@ -179,7 +170,7 @@ public class ImageCropActivity extends AppCompatActivity {
             setResult(RESULT_OK, new Intent().putExtra(OUTPUT_PATH, saveUri.getPath()));
         }
         final Bitmap b = croppedImage;
-        handler.post(new Runnable() {
+        ThreadUtils.postOnUiThread(new Runnable() {
             public void run() {
                 b.recycle();
             }

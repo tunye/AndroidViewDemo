@@ -182,19 +182,19 @@ public class ImageUtil {
         Glide.with(application).onDestroy();
     }
 
-    public RequestOptions getRequestOptions(int placeholderDrawableId) {
+    public static RequestOptions getRequestOptions(int placeholderDrawableId) {
         return getRequestOptions(placeholderDrawableId, 5);
     }
 
-    public RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners) {
+    public static RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners) {
         return getRequestOptions(placeholderDrawableId, roundCorners, DiskCacheStrategy.RESOURCE);
     }
 
-    public RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners, DiskCacheStrategy strategy) {
+    public static RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners, DiskCacheStrategy strategy) {
         return getRequestOptions(placeholderDrawableId, roundCorners, strategy, true);
     }
 
-    public RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners, DiskCacheStrategy strategy, boolean centerCrop) {
+    public static RequestOptions getRequestOptions(int placeholderDrawableId, int roundCorners, DiskCacheStrategy strategy, boolean centerCrop) {
         RequestOptions requestOptions;
         if (roundCorners == 0) {
             requestOptions = new RequestOptions();

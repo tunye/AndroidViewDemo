@@ -5,12 +5,13 @@ import com.buaa.ct.imageselector.model.LocalMedia;
 import java.util.List;
 
 public class MediaListManager {
-    List<LocalMedia> mediaList;
-    private static class InstanceHelper{
-        private static MediaListManager instance=new MediaListManager();
+    private List<LocalMedia> mediaList;
+
+    private static class InstanceHelper {
+        private static MediaListManager instance = new MediaListManager();
     }
 
-    public static MediaListManager getInstance(){
+    public static MediaListManager getInstance() {
         return InstanceHelper.instance;
     }
 
