@@ -65,6 +65,19 @@ public class CommentTestActivity extends BaseActivity {
                 startActivity(new Intent(CommentTestActivity.this, EmojiTestActivity.class));
             }
         });
+        toolbarOper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(CommentTestActivity.this, EmojiTestActivity.class));
+            }
+        });
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.test_comment);
+        toolbarOper.setText(R.string.test_comment_oper);
     }
 
     @Override

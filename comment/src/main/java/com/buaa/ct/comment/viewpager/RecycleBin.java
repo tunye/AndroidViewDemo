@@ -1,4 +1,4 @@
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.viewpager;
 
 import android.util.SparseArray;
 import android.view.View;

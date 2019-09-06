@@ -1,4 +1,4 @@
-package com.buaa.ct.copyboard;
+package com.buaa.ct.myapplication.sample.copyboard;
 
 
 import android.content.Context;

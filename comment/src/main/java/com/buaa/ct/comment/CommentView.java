@@ -1,10 +1,8 @@
 package com.buaa.ct.comment;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -21,17 +19,14 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.buaa.ct.comment.emoji.EmojiIcon;
-import com.buaa.ct.comment.emoji.EmojiViewPagerAdapter;
 import com.buaa.ct.comment.emoji.EmojiconEditText;
-import com.buaa.ct.comment.emoji.People;
-import com.buaa.ct.comment.emoji.RecordButton;
 import com.buaa.ct.comment.emoji.SoftKeyboardStateHelper;
+import com.buaa.ct.comment.recoder.RecordButton;
+import com.buaa.ct.comment.utils.CreateEmojiViewPagerData;
 import com.buaa.ct.comment.viewpage.CirclePageIndicator;
+import com.buaa.ct.comment.viewpager.EmojiViewPagerAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class CommentView extends LinearLayout implements View.OnClickListener, RecordButton.OnFinishedRecordListener, SoftKeyboardStateHelper.SoftKeyboardStateListener, EmojiViewPagerAdapter.OnClickEmojiListener {
 
@@ -92,12 +87,6 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
         init(context, attrs);
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private CommentView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        init(context, attrs);
-    }
-
     public static void input(EditText editText, EmojiIcon emojiIcon) {
         if (editText == null || emojiIcon == null) {
             return;
@@ -145,19 +134,19 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
     private void initView(Context context) {
         inflate(context, R.layout.view_compose, this);
 
-        mIvEmoji = (ImageView) findViewById(R.id.iv_emoji);
+        mIvEmoji = findViewById(R.id.iv_emoji);
         mIvEmoji.setOnClickListener(this);
-        mEtText = (EmojiconEditText) findViewById(R.id.et_text);
+        mEtText = findViewById(R.id.et_text);
         mEtText.addTextChangedListener(mTextWatcher);
         mEtText.setOnClickListener(this);
-        mIvMore = (ImageView) findViewById(R.id.iv_more);
+        mIvMore = findViewById(R.id.iv_more);
         mIvMore.setOnClickListener(this);
-        mBtnSend = (Button) findViewById(R.id.btn_send);
+        mBtnSend = findViewById(R.id.btn_send);
         mBtnSend.setOnClickListener(this);
-        mBtnVoice = (RecordButton) findViewById(R.id.btn_voice);
+        mBtnVoice = findViewById(R.id.btn_voice);
         mBtnVoice.setRecorderCallback(this);
 
-        mIvVoiceText = (ImageView) findViewById(R.id.iv_voice_text);
+        mIvVoiceText = findViewById(R.id.iv_voice_text);
         mIvVoiceText.setOnClickListener(this);
         if (!showVoice) {
             mIvVoiceText.setVisibility(View.GONE);
@@ -176,42 +165,11 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
                 .getDecorView());
         mKeyboardHelper.addSoftKeyboardStateListener(this);
 
-        mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        mViewPager = findViewById(R.id.view_pager);
 
         int emojiHeight = calculateEmiliPanelHeight();
 
-        EmojiIcon[] emojis = People.DATA;
-        List<List<EmojiIcon>> pagers = new ArrayList<>();
-        List<EmojiIcon> es = null;
-        int size = 0;
-        boolean justAdd = false;
-        for (EmojiIcon ej : emojis) {
-            if (size == 0) {
-                es = new ArrayList<>();
-            }
-            if (size == 27) {
-                es.add(new EmojiIcon(""));
-            } else {
-                es.add(ej);
-            }
-            size++;
-            if (size == 28) {
-                pagers.add(es);
-                size = 0;
-                justAdd = true;
-            } else {
-                justAdd = false;
-            }
-        }
-        if (!justAdd && es != null) {
-            int exSize = 28 - es.size();
-            for (int i = 0; i < exSize; i++) {
-                es.add(new EmojiIcon(""));
-            }
-            pagers.add(es);
-        }
-
-        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), pagers, emojiHeight, this);
+        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), CreateEmojiViewPagerData.create(), emojiHeight, this);
         mViewPager.setAdapter(mPagerAdapter);
 
         CirclePageIndicator indicator = findViewById(R.id.indicator);
@@ -474,6 +432,4 @@ public class CommentView extends LinearLayout implements View.OnClickListener, R
 
         void onSendLocationClicked(View v);
     }
-
-
 }

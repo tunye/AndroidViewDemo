@@ -1,4 +1,4 @@
-package com.buaa.ct.copyboard;
+package com.buaa.ct.myapplication.sample.copyboard;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -10,6 +10,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.buaa.ct.copyboard.ViewContainer;
+import com.buaa.ct.myapplication.R;
 
 
 final class TipViewController implements View.OnClickListener, View.OnTouchListener, ViewContainer.KeyEventHandler {

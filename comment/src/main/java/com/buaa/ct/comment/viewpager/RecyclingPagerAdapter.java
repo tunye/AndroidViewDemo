@@ -1,4 +1,4 @@
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.viewpager;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;

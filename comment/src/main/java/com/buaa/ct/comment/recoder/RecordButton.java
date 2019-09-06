@@ -1,4 +1,4 @@
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.recoder;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -16,10 +16,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.buaa.ct.comment.R;
-import com.buaa.ct.comment.recoder.AudioMediaRecorder;
-import com.buaa.ct.comment.recoder.MediaRecorderOnErrorListener;
-import com.buaa.ct.comment.recoder.MediaRecorderOnProgressListener;
-import com.buaa.ct.comment.recoder.RecordUtils;
 import com.buaa.ct.core.util.ThreadUtils;
 
 import java.io.File;

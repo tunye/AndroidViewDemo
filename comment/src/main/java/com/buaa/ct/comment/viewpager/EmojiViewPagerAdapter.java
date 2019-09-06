@@ -1,4 +1,4 @@
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.viewpager;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.buaa.ct.comment.R;
+import com.buaa.ct.comment.emoji.EmojiIcon;
 
 import java.util.List;
 

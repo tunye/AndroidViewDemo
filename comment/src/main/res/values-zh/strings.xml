@@ -12,4 +12,5 @@
     <string name="prepardError">录音准备失败</string>
     <string name="storageError">本地存储损坏，无法写入文件</string>
     <string name="volumeTips">请打开音量收听</string>
+    <string name="comment_send">发送</string>
 </resources>

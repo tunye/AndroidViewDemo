@@ -12,4 +12,5 @@
     <string name="prepardError">Failure to prepare recording</string>
     <string name="storageError">cannot be written to files</string>
     <string name="volumeTips">Turn on the volume</string>
+    <string name="comment_send">Send</string>
 </resources>

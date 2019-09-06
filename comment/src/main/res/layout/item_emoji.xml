@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:emojiIcon="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/emoji_root"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/emoji_item_selector">
@@ -12,4 +13,12 @@
         android:layout_gravity="center"
         android:gravity="center"
         emojiIcon:emojiconSize="30dip" />
+
+    <ImageView
+        android:id="@+id/emojicon_del"
+        android:layout_width="24dip"
+        android:layout_height="30dip"
+        android:layout_gravity="center"
+        android:src="@drawable/btn_del_selector"
+        android:gravity="center"/>
 </FrameLayout>

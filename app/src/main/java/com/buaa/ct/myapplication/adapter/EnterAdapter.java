@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.copyboard.CopyboardTestActivity;
+import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
@@ -32,7 +32,12 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
 
     public EnterAdapter(Context context) {
         super(context);
-        String[] nameList = {"网页回弹效果", "照片选择器", RuntimeManager.getInstance().getString(R.string.test_skin), "视频缓存", "仿雅虎digest阅读效果", "微信评论框", "应用内toast通知", "UC剪贴板", "录屏", "二维码"};
+        String[] nameList = {"网页回弹效果", "照片选择器",
+                RuntimeManager.getInstance().getString(R.string.test_skin),
+                "视频缓存", "仿雅虎digest阅读效果",
+                RuntimeManager.getInstance().getString(R.string.test_comment),
+                "应用内toast通知",
+                RuntimeManager.getInstance().getString(R.string.test_copyboard), "录屏", "二维码"};
         addDatas(Arrays.asList(nameList));
         addData(context.getResources().getString(R.string.ui));
     }

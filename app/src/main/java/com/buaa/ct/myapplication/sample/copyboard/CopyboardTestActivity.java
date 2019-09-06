@@ -1,15 +1,15 @@
-package com.buaa.ct.copyboard;
+package com.buaa.ct.myapplication.sample.copyboard;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.widget.TextView;
 
+import com.buaa.ct.myapplication.R;
+import com.buaa.ct.myapplication.sample.base.BaseActivity;
 
-public final class CopyboardTestActivity extends AppCompatActivity {
+
+public final class CopyboardTestActivity extends BaseActivity {
 
     private final static String KEY_CONTENT = "content";
     private TextView mTextView;
@@ -22,18 +22,23 @@ public final class CopyboardTestActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int getLayoutId() {
+        return R.layout.copy_board_test;
+    }
 
-        setContentView(R.layout.copy_board_test);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
+    @Override
+    public void initWidget() {
+        super.initWidget();
         mTextView = findViewById(R.id.text_view);
+    }
 
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
         Intent intent = getIntent();
         tryToShowContent(intent);
         ListenClipboardService.start(this);
+        title.setText(R.string.test_copyboard);
     }
 
     @Override

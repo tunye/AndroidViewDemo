@@ -33,6 +33,7 @@ public class EmojiTestActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         emojiView.setmEtText(editText);
+        title.setText(R.string.test_comment);
     }
 
     @Override

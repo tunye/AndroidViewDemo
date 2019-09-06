@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.viewpager;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
 import com.buaa.ct.comment.R;
-import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.comment.emoji.EmojiIcon;
+import com.buaa.ct.comment.emoji.EmojiconTextView;
 
 import java.util.List;
 
@@ -66,6 +67,8 @@ class EmojiAdapter extends ArrayAdapter<EmojiIcon> {
             v = View.inflate(getContext(), R.layout.item_emoji, null);
             ViewHolder holder = new ViewHolder();
             holder.icon = v.findViewById(R.id.emojicon_icon);
+            holder.del = v.findViewById(R.id.emojicon_del);
+            holder.root = v.findViewById(R.id.emoji_root);
             holder.icon.setUseSystemDefault(mUseSystemDefault);
             v.setTag(holder);
         }
@@ -76,20 +79,21 @@ class EmojiAdapter extends ArrayAdapter<EmojiIcon> {
             holder.icon.setText(emoji.getEmoji());
         }
         if (position == 27) {
-            holder.icon.setBackgroundResource(R.drawable.btn_del_selector);
-            int padding = RuntimeManager.getInstance().dip2px(6);
-            holder.icon.setPadding(padding, padding, padding, padding);
+            holder.icon.setVisibility(View.GONE);
+            holder.del.setVisibility(View.VISIBLE);
         } else {
-            holder.icon.setBackgroundColor(Color.TRANSPARENT);
-            holder.icon.setPadding(0, 0, 0, 0);
+            holder.icon.setVisibility(View.VISIBLE);
+            holder.del.setVisibility(View.GONE);
         }
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, mEmojiHeight);
-        holder.icon.setLayoutParams(lp);
+        holder.root.setLayoutParams(lp);
         return v;
     }
 
     private class ViewHolder {
         EmojiconTextView icon;
+        ImageView del;
+        View root;
     }
 }

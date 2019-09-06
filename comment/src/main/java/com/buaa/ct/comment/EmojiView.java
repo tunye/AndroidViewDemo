@@ -1,8 +1,6 @@
 package com.buaa.ct.comment;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
@@ -13,13 +11,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.buaa.ct.comment.emoji.EmojiIcon;
-import com.buaa.ct.comment.emoji.EmojiViewPagerAdapter;
-import com.buaa.ct.comment.emoji.People;
+import com.buaa.ct.comment.utils.CreateEmojiViewPagerData;
 import com.buaa.ct.comment.viewpage.CirclePageIndicator;
+import com.buaa.ct.comment.viewpager.EmojiViewPagerAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.buaa.ct.core.util.GetAppColor;
 
 public class EmojiView extends LinearLayout implements View.OnClickListener, EmojiViewPagerAdapter.OnClickEmojiListener {
 
@@ -42,12 +38,6 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
 
     private EmojiView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
-    }
-
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    private EmojiView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         init(context);
     }
 
@@ -82,43 +72,12 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
 
         int emojiHeight = caculateEmojiPanelHeight();
 
-        EmojiIcon[] emojis = People.DATA;
-        List<List<EmojiIcon>> pagers = new ArrayList<>();
-        List<EmojiIcon> es = null;
-        int size = 0;
-        boolean justAdd = false;
-        for (EmojiIcon ej : emojis) {
-            if (size == 0) {
-                es = new ArrayList<>();
-            }
-            if (size == 27) {
-                es.add(new EmojiIcon(""));
-            } else {
-                es.add(ej);
-            }
-            size++;
-            if (size == 28) {
-                pagers.add(es);
-                size = 0;
-                justAdd = true;
-            } else {
-                justAdd = false;
-            }
-        }
-        if (!justAdd && es != null) {
-            int exSize = 28 - es.size();
-            for (int i = 0; i < exSize; i++) {
-                es.add(new EmojiIcon(""));
-            }
-            pagers.add(es);
-        }
-
-        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), pagers,
+        mPagerAdapter = new EmojiViewPagerAdapter(getContext(), CreateEmojiViewPagerData.create(),
                 emojiHeight, this);
         mViewPager.setAdapter(mPagerAdapter);
 
-        CirclePageIndicator indicator = (CirclePageIndicator) findViewById(R.id.indicator);
-        indicator.setFillColor(0xff45B91C);
+        CirclePageIndicator indicator = findViewById(R.id.indicator);
+        indicator.setFillColor(GetAppColor.getInstance().getAppColor());
         indicator.setViewPager(mViewPager);
     }
 

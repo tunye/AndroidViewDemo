@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-package com.buaa.ct.comment.emoji;
+package com.buaa.ct.comment.data;
+
+import com.buaa.ct.comment.emoji.EmojiIcon;
 
 /**
  * @author Hieu Rocker (rockerhieu@gmail.com)

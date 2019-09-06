@@ -23,6 +23,10 @@
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
@@ -43,6 +47,9 @@
         <activity android:name=".sample.base.BaseActivity" />
         <activity android:name=".sample.appskin.SkinActivity" />
         <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".sample.comment.CommentTestActivity" />
+        <activity android:name=".sample.comment.EmojiTestActivity" />
+        <activity android:name=".sample.copyboard.CopyboardTestActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -53,6 +60,20 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
+        <service
+            android:name="com.buaa.ct.myapplication.sample.copyboard.ListenClipboardService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":process"/>
+        <receiver
+            android:name="com.buaa.ct.myapplication.sample.copyboard.BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
