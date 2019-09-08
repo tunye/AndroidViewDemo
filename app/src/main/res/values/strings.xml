@@ -6,6 +6,7 @@
     <string name="test_skin">APP Skin test</string>
     <string name="test_comment">Comment test</string>
     <string name="test_copyboard">UC Copyboard test</string>
+    <string name="test_pudding">Pudding test</string>
 
     <string name="app_no_change">The app skin color is not changed.</string>
     <string name="test_skin_oper">Use</string>

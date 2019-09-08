@@ -7,7 +7,7 @@
         android:id="@+id/body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/skin_app_color"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/page_margin">
+            android:padding="@dimen/activity_horizontal_margin">
 
             <FrameLayout
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:id="@+id/content"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/page_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -52,17 +52,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/app_name"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/textSize" />
+                    android:textColor="@color/textcolor_on_appcolor"
+                    android:textSize="@dimen/title_text" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/subText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/mini_margin"
+                    android:layout_marginTop="@dimen/row_space_small"
                     android:text="@string/app_name"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/subTextSize"
+                    android:textColor="@color/textcolor_on_appcolor"
+                    android:textSize="@dimen/big_text"
                     android:visibility="gone" />
             </LinearLayout>
         </LinearLayout>
@@ -72,8 +72,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="-10dp"
-            android:layout_marginEnd="@dimen/default_margin"
-            android:layout_marginBottom="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/row_space_large"
+            android:layout_marginBottom="@dimen/row_space_large"
             android:gravity="end|bottom"
             android:orientation="horizontal">
 

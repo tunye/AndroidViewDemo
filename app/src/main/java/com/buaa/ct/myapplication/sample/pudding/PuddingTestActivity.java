@@ -2,129 +2,131 @@
  * Created by chentong1 on 2019.8.20
  */
 
-package com.buaa.ct.pudding;
+package com.buaa.ct.myapplication.sample.pudding;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.GetAppColor;
+import com.buaa.ct.core.view.CustomToast;
+import com.buaa.ct.myapplication.R;
+import com.buaa.ct.myapplication.activity.TestActivity;
+import com.buaa.ct.myapplication.sample.base.BaseActivity;
 import com.buaa.ct.pudding.callback.PuddingCallBack;
 import com.buaa.ct.pudding.util.PuddingBuilder;
 
 
-public class PuddingTestActivity extends AppCompatActivity {
+public class PuddingTestActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_pudding_test);
+    public int getLayoutId() {
+        return R.layout.layout_pudding_test;
     }
 
     public void click1(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setSubTitleText("This is a content")
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setSubTitleText(RuntimeManager.getInstance().getString(R.string.pudding_content))
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click2(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setSubTitleText("This is a content")
-                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setSubTitleText(RuntimeManager.getInstance().getString(R.string.pudding_content))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setTitleTypeface(Typeface.DEFAULT_BOLD)
                 .setSubTitleTypeface(Typeface.create(Typeface.DEFAULT, Typeface.ITALIC))
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click3(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setSubTitleText("This is a content")
-                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setSubTitleText(RuntimeManager.getInstance().getString(R.string.pudding_content))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click4(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
                 .setSubTitleText(getResources().getString(R.string.verbose_text_text))
-                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click5(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setEnableInfiniteDuration()
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click6(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setBackgroundColor(getResources().getColor(R.color.colorAccent))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setProgressMode()
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click7(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setSubTitleText("This is a content")
-                .setTitleColor(Color.BLUE)
-                .setSubTitleColor(Color.parseColor("#cdcdcd"))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setSubTitleText(RuntimeManager.getInstance().getString(R.string.pudding_content))
+                .setTitleColor(GetAppColor.getInstance().getAppColorAccent())
+                .setSubTitleColor(GetAppColor.getInstance().getAppColorLight())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setEnableSwipeDismiss()
                 .setEnableIconAnimation().create(this).show();
     }
 
     public void click8(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
                 .setSubTitleText(getResources().getString(R.string.verbose_text_text))
-                .setBackgroundColor(Color.parseColor("#FFCC00"))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setIconDrawableRes(R.drawable.ic_event_available_black_24dp)
                 .setEnableSwipeDismiss()
                 .setEnableIconAnimation()
                 .setPuddingCallBack(new PuddingCallBack() {
                     @Override
                     public void show() {
-                        Toast.makeText(PuddingTestActivity.this, "显示", Toast.LENGTH_SHORT).show();
+                        CustomToast.getInstance().showToast("显示");
                     }
 
                     @Override
                     public void dismiss() {
-                        Toast.makeText(PuddingTestActivity.this, "隐藏", Toast.LENGTH_SHORT).show();
+                        CustomToast.getInstance().showToast("隐藏");
                     }
 
                     @Override
                     public void onSwing(boolean dismiss) {
-                        Toast.makeText(PuddingTestActivity.this, "将要隐藏", Toast.LENGTH_SHORT).show();
+                        CustomToast.getInstance().showToast("将要隐藏");
                     }
                 }).create(this).show();
     }
 
     public void click9(View view) {
-        new PuddingBuilder().setTitleText("This is a title")
-                .setSubTitleText("This is a content")
-                .setBackgroundColor(Color.parseColor("#FFCC00"))
+        new PuddingBuilder().setTitleText(RuntimeManager.getInstance().getString(R.string.pudding_title))
+                .setSubTitleText(RuntimeManager.getInstance().getString(R.string.pudding_content))
+                .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setEnableIconAnimation()
                 .setEnableInfiniteDuration()
                 .setPositive("确定", R.style.PuddingButton, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(PuddingTestActivity.this, "确定", Toast.LENGTH_SHORT).show();
+                        CustomToast.getInstance().showToast("确定");
                     }
                 })
                 .setNegative("取消", R.style.PuddingButton, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(PuddingTestActivity.this, "取消", Toast.LENGTH_SHORT).show();
+                        CustomToast.getInstance().showToast("取消");
                     }
                 })
                 .create(this).show();
@@ -154,6 +156,12 @@ public class PuddingTestActivity extends AppCompatActivity {
                     }
                 })
                 .create().show();
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.test_pudding);
     }
 
     public void startAnActivity(View view) {

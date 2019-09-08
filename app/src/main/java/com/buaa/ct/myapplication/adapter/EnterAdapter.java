@@ -20,7 +20,7 @@ import com.buaa.ct.myapplication.activity.UIActivity;
 import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
 import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
-import com.buaa.ct.pudding.PuddingTestActivity;
+import com.buaa.ct.myapplication.sample.pudding.PuddingTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 

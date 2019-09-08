@@ -50,6 +50,7 @@
         <activity android:name=".sample.comment.CommentTestActivity" />
         <activity android:name=".sample.comment.EmojiTestActivity" />
         <activity android:name=".sample.copyboard.CopyboardTestActivity" />
+        <activity android:name=".sample.pudding.PuddingTestActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
