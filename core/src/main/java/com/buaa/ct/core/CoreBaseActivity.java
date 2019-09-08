@@ -115,8 +115,13 @@ public class CoreBaseActivity extends BaseSkinActivity {
 
     public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions, String dialogContent) {
         boolean result = true;
+        int i = 0;
         for (String permission : permissions) {
             result = result && (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED);
+            if (result) {
+                onAccreditSucceed(codes[i]);
+            }
+            i++;
         }
         if (this.isFinishing() || result) {
             return;

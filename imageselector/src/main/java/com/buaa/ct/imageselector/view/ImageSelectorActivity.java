@@ -111,7 +111,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
 
         RecyclerView recyclerView = findViewById(R.id.folder_list);
         recyclerView.setHasFixedSize(true);
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(SPAN_COUNT, RuntimeManager.getInstance().dip2px(2), false));
+        recyclerView.addItemDecoration(new GridSpacingItemDecoration(SPAN_COUNT, RuntimeManager.getInstance().dip2px(1), false));
         recyclerView.setLayoutManager(new GridLayoutManager(this, SPAN_COUNT));
         imageAdapter = new ImageListAdapter(this, maxSelectNum, selectMode, showCamera, enablePreview);
         recyclerView.setAdapter(imageAdapter);
@@ -126,6 +126,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 if (folderWindow.isShowing()) {
                     folderWindow.dismiss();
                 } else {
+                    folderWindow.setToolBarHeight(toolBarLayout.getMeasuredHeight());
                     folderWindow.showAsDropDown(toolBarLayout);
                 }
             }
@@ -215,6 +216,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
             toolbarOper.setText("");
         }
         previewText.setVisibility(enablePreview ? View.VISIBLE : View.GONE);
+        title.setText(R.string.picture);
     }
 
     @Override

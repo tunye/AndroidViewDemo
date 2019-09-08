@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="#343434"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,7 +22,7 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bar_height"
+        android:layout_height="@dimen/image_selctor_bar_height"
         android:layout_gravity="bottom"
         android:background="@color/bar_grey_90"
         android:gravity="center_vertical">
@@ -33,8 +33,8 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="@dimen/margin_layout"
-            android:paddingEnd="@dimen/margin_layout">
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin">
 
 
             <TextView
@@ -43,12 +43,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/all_image"
                 android:textColor="@color/white"
-                android:textSize="@dimen/middle_text_size" />
+                android:textSize="@dimen/large_text" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_text"
+                android:layout_marginStart="@dimen/row_space_big"
                 android:layout_marginTop="4dp"
                 android:src="@drawable/ic_arrow" />
         </LinearLayout>
@@ -60,11 +60,11 @@
             android:layout_gravity="end"
             android:enabled="false"
             android:gravity="center"
-            android:paddingStart="@dimen/margin_layout"
-            android:paddingEnd="@dimen/margin_layout"
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:text="@string/preview"
             android:textColor="@color/white_text_selector"
-            android:textSize="@dimen/middle_text_size" />
+            android:textSize="@dimen/large_text" />
     </FrameLayout>
 
 </FrameLayout>

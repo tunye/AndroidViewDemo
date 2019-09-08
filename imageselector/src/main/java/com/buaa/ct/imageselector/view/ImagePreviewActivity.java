@@ -140,7 +140,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) title.getLayoutParams();
-        layoutParams.gravity = Gravity.START;
+        layoutParams.gravity = Gravity.START | Gravity.CENTER_VERTICAL;
         layoutParams.setMargins(RuntimeManager.getInstance().dip2px(44), 0, 0, 0);
         title.setText((position + 1) + "/" + images.size());
 
@@ -167,18 +167,23 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         }
     }
 
-    public void setCheckBoxCheckedIcon(){
+    public void setCheckBoxCheckedIcon() {
         Drawable selectDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_checked));
         DrawableCompat.setTint(selectDrawable, GetAppColor.getInstance().getAppColor());
-        checkboxSelect.setBackground(selectDrawable);
+        checkboxSelect.setButtonDrawable(selectDrawable);
     }
 
-    public void setCheckBoxUnCheckedIcon(){
-        checkboxSelect.setBackgroundResource(R.drawable.ic_check);
+    public void setCheckBoxUnCheckedIcon() {
+        checkboxSelect.setButtonDrawable(R.drawable.ic_check);
     }
 
     public void onImageSwitch(int position) {
         checkboxSelect.setChecked(isSelected(images.get(position)));
+        if (checkboxSelect.isSelected()) {
+            setCheckBoxCheckedIcon();
+        } else {
+            setCheckBoxUnCheckedIcon();
+        }
     }
 
     public boolean isSelected(LocalMedia image) {

@@ -13,6 +13,7 @@
     <string name="message_max_num">Up to %1$d photos can be selected</string>
     <string name="save_ing">Saving picture…</string>
     <string name="no_pic">There is no picture in this phone.</string>
+    <string name="crop">Crop</string>
 
     <string name="select_picture">Select picture</string>
     <string name="max_select_num">Maximum number of options</string>

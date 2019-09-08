@@ -40,7 +40,7 @@ public class FolderWindow extends PopupWindow {
         window = LayoutInflater.from(context).inflate(R.layout.window_folder, null);
         this.setContentView(window);
         this.setWidth(RuntimeManager.getInstance().getScreenWidth());
-        this.setHeight(RuntimeManager.getInstance().getScreenHeight() - RuntimeManager.getInstance().dip2px(96));
+        this.setHeight(RuntimeManager.getInstance().getScreenHeight() - 296);
         setPopupWindowTouchModal(this, false);
         this.setAnimationStyle(R.style.WindowStyle);
         this.setFocusable(true);
@@ -76,11 +76,20 @@ public class FolderWindow extends PopupWindow {
     }
 
     public void registerListener() {
-
+        window.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
     }
 
     public void bindFolder(List<LocalMediaFolder> folders) {
         adapter.setFolders(folders);
+    }
+
+    public void setToolBarHeight(int toolBarHeight){
+
     }
 
     @Override

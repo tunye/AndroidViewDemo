@@ -4,20 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Looper;
-import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.Target;
 
 /**
  * Created by 102 on 2016/10/10.
@@ -29,10 +24,6 @@ public class ImageUtil {
     }
 
     public static void loadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
-        loadImage(imageUrl, imageView, requestOptions, null);
-    }
-
-    public static void loadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, final OnDrawableLoadListener listener) {
         if (imageView == null) {
             return;
         } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
@@ -50,26 +41,10 @@ public class ImageUtil {
             requestBuilder = requestBuilder.apply(requestOptions);
         }
 
-        requestBuilder.listener(new RequestListener<Bitmap>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onFail(e);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onSuccess(resource);
-                }
-                return true;
-            }
-        }).into(imageView);
+        requestBuilder.into(imageView);
     }
 
-    public static void preLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, final OnDrawableLoadListener listener) {
+    public static void preLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
         if (imageView == null) {
             return;
         } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
@@ -87,26 +62,10 @@ public class ImageUtil {
             requestBuilder = requestBuilder.apply(requestOptions);
         }
 
-        requestBuilder.listener(new RequestListener<Bitmap>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onFail(e);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onSuccess(resource);
-                }
-                return true;
-            }
-        }).preload();
+        requestBuilder.preload();
     }
 
-    public static void downLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, final OnDrawableLoadListener listener) {
+    public static void downLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
         if (imageView == null) {
             return;
         } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
@@ -124,23 +83,7 @@ public class ImageUtil {
             requestBuilder = requestBuilder.apply(requestOptions);
         }
 
-        requestBuilder.listener(new RequestListener<Bitmap>() {
-            @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onFail(e);
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                if (listener != null) {
-                    listener.onSuccess(resource);
-                }
-                return true;
-            }
-        }).submit();
+        requestBuilder.submit();
     }
 
 
@@ -210,11 +153,5 @@ public class ImageUtil {
         requestOptions = requestOptions.placeholder(placeholderDrawableId);
         requestOptions = requestOptions.error(placeholderDrawableId);
         return requestOptions;
-    }
-
-    public interface OnDrawableLoadListener {
-        void onSuccess(Bitmap bitmap);
-
-        void onFail(Exception e);
     }
 }

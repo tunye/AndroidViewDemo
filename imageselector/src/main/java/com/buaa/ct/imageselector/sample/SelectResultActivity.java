@@ -1,8 +1,6 @@
 package com.buaa.ct.imageselector.sample;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,25 +8,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.util.ImageUtil;
 import com.buaa.ct.imageselector.R;
-import com.bumptech.glide.Glide;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
  * Created by dee on 15/11/27.
  */
-public class SelectResultActivity extends AppCompatActivity {
+public class SelectResultActivity extends CoreBaseActivity {
     public static final String EXTRA_IMAGES = "extraImages";
 
     private ArrayList<String> images = new ArrayList<>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_selector_result);
+    public int getLayoutId() {
+        return R.layout.activity_image_selector_result;
+    }
 
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText("选取结果");
         initView();
     }
 
@@ -41,9 +43,7 @@ public class SelectResultActivity extends AppCompatActivity {
 
         if (images.size() == 1) {
             resultRecyclerView.setVisibility(View.GONE);
-            Glide.with(SelectResultActivity.this)
-                    .load(new File(images.get(0)))
-                    .into(singleImageView);
+            ImageUtil.loadImage(images.get(0), singleImageView);
         } else {
             singleImageView.setVisibility(View.GONE);
             resultRecyclerView.setAdapter(new GridAdapter());
@@ -53,6 +53,7 @@ public class SelectResultActivity extends AppCompatActivity {
 
     private class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
+        @NonNull
         @Override
         public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_result, parent, false);
@@ -61,10 +62,7 @@ public class SelectResultActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-            Glide.with(SelectResultActivity.this)
-                    .load(new File(images.get(position)))
-                    .centerCrop()
-                    .into(holder.imageView);
+            ImageUtil.loadImage(images.get(position), holder.imageView);
         }
 
         @Override

@@ -14,6 +14,7 @@
     <string name="message_max_num">你最多可以选择%1$d张图片</string>
     <string name="save_ing">保存图片中…</string>
     <string name="no_pic">系统中无照片</string>
+    <string name="crop">裁剪</string>
 
     <string name="max_select_num">可选择图片数量</string>
     <string name="select_picture">选择图片</string>

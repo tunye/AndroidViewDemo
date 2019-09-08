@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <com.buaa.ct.imageselector.widget.PreviewViewPager
         android:id="@+id/preview_pager"
@@ -13,7 +14,7 @@
     <FrameLayout
         android:id="@+id/select_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/bar_height"
+        android:layout_height="@dimen/image_selctor_bar_height"
         android:layout_gravity="bottom"
         android:background="@color/bar_grey_90"
         android:gravity="center_vertical">
@@ -25,10 +26,10 @@
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:gravity="center"
-            android:paddingStart="@dimen/margin_text"
-            android:paddingEnd="@dimen/margin_layout"
+            android:paddingStart="@dimen/row_space_big"
+            android:paddingEnd="@dimen/activity_horizontal_margin"
             android:text="@string/choose"
-            android:textColor="@color/white"
-            android:textSize="@dimen/middle_text_size" />
+            android:textColor="@color/textcolor_on_appcolor"
+            android:textSize="@dimen/large_text" />
     </FrameLayout>
 </FrameLayout>
