@@ -164,6 +164,12 @@ public class HttpProxyCacheServer {
         return getCacheFile(url).exists();
     }
 
+    public void clearCache(String url) {
+        if (isCached(url)) {
+            getCacheFile(url).delete();
+        }
+    }
+
     public void shutdown() {
         shutdownClients();
         config.sourceInfoStorage.release();

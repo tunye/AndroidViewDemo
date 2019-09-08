@@ -1,6 +1,7 @@
 package com.buaa.ct.myapplication;
 
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -39,6 +40,10 @@ public class MainActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         recyclerView.setAdapter(new EnterAdapter(this));
+        LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
+        if (layoutManager!=null) {
+            layoutManager.setReverseLayout(true);
+        }
         title.setText(R.string.app_name);
         back.setVisibility(View.INVISIBLE);
     }

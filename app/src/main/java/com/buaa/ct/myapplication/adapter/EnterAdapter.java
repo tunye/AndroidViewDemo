@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
-import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.myapplication.R;
@@ -21,23 +20,25 @@ import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
 import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
 import com.buaa.ct.myapplication.sample.pudding.PuddingTestActivity;
+import com.buaa.ct.myapplication.sample.videocache.VideoCacheTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
-import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
 
 import java.util.Arrays;
 
 public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.ItemViewHolder> {
-    private static final int count = 11;
+    private static final int count = 9;
 
     public EnterAdapter(Context context) {
         super(context);
-        String[] nameList = {"网页回弹效果",
+        String[] nameList = {
+                RuntimeManager.getInstance().getString(R.string.web_flexible_test),
                 RuntimeManager.getInstance().getString(R.string.test_select_image),
                 RuntimeManager.getInstance().getString(R.string.test_skin),
-                "视频缓存", "hha",
+                RuntimeManager.getInstance().getString(R.string.test_video_cache),
+                "二维码",
                 RuntimeManager.getInstance().getString(R.string.test_comment),
-                "应用内toast通知",
-                RuntimeManager.getInstance().getString(R.string.test_copyboard), "录屏", "二维码"};
+                RuntimeManager.getInstance().getString(R.string.test_pudding),
+                RuntimeManager.getInstance().getString(R.string.test_copyboard)};
         addDatas(Arrays.asList(nameList));
         addData(context.getResources().getString(R.string.ui));
     }
@@ -71,6 +72,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                         context.startActivity(new Intent(context, VideoCacheTestActivity.class));
                         break;
                     case 4:
+                        context.startActivity(new Intent(context, QRCodeTestActivity.class));
                         break;
                     case 5:
                         context.startActivity(new Intent(context, CommentTestActivity.class));
@@ -80,12 +82,6 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                         break;
                     case 7:
                         context.startActivity(new Intent(context, CopyboardTestActivity.class));
-                        break;
-                    case 8:
-                        context.startActivity(new Intent(context, PullDoorTestActivity.class));
-                        break;
-                    case 9:
-                        context.startActivity(new Intent(context, QRCodeTestActivity.class));
                         break;
                     case count - 1:
                         context.startActivity(new Intent(context, UIActivity.class));

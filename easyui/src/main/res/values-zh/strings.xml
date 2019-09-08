@@ -8,4 +8,5 @@
     <string name="qq_send_pic_test">QQ发图效果</string>
     <string name="pull_door_test">推门效果</string>
     <string name="share_test">分享弹框</string>
+    <string name="web_flexible_test">网页回弹效果</string>
 </resources>

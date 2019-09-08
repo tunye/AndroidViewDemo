@@ -8,11 +8,15 @@
     <string name="test_comment">仿微信评论框</string>
     <string name="test_copyboard">仿UC 剪贴板</string>
     <string name="test_pudding">页面内toast</string>
+    <string name="test_video_cache">视频缓存</string>
 
     <string name="app_no_change">应用皮肤没有改变</string>
     <string name="test_skin_oper">应用</string>
 
     <string name="test_comment_oper">emoji选择器</string>
+
+    <string name="test_video_cache_oper">清除缓存</string>
+    <string name="test_video_cache_play">点击播放</string>
 
     <string name="tip">此为剪贴板中内容，点击查看：</string>
     <string name="init_tip">在任何应用中复制内容，所复制文本将会在显示在屏幕顶部。点击后，内容将会显示在此处。</string>

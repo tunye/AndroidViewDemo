@@ -43,6 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/text_color"
                 android:text="@string/multiple" />
 
             <RadioButton
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_text"
                 android:layout_weight="1.5"
+                android:textColor="@color/text_color"
                 android:text="@string/single" />
         </RadioGroup>
 
@@ -74,6 +76,7 @@
                 android:id="@+id/camera_yes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color"
                 android:layout_weight="1"
                 android:text="@string/yes" />
 
@@ -83,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_text"
                 android:layout_weight="1.5"
+                android:textColor="@color/text_color"
                 android:text="@string/no" />
         </RadioGroup>
 
@@ -107,6 +111,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@color/text_color"
                 android:text="@string/enable" />
 
             <RadioButton
@@ -115,6 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_text"
                 android:layout_weight="1.5"
+                android:textColor="@color/text_color"
                 android:text="@string/disable" />
         </RadioGroup>
 
@@ -140,6 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:enabled="false"
+                android:textColor="@color/text_color"
                 android:text="@string/enable" />
 
             <RadioButton
@@ -147,6 +154,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_text"
+                android:textColor="@color/text_color"
                 android:layout_weight="1.5"
                 android:text="@string/disable" />
         </RadioGroup>
@@ -158,7 +166,7 @@
             android:layout_marginTop="@dimen/margin_layout"
             android:background="@drawable/btn_round_green_enable"
             android:text="@string/select_picture"
-            android:textColor="@color/white"
+            android:textColor="@color/textcolor_on_appcolor"
             android:textSize="@dimen/middle_text_size" />
     </LinearLayout>
 </LinearLayout>

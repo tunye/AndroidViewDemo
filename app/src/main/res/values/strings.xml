@@ -7,11 +7,15 @@
     <string name="test_comment">Comment test</string>
     <string name="test_copyboard">UC Copyboard test</string>
     <string name="test_pudding">Pudding test</string>
+    <string name="test_video_cache">Video Cache test</string>
 
     <string name="app_no_change">The app skin color is not changed.</string>
     <string name="test_skin_oper">Use</string>
 
     <string name="test_comment_oper">only emoji</string>
+
+    <string name="test_video_cache_oper">Clear</string>
+    <string name="test_video_cache_play">Play</string>
 
     <string name="tip">This is the clipboard content, Click to see：</string>
     <string name="init_tip">Copy content in any application, and the copied text will be displayed at the top of the screen. After clicking, the content will be displayed here.</string>

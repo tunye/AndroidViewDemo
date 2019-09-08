@@ -1,5 +1,6 @@
 package com.buaa.ct.myapplication.activity;
 
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.buaa.ct.myapplication.R;
@@ -25,6 +26,10 @@ public class UIActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.ui);
+        LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+        if (layoutManager != null) {
+            layoutManager.setReverseLayout(true);
+        }
         recyclerView.setAdapter(new UIEnterAdapter(this));
     }
 }

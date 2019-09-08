@@ -101,7 +101,7 @@ public class ShareDialogTestActivity extends CoreBaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (share.getVisibility() == View.VISIBLE) {
+        if (shown) {
             fadeoutShareDialog();
         } else {
             super.onBackPressed();

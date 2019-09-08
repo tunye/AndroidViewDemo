@@ -1,21 +1,21 @@
-package com.buaa.ct.videocache.sample;
+package com.buaa.ct.myapplication.sample.videocache;
 
 
 import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.buaa.ct.videocache.R;
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.view.CustomToast;
+import com.buaa.ct.myapplication.R;
 import com.buaa.ct.videocache.core.CacheListener;
 import com.buaa.ct.videocache.httpproxy.HttpProxyCacheServer;
 
 import java.io.File;
 import java.io.IOException;
 
-public class VideoCacheTestActivity extends AppCompatActivity implements CacheListener {
+public class VideoCacheTestActivity extends CoreBaseActivity implements CacheListener {
     private HttpProxyCacheServer proxy;
     private String url = "http://sc1.111ttt.cn/2017/1/05/09/298092038446.mp3";
     private OnCacheListener onCacheListener;
@@ -23,16 +23,24 @@ public class VideoCacheTestActivity extends AppCompatActivity implements CacheLi
     private TextView startPlay, percent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_videocache);
+    public int getLayoutId() {
+        return R.layout.activity_videocache_test;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         startPlay = findViewById(R.id.video_cache_click);
         percent = findViewById(R.id.video_cache_progress);
+    }
 
+    @Override
+    public void setListener() {
+        super.setListener();
         startPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "已经开始播放", Toast.LENGTH_SHORT).show();
+                CustomToast.getInstance().showToast("已经开始播放");
                 HttpProxyCacheServer proxy = getProxy();
                 proxy.registerCacheListener(VideoCacheTestActivity.this, url);
                 String proxyUrl = proxy.getProxyUrl(url);
@@ -46,7 +54,22 @@ public class VideoCacheTestActivity extends AppCompatActivity implements CacheLi
                 }
             }
         });
+        toolbarOper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HttpProxyCacheServer proxy = getProxy();
+                proxy.clearCache(url);
+                percent.setText("");
+                CustomToast.getInstance().showToast("已清除");
+            }
+        });
+    }
 
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.test_video_cache);
+        toolbarOper.setText(R.string.test_video_cache_oper);
         mediaPlayer = new MediaPlayer();
         checkCachedState();
     }
