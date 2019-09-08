@@ -1,43 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <com.buaa.ct.easyui.progressimage.ProgressImageView
-        android:id="@+id/test_content"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/asm_logo" />
+    <include layout="@layout/toolbar" />
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|bottom"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16sp">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/stop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="停止" />
+        <com.buaa.ct.easyui.progressimage.ProgressImageView
+            android:id="@+id/test_content"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/asm_logo" />
 
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:text="重置" />
+            android:layout_gravity="center_horizontal|bottom"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16sp">
 
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16sp"
-            android:text="开始" />
-    </LinearLayout>
-</FrameLayout>
+            <Button
+                android:id="@+id/stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="停止" />
+
+            <Button
+                android:id="@+id/reset"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:text="重置" />
+
+            <Button
+                android:id="@+id/start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16sp"
+                android:text="开始" />
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>

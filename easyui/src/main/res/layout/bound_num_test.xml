@@ -1,65 +1,63 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="16dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical">
+    <include layout="@layout/toolbar" />
 
-        <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
-            android:id="@+id/number1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:textColor="#000000"
-            android:textSize="20sp"/>
+    <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
+        android:id="@+id/number1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
-        <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
-            android:id="@+id/number2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:textColor="#454565"
-            android:textSize="20sp"/>
+    <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
+        android:id="@+id/number2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#454565"
+        android:textSize="20sp" />
 
-        <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
-            android:id="@+id/number3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:textColor="#896421"
-            android:textSize="20sp"/>
+    <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
+        android:id="@+id/number3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#896421"
+        android:textSize="20sp" />
 
-        <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
-            android:id="@+id/number4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:textColor="#658965"
-            android:textSize="20sp"/>
+    <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
+        android:id="@+id/number4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#658965"
+        android:textSize="20sp" />
 
-        <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
-            android:id="@+id/number5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:textColor="#564436"
-            android:textSize="20sp"/>
+    <com.buaa.ct.easyui.boundnumber.RiseNumberTextView
+        android:id="@+id/number5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:textColor="#564436"
+        android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/start"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dp"
-            android:text="开始"
-            android:textSize="20sp"/>
-    </LinearLayout>
-</RelativeLayout>
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:text="开始"
+        android:textColor="@color/text_color"
+        android:textSize="20sp" />
+</LinearLayout>

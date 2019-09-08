@@ -9,10 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.manager.RuntimeManager;
-import com.buaa.ct.easyui.listview.ParallaxScollListViewTrestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
@@ -21,6 +19,7 @@ import com.buaa.ct.myapplication.activity.TestActivity;
 import com.buaa.ct.myapplication.activity.UIActivity;
 import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
+import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
 import com.buaa.ct.pudding.PuddingTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import com.buaa.ct.videocache.sample.VideoCacheTestActivity;
@@ -35,7 +34,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
         String[] nameList = {"网页回弹效果",
                 RuntimeManager.getInstance().getString(R.string.test_select_image),
                 RuntimeManager.getInstance().getString(R.string.test_skin),
-                "视频缓存", "仿雅虎digest阅读效果",
+                "视频缓存", "hha",
                 RuntimeManager.getInstance().getString(R.string.test_comment),
                 "应用内toast通知",
                 RuntimeManager.getInstance().getString(R.string.test_copyboard), "录屏", "二维码"};
@@ -72,7 +71,6 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                         context.startActivity(new Intent(context, VideoCacheTestActivity.class));
                         break;
                     case 4:
-                        context.startActivity(new Intent(context, ParallaxScollListViewTrestActivity.class));
                         break;
                     case 5:
                         context.startActivity(new Intent(context, CommentTestActivity.class));

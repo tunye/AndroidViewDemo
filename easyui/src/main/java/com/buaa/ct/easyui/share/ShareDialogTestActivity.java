@@ -1,62 +1,85 @@
 package com.buaa.ct.easyui.share;
 
 import android.animation.Animator;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.easyui.R;
-import com.buaa.ct.easyui.share.manager.RuntimeManager;
+import com.buaa.ct.easyui.share.listener.SimpleAnimationListener;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 
-public class ShareDialogTestActivity extends AppCompatActivity {
+public class ShareDialogTestActivity extends CoreBaseActivity {
     FloatingActionButton fab;
     View share;
     View cancel;
 
+    View qq, wb, wx, yx;
+
+    boolean shown;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.share_dialog_test);
-        RuntimeManager.setApplication(getApplication());
-        RuntimeManager.setApplicationContext(this);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public int getLayoutId() {
+        return R.layout.share_dialog_test;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         share = findViewById(R.id.share);
         cancel = findViewById(R.id.cancel);
-        share.setVisibility(View.GONE);
+        share.setAlpha(0);
         fab = findViewById(R.id.fab);
+
+        qq = findViewById(R.id.qq);
+        wx = findViewById(R.id.wx);
+        wb = findViewById(R.id.wb);
+        yx = findViewById(R.id.yx);
+    }
+
+    @Override
+    public void setListener() {
+        super.setListener();
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (share.getVisibility() != View.VISIBLE) {
-                    YoYo.with(Techniques.SlideInUp).interpolate(new AccelerateDecelerateInterpolator()).duration(200).withListener(new Animator.AnimatorListener() {
+                if (!shown) {
+                    shown = true;
+                    YoYo.with(Techniques.SlideInUp).interpolate(new AccelerateDecelerateInterpolator()).duration(200).withListener(new SimpleAnimationListener() {
                         @Override
                         public void onAnimationStart(Animator animation) {
-                            share.setVisibility(View.VISIBLE);
-                            YoYo.with(Techniques.BounceIn).interpolate(new AccelerateDecelerateInterpolator()).delay(50).duration(400).playOn(findViewById(R.id.qq));
-                            YoYo.with(Techniques.BounceIn).interpolate(new AccelerateDecelerateInterpolator()).delay(100).duration(400).playOn(findViewById(R.id.wx));
-                            YoYo.with(Techniques.BounceIn).interpolate(new AccelerateDecelerateInterpolator()).delay(150).duration(400).playOn(findViewById(R.id.wb));
-                            YoYo.with(Techniques.BounceIn).interpolate(new AccelerateDecelerateInterpolator()).delay(200).duration(400).playOn(findViewById(R.id.yx));
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animation) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animation) {
-
+                            qq.setAlpha(0);
+                            wx.setAlpha(0);
+                            wb.setAlpha(0);
+                            yx.setAlpha(0);
+                            final AccelerateDecelerateInterpolator interpolator = new AccelerateDecelerateInterpolator();
+                            ThreadUtils.postOnUiThreadDelay(new Runnable() {
+                                @Override
+                                public void run() {
+                                    YoYo.with(Techniques.BounceIn).interpolate(interpolator).duration(400).playOn(qq);
+                                }
+                            }, 50);
+                            ThreadUtils.postOnUiThreadDelay(new Runnable() {
+                                @Override
+                                public void run() {
+                                    YoYo.with(Techniques.BounceIn).interpolate(interpolator).duration(400).playOn(wx);
+                                }
+                            }, 100);
+                            ThreadUtils.postOnUiThreadDelay(new Runnable() {
+                                @Override
+                                public void run() {
+                                    YoYo.with(Techniques.BounceIn).interpolate(interpolator).duration(400).playOn(wb);
+                                }
+                            }, 150);
+                            ThreadUtils.postOnUiThreadDelay(new Runnable() {
+                                @Override
+                                public void run() {
+                                    YoYo.with(Techniques.BounceIn).interpolate(interpolator).duration(400).playOn(yx);
+                                }
+                            }, 200);
                         }
                     }).duration(250).playOn(share);
                 }
@@ -71,6 +94,12 @@ public class ShareDialogTestActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.share_test);
+    }
+
+    @Override
     public void onBackPressed() {
         if (share.getVisibility() == View.VISIBLE) {
             fadeoutShareDialog();
@@ -80,26 +109,7 @@ public class ShareDialogTestActivity extends AppCompatActivity {
     }
 
     private void fadeoutShareDialog() {
-        YoYo.with(Techniques.FadeOut).interpolate(new AccelerateDecelerateInterpolator()).duration(200).withListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                share.setVisibility(View.GONE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        }).playOn(share);
+        shown = false;
+        YoYo.with(Techniques.FadeOut).interpolate(new AccelerateDecelerateInterpolator()).duration(200).playOn(share);
     }
 }

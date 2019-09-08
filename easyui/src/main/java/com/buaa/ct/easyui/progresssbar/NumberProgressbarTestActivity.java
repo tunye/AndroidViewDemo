@@ -1,27 +1,24 @@
 package com.buaa.ct.easyui.progresssbar;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
 
-public class NumberProgressbarTestActivity extends AppCompatActivity implements OnProgressBarListener {
+public class NumberProgressbarTestActivity extends CoreBaseActivity implements OnProgressBarListener {
+    private NumberProgressBar bnp;
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case 0:
-                    Log.e("aaa", "步进");
                     bnp.incrementProgressBy(1);
                     handler.sendEmptyMessageDelayed(0, 100);
                     break;
                 case 1:
-                    Log.e("aaa", "重置");
                     bnp.setProgress(0);
                     handler.sendEmptyMessageDelayed(0, 1000);
                     break;
@@ -33,20 +30,32 @@ public class NumberProgressbarTestActivity extends AppCompatActivity implements 
         }
     });
 
-    private NumberProgressBar bnp;
+    @Override
+    public int getLayoutId() {
+        return R.layout.number_progressbar_test;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.number_progressbar_test);
-
+    public void initWidget() {
+        super.initWidget();
         bnp = findViewById(R.id.numberbar1);
+    }
+
+    @Override
+    public void setListener() {
+        super.setListener();
         bnp.setOnProgressBarListener(this);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.progress_test);
+    }
+
+    @Override
+    public void onActivityResumed() {
+        super.onActivityResumed();
         handler.sendEmptyMessageDelayed(0, 1000);
     }
 
@@ -59,13 +68,15 @@ public class NumberProgressbarTestActivity extends AppCompatActivity implements 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        handler.removeMessages(0);
+        handler.removeMessages(1);
         handler.removeCallbacksAndMessages(null);
     }
 
     @Override
     public void onProgressChange(int current, int max) {
         if (current == max) {
-            Toast.makeText(getApplicationContext(), "完成", Toast.LENGTH_SHORT).show();
+            CustomToast.getInstance().showToast("完成");
             handler.sendEmptyMessage(2);
             handler.sendEmptyMessageDelayed(1, 2000);
         }

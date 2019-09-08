@@ -22,8 +22,9 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ import java.util.concurrent.TimeUnit;
  */
 
 public class BannerView extends FrameLayout {
+    public final static int LEFT = 1;
+    public final static int RIGHT = 2;
+    public final static int CENTER = 0;
     private ViewPager bannerViewPager;
     private MyAdapter myAdapter;
     private TextView bannerTitle;
@@ -47,7 +51,6 @@ public class BannerView extends FrameLayout {
     private int currentItem = 0;
     private boolean isLooping = false;
     private ScheduledExecutorService scheduledExecutorService;
-
     private int selectItemColor = 0xffffffff, unselectedItemColor = 0xff808080;
     private int shadowColor = 0x66000000;
     private boolean isAutoStart;
@@ -68,12 +71,12 @@ public class BannerView extends FrameLayout {
     }
 
     private void setAttr(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.bannerview);
-        selectItemColor = a.getColor(R.styleable.bannerview_banner_select_color, selectItemColor);
-        unselectedItemColor = a.getColor(R.styleable.bannerview_banner_unselected_color, unselectedItemColor);
-        shadowColor = a.getColor(R.styleable.bannerview_banner_shadow_color, shadowColor);
-        isAutoStart = a.getBoolean(R.styleable.bannerview_banner_auto_start, true);
-        int alignInt = a.getInt(R.styleable.bannerview_banner_align, 1);
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.BannerView);
+        selectItemColor = a.getColor(R.styleable.BannerView_banner_select_color, selectItemColor);
+        unselectedItemColor = a.getColor(R.styleable.BannerView_banner_unselected_color, unselectedItemColor);
+        shadowColor = a.getColor(R.styleable.BannerView_banner_shadow_color, shadowColor);
+        isAutoStart = a.getBoolean(R.styleable.BannerView_banner_auto_start, true);
+        int alignInt = a.getInt(R.styleable.BannerView_banner_align, 1);
         switch (alignInt) {
             case 0:
                 align = LEFT;
@@ -151,14 +154,6 @@ public class BannerView extends FrameLayout {
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             bannerImages.add(imageView);
         }
-        ImageView imageView = new ImageView(getContext());
-        imageView.setImageResource(mDatas.get(mDatas.size() - 1));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        bannerImages.add(0, imageView);
-        imageView = new ImageView(getContext());
-        imageView.setImageResource(mDatas.get(0));
-        imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        bannerImages.add(imageView);
         bannerTitle.setText("第0张图");
         myAdapter.notifyDataSetChanged();
 
@@ -182,7 +177,7 @@ public class BannerView extends FrameLayout {
     }
 
     private Drawable createPoint(int color) {
-        int size = (int) (getResources().getDisplayMetrics().density * 8 + 0.5f);
+        int size = RuntimeManager.getInstance().dip2px(8);
         Bitmap bitmap = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);
         Drawable drawable = new BitmapDrawable(getResources(), bitmap);
         Canvas canvas = new Canvas(bitmap);
@@ -206,10 +201,6 @@ public class BannerView extends FrameLayout {
         return super.dispatchTouchEvent(ev);
     }
 
-    public final static int LEFT = 1;
-    public final static int RIGHT = 2;
-    public final static int CENTER = 0;
-
     @IntDef(flag = true, value = {LEFT, RIGHT, CENTER})
     @interface Align {
 
@@ -219,28 +210,19 @@ public class BannerView extends FrameLayout {
 
         @Override
         public void run() {
-            currentItem = (currentItem + 1) % (bannerImages.size() - 2);
             BannerView.this.post(new Runnable() {
                 @Override
                 public void run() {
-                    bannerViewPager.setCurrentItem(currentItem, currentItem != 0);
+                    bannerViewPager.setCurrentItem(currentItem + 1, true);
                 }
             });
         }
     }
 
     private class MyPageChangeListener implements ViewPager.OnPageChangeListener {
-        private int oldPosition = 0;
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            if (state == ViewPager.SCROLL_STATE_IDLE) {
-                if (currentItem == bannerViewPager.getAdapter().getCount() - 1) {
-                    bannerViewPager.setCurrentItem(1, false);
-                } else if (currentItem == 0) {
-                    bannerViewPager.setCurrentItem(bannerViewPager.getAdapter().getCount() - 2, false);
-                }
-            }
         }
 
         @Override
@@ -250,11 +232,12 @@ public class BannerView extends FrameLayout {
 
         @Override
         public void onPageSelected(int position) {
+            int oldRealPosition = currentItem % bannerData.size();
             currentItem = position;
-            dots.get(oldPosition).setImageDrawable(createPoint(unselectedItemColor));
-            oldPosition = currentItem % bannerData.size();
-            bannerTitle.setText("第" + oldPosition + "张图");
-            dots.get(oldPosition).setImageDrawable(createPoint(selectItemColor));
+            int nowRealPosition = currentItem % bannerData.size();
+            dots.get(oldRealPosition).setImageDrawable(createPoint(unselectedItemColor));
+            bannerTitle.setText("第" + nowRealPosition + "张图");
+            dots.get(nowRealPosition).setImageDrawable(createPoint(selectItemColor));
         }
     }
 
@@ -262,31 +245,33 @@ public class BannerView extends FrameLayout {
 
         @Override
         public int getCount() {
-            return bannerImages.size();
+            return Integer.MAX_VALUE;
         }
 
+        @NonNull
         @Override
-        public Object instantiateItem(@NonNull ViewGroup container, final int position) {
-            ImageView iv = bannerImages.get(position);
+        public Object instantiateItem(@NonNull ViewGroup container, int position) {
+            final int realPos = position % bannerImages.size();
+            ImageView iv = bannerImages.get(realPos);
             container.addView(iv);
             // 在这个方法里面设置图片的点击事件
             iv.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), "第" + position % bannerData.size() + "张图", Toast.LENGTH_SHORT).show();
+                    CustomToast.getInstance().showToast("第" + realPos + "张图");
                 }
             });
             return iv;
         }
 
         @Override
-        public void destroyItem(View arg0, int arg1, Object arg2) {
-            ((ViewPager) arg0).removeView(bannerImages.get(arg1));
+        public void destroyItem(@NonNull View arg0, int arg1, @NonNull Object arg2) {
+            ((ViewPager) arg0).removeView(bannerImages.get(arg1 % bannerImages.size()));
         }
 
         @Override
-        public boolean isViewFromObject(View arg0, Object arg1) {
+        public boolean isViewFromObject(@NonNull View arg0, @NonNull Object arg1) {
             return arg0 == arg1;
         }
 

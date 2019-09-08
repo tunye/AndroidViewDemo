@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.animation.BounceInterpolator;
 import android.widget.RelativeLayout;
 
+import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.R;
 
 public class DraggableFlagView extends View {
@@ -116,7 +117,7 @@ public class DraggableFlagView extends View {
         textPaint = new Paint();
         textPaint.setAntiAlias(true);
         textPaint.setColor(textColor);
-        textPaint.setTextSize(ScreenUtil.sp2px(context, textSize));
+        textPaint.setTextSize(RuntimeManager.getInstance().sp2px(textSize));
         textPaint.setTextAlign(Paint.Align.CENTER);
     }
 
@@ -299,7 +300,7 @@ public class DraggableFlagView extends View {
         } else {
             isArrivedMaxMoved = false;
             float calcRadius = (1 - 1f * distance / maxMoveLength) * originRadius;
-            float minRadius = ScreenUtil.dip2px(context, MIN_RADIUS);
+            float minRadius = RuntimeManager.getInstance().dip2px(MIN_RADIUS);
             curRadius = (int) Math.max(calcRadius, minRadius);
         }
     }
@@ -399,7 +400,7 @@ public class DraggableFlagView extends View {
 
     public void setTextSize(int size) {
         textSize = size;
-        textPaint.setTextSize(ScreenUtil.sp2px(context, textSize));
+        textPaint.setTextSize(RuntimeManager.getInstance().sp2px(textSize));
     }
 
     public void setMaxMove(int maxMove) {

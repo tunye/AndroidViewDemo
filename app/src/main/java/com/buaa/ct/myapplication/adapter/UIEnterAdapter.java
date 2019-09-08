@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
+import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
@@ -24,7 +25,13 @@ import com.buaa.ct.stickydot.StickyDotTestActivity;
 import java.util.Arrays;
 
 public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapter.ItemViewHolder> {
-    private String[] names = {"Banner", "一键退朝", "数字效果", "另类进度条", "分享气泡", "另一种一键退朝", "推门效果", "QQ发图效果"};
+    private String[] names = {RuntimeManager.getInstance().getString(R.string.banner_test),
+            "一键退朝",
+            RuntimeManager.getInstance().getString(R.string.bound_num_test),
+            RuntimeManager.getInstance().getString(R.string.progress_test),
+            RuntimeManager.getInstance().getString(R.string.share_test), "另一种一键退朝",
+            RuntimeManager.getInstance().getString(R.string.pull_door_test),
+            RuntimeManager.getInstance().getString(R.string.qq_send_pic_test)};
 
     public UIEnterAdapter(Context context) {
         super(context);

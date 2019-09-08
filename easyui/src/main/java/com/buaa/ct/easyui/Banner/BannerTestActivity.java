@@ -1,21 +1,28 @@
 package com.buaa.ct.easyui.Banner;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-
+import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.easyui.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BannerTestActivity extends AppCompatActivity {
+public class BannerTestActivity extends CoreBaseActivity {
     BannerView bannerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.banner_test);
+    public int getLayoutId() {
+        return R.layout.banner_test;
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         bannerView = findViewById(R.id.banner);
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
         List<Integer> list = new ArrayList<>();
         list.add(R.drawable.banner_a);
         list.add(R.drawable.banner_b);
@@ -27,6 +34,8 @@ public class BannerTestActivity extends AppCompatActivity {
         list.add(R.drawable.banner_h);
         list.add(R.drawable.banner_i);
         bannerView.initData(list);
+
+        title.setText(R.string.banner_test);
     }
 
     @Override

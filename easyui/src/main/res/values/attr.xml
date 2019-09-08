@@ -1,49 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="draggableflag">
-        <attr name="roundcolor" format="color"/>
-        <attr name="textcolor" format="color"/>
-        <attr name="textsize" format="integer"/>
-        <attr name="max_move" format="dimension"/>
-        <attr name="text" format="string"/>
-        <attr name="anim_interval" format="integer"/>
+        <attr name="roundcolor" format="color" />
+        <attr name="textcolor" format="color" />
+        <attr name="textsize" format="integer" />
+        <attr name="max_move" format="dimension" />
+        <attr name="text" format="string" />
+        <attr name="anim_interval" format="integer" />
     </declare-styleable>
 
-    <declare-styleable name="bannerview">
+    <declare-styleable name="BannerView">
         <attr name="banner_align">
-            <enum name="LEFT" value="0"/>
-            <enum name="CENTER" value="1"/>
-            <enum name="RIGHT" value="2"/>
+            <enum name="LEFT" value="0" />
+            <enum name="CENTER" value="1" />
+            <enum name="RIGHT" value="2" />
         </attr>
-        <attr name="banner_select_color" format="color"/>
-        <attr name="banner_unselected_color" format="color"/>
-        <attr name="banner_shadow_color" format="color"/>
-        <attr name="banner_auto_start" format="boolean"/>
-    </declare-styleable>
-
-    <declare-styleable name="PageIndicator">
-        <attr name="pi_strokecolor" format="color" />
-        <attr name="pi_fillcolor" format="color" />
-        <attr name="pi_hightlightcolor" format="color" />
-        <attr name="pi_stroke" format="dimension" />
-        <attr name="pi_radius" format="dimension" />
-        <attr name="pi_count" format="integer" />
-        <attr name="pi_circlepadding" format="dimension" />
-    </declare-styleable>
-
-    <declare-styleable name="MaterialRippleLayout">
-        <attr name="mrl_rippleColor" format="color" localization="suggested" />
-        <attr name="mrl_rippleDimension" format="dimension" localization="suggested" />
-        <attr name="mrl_rippleOverlay" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleAlpha" format="float" localization="suggested" />
-        <attr name="mrl_rippleDuration" format="integer" localization="suggested" />
-        <attr name="mrl_rippleFadeDuration" format="integer" localization="suggested" />
-        <attr name="mrl_rippleHover" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleBackground" format="color" localization="suggested" />
-        <attr name="mrl_rippleDelayClick" format="boolean" localization="suggested" />
-        <attr name="mrl_ripplePersistent" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
+        <attr name="banner_select_color" format="color" />
+        <attr name="banner_unselected_color" format="color" />
+        <attr name="banner_shadow_color" format="color" />
+        <attr name="banner_auto_start" format="boolean" />
     </declare-styleable>
 
     <style name="NumberProgressBar_Beauty_Red">

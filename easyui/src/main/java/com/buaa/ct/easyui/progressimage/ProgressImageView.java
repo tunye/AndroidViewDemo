@@ -25,18 +25,11 @@ public class ProgressImageView extends AppCompatImageView {
     public static final int READY = 0;
     public static final int PROGRESS = 1;
     public static final int FINISH = 2;
-
-    @IntDef({READY, PROGRESS, FINISH})
-    @Retention(RetentionPolicy.SOURCE)
-    @interface STATE {
-    }
-
     private @STATE
     int state;
     private int outRadius = dp2px(50);
     private int inRadius = dp2px(40);
     private int round = outRadius - inRadius;
-
     private int progress = 0;
     private Paint paint = new Paint();
     private TextPaint textPaint;
@@ -44,10 +37,8 @@ public class ProgressImageView extends AppCompatImageView {
     private RectF rectF;
     private RadialGradient radialGradient;
     private PorterDuffXfermode porterDuffXfermode;
-
     private float currFinishAnimValue;
     private float currWaitingAnimValue;
-
     private ValueAnimator waittingAnimator;
 
     public ProgressImageView(Context context) {
@@ -189,5 +180,10 @@ public class ProgressImageView extends AppCompatImageView {
 
     private int dp2px(int dp) {
         return (int) (getContext().getResources().getDisplayMetrics().density * dp + 0.5f);
+    }
+
+    @IntDef({READY, PROGRESS, FINISH})
+    @Retention(RetentionPolicy.SOURCE)
+    @interface STATE {
     }
 }

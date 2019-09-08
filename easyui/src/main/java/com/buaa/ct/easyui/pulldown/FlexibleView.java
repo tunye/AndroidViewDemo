@@ -25,6 +25,34 @@ public class FlexibleView extends FrameLayout {
     private AdapterView<?> adapterView;
     private WebView webView;
     private View customView;
+    Animation.AnimationListener animationListener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if (webView != null) {
+                webView.clearAnimation();
+                webView.setY(0);
+            } else if (scrollView != null) {
+                scrollView.clearAnimation();
+                scrollView.setY(0);
+            } else if (adapterView != null) {
+                adapterView.clearAnimation();
+                adapterView.setY(0);
+            } else {
+                customView.clearAnimation();
+                customView.setY(0);
+            }
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    };
 
     public FlexibleView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -179,33 +207,4 @@ public class FlexibleView extends FrameLayout {
             customView.startAnimation(translateAnimation);
         }
     }
-
-    Animation.AnimationListener animationListener = new Animation.AnimationListener() {
-        @Override
-        public void onAnimationStart(Animation animation) {
-
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            if (webView != null) {
-                webView.clearAnimation();
-                webView.setY(0);
-            } else if (scrollView != null) {
-                scrollView.clearAnimation();
-                scrollView.setY(0);
-            } else if (adapterView != null) {
-                adapterView.clearAnimation();
-                adapterView.setY(0);
-            } else {
-                customView.clearAnimation();
-                customView.setY(0);
-            }
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-
-        }
-    };
 }

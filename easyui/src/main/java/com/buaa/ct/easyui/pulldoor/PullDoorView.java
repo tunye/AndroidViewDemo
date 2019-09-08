@@ -1,21 +1,19 @@
 package com.buaa.ct.easyui.pulldoor;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.BounceInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.Scroller;
 
+import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.R;
 
 /**
@@ -24,10 +22,8 @@ import com.buaa.ct.easyui.R;
 public class PullDoorView extends FrameLayout {
     private Context mContext;
     private Scroller mScroller;
-    private int mScreenHeigh = 0;
+    private int mScreenHeight = 0;
     private int mLastDownY = 0;
-    private int mCurryY;
-    private int mDelY;
     private boolean mCloseFlag = false;
     private ImageView mImgView;
 
@@ -43,7 +39,6 @@ public class PullDoorView extends FrameLayout {
         setupView();
     }
 
-    @SuppressLint("NewApi")
     private void setupView() {
         BounceInterpolator polator = new BounceInterpolator();
         mScroller = new Scroller(mContext, polator);
@@ -53,7 +48,7 @@ public class PullDoorView extends FrameLayout {
                 .getSystemService(Context.WINDOW_SERVICE));
         DisplayMetrics dm = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(dm);
-        mScreenHeigh = dm.heightPixels;
+        mScreenHeight = RuntimeManager.getInstance().getScreenHeight();
 
         // 这里你一定要设置成透明背景,不然会影响你看到底层布局
         this.setBackgroundColor(Color.argb(0, 0, 0, 0));
@@ -89,20 +84,20 @@ public class PullDoorView extends FrameLayout {
                 mLastDownY = (int) event.getY();
                 return true;
             case MotionEvent.ACTION_MOVE:
-                mCurryY = (int) event.getY();
-                mDelY = mCurryY - mLastDownY;
+                int mCurrY = (int) event.getY();
+                int mDelY = mCurrY - mLastDownY;
                 // 只准上滑有效
                 if (mDelY < 0) {
                     scrollTo(0, -mDelY);
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                mCurryY = (int) event.getY();
-                mDelY = mCurryY - mLastDownY;
+                mCurrY = (int) event.getY();
+                mDelY = mCurrY - mLastDownY;
                 if (mDelY < 0) {
-                    if (Math.abs(mDelY) > mScreenHeigh / 2) {
+                    if (Math.abs(mDelY) > mScreenHeight / 2) {
                         // 向上滑动超过半个屏幕高的时候 开启向上消失动画
-                        startBounceAnim(this.getScrollY(), mScreenHeigh, 450);
+                        startBounceAnim(this.getScrollY(), mScreenHeight, 450);
                         mCloseFlag = true;
                     } else {
                         // 向上滑动未超过半个屏幕高的时候 开启向下弹动动画

@@ -1,19 +1,14 @@
 package com.buaa.ct.easyui.boundnumber;
 
-import android.app.Activity;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
 
-public class BoundNumTestActivity extends Activity {
+public class BoundNumTestActivity extends CoreBaseActivity {
 
     private RiseNumberTextView number1, number2, number3, number4, number5;
     private Button start;
@@ -28,34 +23,31 @@ public class BoundNumTestActivity extends Activity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.TRANSPARENT);
-            window.setNavigationBarColor(Color.TRANSPARENT);
-        } else {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        }
-        setContentView(R.layout.bound_num_test);
-        initView();
+    public int getLayoutId() {
+        return R.layout.bound_num_test;
     }
 
-    private void initView() {
-        number1 = (RiseNumberTextView) findViewById(R.id.number1);
-        number2 = (RiseNumberTextView) findViewById(R.id.number2);
-        number3 = (RiseNumberTextView) findViewById(R.id.number3);
-        number4 = (RiseNumberTextView) findViewById(R.id.number4);
-        number5 = (RiseNumberTextView) findViewById(R.id.number5);
-        start = (Button) findViewById(R.id.start);
+    @Override
+    public void initWidget() {
+        super.initWidget();
+        number1 = findViewById(R.id.number1);
+        number2 = findViewById(R.id.number2);
+        number3 = findViewById(R.id.number3);
+        number4 = findViewById(R.id.number4);
+        number5 = findViewById(R.id.number5);
+        start = findViewById(R.id.start);
+    }
 
+    @Override
+    public void setListener() {
+        super.setListener();
         start.setOnClickListener(listener);
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.bound_num_test);
     }
 
     private void initData() {
@@ -67,7 +59,7 @@ public class BoundNumTestActivity extends Activity {
         number5.setOnEnd(new RiseNumberTextView.EndListener() {
             @Override
             public void onEndFinish() {
-                Toast.makeText(BoundNumTestActivity.this, number5.getText() + " is faster!", Toast.LENGTH_SHORT).show();
+                CustomToast.getInstance().showToast(number5.getText() + " is faster!");
             }
         });
     }

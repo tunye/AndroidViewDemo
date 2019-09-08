@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/activity_main"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <com.buaa.ct.easyui.Banner.BannerView
+    <include layout="@layout/toolbar" />
+
+    <com.buaa.ct.easyui.Banner.BannerView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-</FrameLayout>
+        android:layout_height="wrap_content"
+        app:banner_align="RIGHT" />
+</LinearLayout>
