@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -33,17 +34,13 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         initPaint();
     }
 
-    public DividerItemDecoration(int space) {
-        this.space = space;
+    public DividerItemDecoration(int type) {
+        this.space = (int) RuntimeManager.getInstance().getContext().getResources().getDimension(R.dimen.line_thin);
         this.color = RuntimeManager.getInstance().getContext().getResources().getColor(R.color.background_complementary);
+        this.type = type;
         initPaint();
     }
 
-    public DividerItemDecoration(int space, int color) {
-        this.space = space;
-        this.color = color;
-        initPaint();
-    }
 
     public DividerItemDecoration(int space, int color, int type) {
         this.space = space;
@@ -52,9 +49,10 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
         initPaint();
     }
 
-    public DividerItemDecoration(Drawable mDivider) {
+    public DividerItemDecoration(Drawable mDivider, int type) {
         this.space = mDivider.getIntrinsicHeight();
         this.mDivider = mDivider;
+        this.type = type;
     }
 
     private void initPaint() {
@@ -74,8 +72,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view,
-                               RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view,
+                               @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         if (type == TYPE_WITH_BORDER) {
             outRect.set(space, space, space, space);
         } else {
@@ -94,7 +92,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         super.onDraw(c, parent, state);
         if (parent.getLayoutManager() != null) {
             if (parent.getLayoutManager() instanceof LinearLayoutManager && !(parent.getLayoutManager() instanceof GridLayoutManager)) {
@@ -117,9 +115,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private void drawHorizontal(Canvas canvas, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getMeasuredHeight() - parent.getPaddingBottom();
-        final int childSize = parent.getChildCount();
+        int childSize = parent.getChildCount();
         RecyclerView.LayoutParams layoutParams;
-        for (int i = 0; i < childSize - 1; i++) {
+        if (type == TYPE_WITHOUT_BORDER) {
+            childSize--;
+        }
+        for (int i = 0; i < childSize; i++) {
             final View child = parent.getChildAt(i);
             layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
             final int left = child.getRight() + layoutParams.rightMargin;
@@ -138,9 +139,12 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private void drawVertical(Canvas canvas, RecyclerView parent) {
         int left = parent.getPaddingLeft();
         int right = parent.getMeasuredWidth() - parent.getPaddingRight();
-        final int childSize = parent.getChildCount();
+        int childSize = parent.getChildCount();
+        if (type == TYPE_WITHOUT_BORDER) {
+            childSize--;
+        }
         RecyclerView.LayoutParams layoutParams;
-        for (int i = 0; i < childSize - 1; i++) {
+        for (int i = 0; i < childSize; i++) {
             final View child = parent.getChildAt(i);
             layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
             int top = child.getBottom() + layoutParams.bottomMargin;
@@ -308,8 +312,8 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     private boolean isLastRaw(RecyclerView parent, int pos, int spanCount,
                               int childCount) {
         RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        childCount = childCount - childCount % spanCount == 0 ? spanCount : childCount % spanCount;
         if (layoutManager instanceof GridLayoutManager) {
-            childCount = childCount - childCount % spanCount == 0 ? spanCount : childCount % spanCount;
             if (pos >= childCount)// 如果是最后一行，则不需要绘制底部
                 return true;
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -317,7 +321,6 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
                     .getOrientation();
             // StaggeredGridLayoutManager 且纵向滚动
             if (orientation == StaggeredGridLayoutManager.VERTICAL) {
-                childCount = childCount - childCount % spanCount == 0 ? spanCount : childCount % spanCount;
                 // 如果是最后一行，则不需要绘制底部
                 if (pos >= childCount)
                     return true;

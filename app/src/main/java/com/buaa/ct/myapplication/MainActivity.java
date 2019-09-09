@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.buaa.ct.core.view.image.DividerItemDecoration;
 import com.buaa.ct.myapplication.activity.SettingActivity;
 import com.buaa.ct.myapplication.adapter.EnterAdapter;
 import com.buaa.ct.myapplication.sample.base.BaseActivity;
@@ -22,7 +23,6 @@ public class MainActivity extends BaseActivity {
         super.initWidget();
         recyclerView = findViewById(R.id.enter);
         toolbarOper.setText(R.string.setting);
-        setRecyclerViewProperty(recyclerView);
     }
 
     @Override
@@ -40,10 +40,8 @@ public class MainActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         recyclerView.setAdapter(new EnterAdapter(this));
-        LinearLayoutManager layoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
-        if (layoutManager!=null) {
-            layoutManager.setReverseLayout(true);
-        }
+        recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
+        recyclerView.addItemDecoration(new DividerItemDecoration(DividerItemDecoration.TYPE_WITH_BORDER));
         title.setText(R.string.app_name);
         back.setVisibility(View.INVISIBLE);
     }

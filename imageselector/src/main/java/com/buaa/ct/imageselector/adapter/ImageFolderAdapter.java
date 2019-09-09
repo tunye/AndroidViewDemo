@@ -30,7 +30,7 @@ public class ImageFolderAdapter extends CoreRecyclerViewAdapter<LocalMediaFolder
     }
 
     public void setFolders(List<LocalMediaFolder> folders) {
-        addDatas(folders);
+        setDataSet(folders);
     }
 
     @NonNull

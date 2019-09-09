@@ -50,7 +50,7 @@ public class ImageListAdapter extends CoreRecyclerViewAdapter<LocalMedia, CoreRe
     }
 
     public void setSource(List<LocalMedia> images) {
-        addDatas(images);
+        setDataSet(images);
     }
 
     public void bindSelectImages(List<LocalMedia> images) {

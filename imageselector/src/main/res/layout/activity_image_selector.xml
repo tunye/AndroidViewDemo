@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#343434"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <include layout="@layout/toolbar" />
 
-        <include layout="@layout/toolbar" />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/folder_list"
@@ -18,53 +17,76 @@
             android:layout_height="match_parent"
             android:scrollbars="none" />
 
-    </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/image_selctor_bar_height"
-        android:layout_gravity="bottom"
-        android:background="@color/bar_grey_90"
-        android:gravity="center_vertical">
-
         <LinearLayout
-            android:id="@+id/folder_layout"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/folder_float_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="#99000000"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/folder_float_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/image_selctor_bar_height"
+                android:layout_gravity="bottom"
+                android:background="@color/bar_grey_90">
+
+                <LinearLayout
+                    android:id="@+id/folder_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin">
 
 
-            <TextView
-                android:id="@+id/folder_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/all_image"
-                android:textColor="@color/white"
-                android:textSize="@dimen/large_text" />
+                    <TextView
+                        android:id="@+id/folder_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/all_image"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/large_text" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/row_space_big"
-                android:layout_marginTop="4dp"
-                android:src="@drawable/ic_arrow" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/row_space_big"
+                        android:layout_marginTop="4dp"
+                        android:src="@drawable/ic_arrow" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/preview_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/activity_horizontal_margin"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:text="@string/preview"
+                    android:textColor="@color/white_text_selector"
+                    android:textSize="@dimen/large_text" />
+            </FrameLayout>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/preview_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:enabled="false"
-            android:gravity="center"
-            android:paddingStart="@dimen/activity_horizontal_margin"
-            android:paddingEnd="@dimen/activity_horizontal_margin"
-            android:text="@string/preview"
-            android:textColor="@color/white_text_selector"
-            android:textSize="@dimen/large_text" />
     </FrameLayout>
-
-</FrameLayout>
+</LinearLayout>

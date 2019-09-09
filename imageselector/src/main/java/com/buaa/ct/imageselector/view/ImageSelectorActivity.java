@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,15 +20,19 @@ import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.core.listener.OnRecycleViewItemClickListener;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
+import com.buaa.ct.core.util.SpringUtil;
 import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
+import com.buaa.ct.imageselector.adapter.ImageFolderAdapter;
 import com.buaa.ct.imageselector.adapter.ImageListAdapter;
 import com.buaa.ct.imageselector.model.LocalMedia;
 import com.buaa.ct.imageselector.model.LocalMediaFolder;
 import com.buaa.ct.imageselector.provider.LocalMediaLoader;
 import com.buaa.ct.imageselector.utils.FileUtils;
 import com.buaa.ct.imageselector.utils.GridSpacingItemDecoration;
-import com.buaa.ct.imageselector.widget.FolderWindow;
+import com.buaa.ct.imageselector.widget.ItemDivider;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -65,7 +70,9 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     private ImageListAdapter imageAdapter;
     private LinearLayout folderLayout;
     private TextView folderName;
-    private FolderWindow folderWindow;
+    private LinearLayout folderPanel;
+    private RecyclerView folderRecyclerView;
+    private ImageFolderAdapter folderAdapter;
 
     public static void start(Activity activity, int maxSelectNum, int mode, boolean isShow, boolean enablePreview, boolean enableCrop) {
         Intent intent = new Intent(activity, ImageSelectorActivity.class);
@@ -104,7 +111,13 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     @Override
     public void initWidget() {
         super.initWidget();
-        folderWindow = new FolderWindow(this);
+        folderPanel = findViewById(R.id.folder_float_layout);
+        folderRecyclerView = findViewById(R.id.folder_float_list);
+        folderAdapter = new ImageFolderAdapter(context);
+        folderRecyclerView.addItemDecoration(new ItemDivider(context));
+        folderRecyclerView.setLayoutManager(new LinearLayoutManager(context));
+        folderRecyclerView.setAdapter(folderAdapter);
+
         previewText = findViewById(R.id.preview_text);
         folderLayout = findViewById(R.id.folder_layout);
         folderName = findViewById(R.id.folder_name);
@@ -123,12 +136,17 @@ public class ImageSelectorActivity extends CoreBaseActivity {
         folderLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (folderWindow.isShowing()) {
-                    folderWindow.dismiss();
+                if (folderPanel.getAlpha() == 1) {
+                    folderDismiss();
                 } else {
-                    folderWindow.setToolBarHeight(toolBarLayout.getMeasuredHeight());
-                    folderWindow.showAsDropDown(toolBarLayout);
+                    folderShow();
                 }
+            }
+        });
+        folderPanel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                folderDismiss();
             }
         });
         toolbarOper.setOnClickListener(new View.OnClickListener() {
@@ -174,11 +192,11 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 }
             }
         });
-        folderWindow.setOnItemClickListener(new OnRecycleViewItemClickListener() {
+        folderAdapter.setOnItemClickListener(new OnRecycleViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                folderWindow.dismiss();
-                LocalMediaFolder curFolder = folderWindow.getCurFolderInfo(position);
+                folderDismiss();
+                LocalMediaFolder curFolder = folderAdapter.getDatas().get(position);
                 imageAdapter.setSource(curFolder.getImages());
                 folderName.setText(curFolder.getName());
             }
@@ -220,6 +238,12 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        folderDismissWithoutAnim();
+    }
+
+    @Override
     public void onAccreditSucceed(int requestCode) {
         super.onAccreditSucceed(requestCode);
         if (requestCode == PermissionPool.WRITE_EXTERNAL_STORAGE) {
@@ -227,7 +251,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
 
                 @Override
                 public void loadComplete(List<LocalMediaFolder> folders) {
-                    folderWindow.bindFolder(folders);
+                    folderAdapter.setFolders(folders);
                     imageAdapter.setSource(folders.get(0).getImages());
                     MediaListManager.getInstance().setMediaList(folders.get(0).getImages());
                 }
@@ -280,6 +304,58 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 onSelectDone(path);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (folderPanel.getAlpha() == 1) {
+            folderDismiss();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    public void folderDismissWithoutAnim() {
+        folderPanel.setTranslationY(folderPanel.getMeasuredHeight());
+        folderPanel.setAlpha(0);
+    }
+
+    public void folderDismiss() {
+        SpringUtil.getInstance().addListener(new SimpleSpringListener() {
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                super.onSpringUpdate(spring);
+                folderPanel.setTranslationY((float) spring.getCurrentValue());
+                folderPanel.setAlpha(1 - folderPanel.getTranslationY() / folderPanel.getMeasuredHeight());
+            }
+
+            @Override
+            public void onSpringAtRest(Spring spring) {
+                super.onSpringAtRest(spring);
+                SpringUtil.getInstance().destory();
+            }
+        });
+        SpringUtil.getInstance().setCurrentValue(folderPanel.getTranslationY());
+        SpringUtil.getInstance().setEndValue(folderPanel.getMeasuredHeight());
+    }
+
+    public void folderShow() {
+        SpringUtil.getInstance().addListener(new SimpleSpringListener() {
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                super.onSpringUpdate(spring);
+                folderPanel.setTranslationY((float) spring.getCurrentValue());
+                folderPanel.setAlpha(1 - folderPanel.getTranslationY() / folderPanel.getMeasuredHeight());
+            }
+
+            @Override
+            public void onSpringAtRest(Spring spring) {
+                super.onSpringAtRest(spring);
+                SpringUtil.getInstance().destory();
+            }
+        });
+        SpringUtil.getInstance().setCurrentValue(folderPanel.getMeasuredHeight());
+        SpringUtil.getInstance().setEndValue(0);
     }
 
     @Override
