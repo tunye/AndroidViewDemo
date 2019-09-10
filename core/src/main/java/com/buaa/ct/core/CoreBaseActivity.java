@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.buaa.ct.appskin.BaseSkinActivity;
 import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.manager.ScreenShotManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.MaterialRippleLayout;
 import com.buaa.ct.core.view.image.DividerItemDecoration;
@@ -29,6 +30,8 @@ public class CoreBaseActivity extends BaseSkinActivity {
     protected MaterialRippleLayout back;
     protected FrameLayout toolBarLayout;
     protected TextView title, toolbarOper;
+
+    protected ScreenShotManager screenShotManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,14 @@ public class CoreBaseActivity extends BaseSkinActivity {
         initWidget();
         setListener();
         onActivityCreated();
+        screenShotManager = ScreenShotManager.newInstance(this);
+        screenShotManager.setListener(new ScreenShotManager.OnScreenShotListener() {
+            @Override
+            public void onShot(String imagePath) {
+                CoreBaseActivity.this.onShot(imagePath);
+            }
+        });
+        screenShotManager.startListen();
     }
 
     public void beforeSetLayout(Bundle savedInstanceState) {
@@ -99,6 +110,9 @@ public class CoreBaseActivity extends BaseSkinActivity {
         onActivityResumed();
     }
 
+    public void onShot(String imgPath) {
+
+    }
 
     @Override
     protected void onPause() {
@@ -107,6 +121,13 @@ public class CoreBaseActivity extends BaseSkinActivity {
         if (getCurrentFocus() != null) {
             imm.hideSoftInputFromWindow(getCurrentFocus().getApplicationWindowToken(), 0);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        screenShotManager.stopListen();
+        screenShotManager = null;
     }
 
     public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions) {
