@@ -16,16 +16,19 @@
 
 package com.buaa.ct.qrcode.sample;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IntDef;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.util.PermissionPool;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.qrcode.QRCode;
 import com.buaa.ct.qrcode.R;
 import com.buaa.ct.qrcode.ui.CaptureFragment;
@@ -35,7 +38,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 
-public class QRCodeTestActivity extends AppCompatActivity {
+public class QRCodeTestActivity extends CoreBaseActivity {
     /**
      * 扫描跳转Activity RequestCode
      */
@@ -48,19 +51,29 @@ public class QRCodeTestActivity extends AppCompatActivity {
     public Button enter1, enter2, enter3, enter4, enter5;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.qrcode_test);
+    public int getLayoutId() {
+        return R.layout.qrcode_test;
+    }
+
+    @Override
+    public void beforeSetLayout(Bundle savedInstanceState) {
+        super.beforeSetLayout(savedInstanceState);
         CaptureFragment.onCreate(this);
+    }
+
+    @Override
+    public void initWidget() {
+        super.initWidget();
         enter1 = findViewById(R.id.test_enter_1);
         enter2 = findViewById(R.id.test_enter_2);
         enter3 = findViewById(R.id.test_enter_3);
         enter4 = findViewById(R.id.test_enter_4);
         enter5 = findViewById(R.id.test_enter_5);
-        setOnclickListener();
     }
 
-    public void setOnclickListener() {
+    @Override
+    public void setListener() {
+        super.setListener();
         enter1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +104,26 @@ public class QRCodeTestActivity extends AppCompatActivity {
                 startActivityForResult(ScanUtil.getDocumentPickerIntent(ScanUtil.IMAGE), REQUEST_IMAGE);
             }
         });
+    }
+
+    @Override
+    public void onActivityCreated() {
+        super.onActivityCreated();
+        title.setText(R.string.qr_code_test);
+        requestMultiPermission(new int[]{PermissionPool.CAMERA, PermissionPool.WRITE_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
+    }
+
+    @Override
+    public void onAccreditSucceed(int requestCode) {
+        super.onAccreditSucceed(requestCode);
+    }
+
+    @Override
+    public void onAccreditFailure(int requestCode) {
+        super.onAccreditFailure(requestCode);
+        CustomToast.getInstance().showToast("没有给权限，无法使用功能");
+        finish();
     }
 
     private void startScan(@ScanType int type) {

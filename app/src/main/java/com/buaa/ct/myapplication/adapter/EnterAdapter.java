@@ -35,7 +35,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                 RuntimeManager.getInstance().getString(R.string.test_select_image),
                 RuntimeManager.getInstance().getString(R.string.test_skin),
                 RuntimeManager.getInstance().getString(R.string.test_video_cache),
-                "二维码",
+                RuntimeManager.getInstance().getString(R.string.qr_code_test),
                 RuntimeManager.getInstance().getString(R.string.test_comment),
                 RuntimeManager.getInstance().getString(R.string.test_pudding),
                 RuntimeManager.getInstance().getString(R.string.test_copyboard)};
