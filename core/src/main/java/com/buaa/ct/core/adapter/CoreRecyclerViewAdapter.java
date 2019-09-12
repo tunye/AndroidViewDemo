@@ -81,18 +81,18 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull final V holder, int position) {
-        if (onRecycleViewItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClick(holder.getAdapterPosition());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClick(holder.getAdapterPosition());
+                if (onRecycleViewItemClickListener != null) {
                     onRecycleViewItemClickListener.onItemClick(holder.itemView, holder.getAdapterPosition());
                 }
-            });
-        }
+            }
+        });
     }
 
-    public void onItemClick(int pos){
+    public void onItemClick(int pos) {
 
     }
 

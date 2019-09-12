@@ -4,15 +4,23 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Looper;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestBuilder;
+import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.FutureTarget;
+import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.Target;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by 102 on 2016/10/10.
@@ -24,10 +32,16 @@ public class ImageUtil {
     }
 
     public static void loadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
+        loadImage(imageUrl, imageView, requestOptions, null);
+    }
+
+    public static void loadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, final OnBitmapLoaded onBitmapLoaded) {
         if (imageView == null) {
             return;
-        } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
-            imageView.setImageResource(requestOptions.getErrorId());
+        } else if (TextUtils.isEmpty(imageUrl)) {
+            if (requestOptions != null) {
+                imageView.setImageResource(requestOptions.getErrorId());
+            }
             return;
         }
         Context context;
@@ -36,19 +50,36 @@ public class ImageUtil {
         } else {
             context = RuntimeManager.getInstance().getContext();
         }
-        RequestBuilder<Bitmap> requestBuilder = Glide.with(context).asBitmap().load(imageUrl);
+        RequestBuilder<Bitmap> requestBuilder = Glide.with(context).asBitmap().addListener(new RequestListener<Bitmap>() {
+            @Override
+            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                if (onBitmapLoaded != null) {
+                    onBitmapLoaded.onImageLoadFailed();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
+                if (onBitmapLoaded != null) {
+                    onBitmapLoaded.onImageLoaded(resource);
+                }
+                return false;
+            }
+        });
         if (requestOptions != null) {
             requestBuilder = requestBuilder.apply(requestOptions);
         }
-
-        requestBuilder.into(imageView);
+        requestBuilder.load(imageUrl).into(imageView);
     }
 
     public static void preLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
         if (imageView == null) {
             return;
-        } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
-            imageView.setImageResource(requestOptions.getErrorId());
+        } else if (TextUtils.isEmpty(imageUrl)) {
+            if (requestOptions != null) {
+                imageView.setImageResource(requestOptions.getErrorId());
+            }
             return;
         }
         Context context;
@@ -65,11 +96,13 @@ public class ImageUtil {
         requestBuilder.preload();
     }
 
-    public static void downLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions) {
+    public static void downLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, OnBitmapLoaded onBitmapLoaded) {
         if (imageView == null) {
             return;
-        } else if (TextUtils.isEmpty(imageUrl) && requestOptions != null) {
-            imageView.setImageResource(requestOptions.getErrorId());
+        } else if (TextUtils.isEmpty(imageUrl)) {
+            if (requestOptions != null) {
+                imageView.setImageResource(requestOptions.getErrorId());
+            }
             return;
         }
         Context context;
@@ -83,7 +116,12 @@ public class ImageUtil {
             requestBuilder = requestBuilder.apply(requestOptions);
         }
 
-        requestBuilder.submit();
+        FutureTarget<Bitmap> target = requestBuilder.submit();
+        try {
+            onBitmapLoaded.onImageLoaded(target.get());
+        } catch (ExecutionException | InterruptedException e) {
+            onBitmapLoaded.onImageLoadFailed();
+        }
     }
 
 
@@ -153,5 +191,11 @@ public class ImageUtil {
         requestOptions = requestOptions.placeholder(placeholderDrawableId);
         requestOptions = requestOptions.error(placeholderDrawableId);
         return requestOptions;
+    }
+
+    public interface OnBitmapLoaded {
+        void onImageLoaded(Bitmap bitmap);
+
+        void onImageLoadFailed();
     }
 }

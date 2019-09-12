@@ -23,8 +23,8 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
     protected int curPage;
     protected boolean isLastPage = false;
 
-    private RecyclerView owner;
-    private CoreRecyclerViewAdapter ownerAdapter;
+    protected RecyclerView owner;
+    protected CoreRecyclerViewAdapter<T, ?> ownerAdapter;
 
     @Override
     public int getLayoutId() {
@@ -44,11 +44,9 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
         toolBarLayout.setOnTouchListener(new IOnDoubleClick(this, context.getString(R.string.list_double)));
     }
 
-    public void setRecyclerViewProperty(RecyclerView recyclerView, CoreRecyclerViewAdapter adapter) {
-        super.setRecyclerViewProperty(recyclerView);
-        owner = recyclerView;
-        ownerAdapter = adapter;
-        owner.setAdapter(adapter);
+    public void assembleRecyclerView() {
+        setRecyclerViewProperty(owner);
+        owner.setAdapter(ownerAdapter);
     }
 
 
@@ -108,7 +106,17 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
                 CustomToast.getInstance().showToast(getLoadAllToastResource());
             }
         } else {
+            handleBeforeAddAdapter(netData);
             ownerAdapter.addDatas(netData);
+            handleAfterAddAdapter(netData);
         }
+    }
+
+    public void handleBeforeAddAdapter(List<T> netData) {
+
+    }
+
+    public void handleAfterAddAdapter(List<T> netData) {
+
     }
 }

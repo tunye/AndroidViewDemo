@@ -40,27 +40,21 @@ public class ScreenShotManager {
      * 已回调过的路径
      */
     private final List<String> sHasCallbackPaths = new ArrayList<String>();
-
-    private Context mContext;
-
-    private OnScreenShotListener mListener;
-
-    private long mStartListenTime;
-
-    /**
-     * 内部存储器内容观察者
-     */
-    private MediaContentObserver mInternalObserver;
-
-    /**
-     * 外部存储器内容观察者
-     */
-    private MediaContentObserver mExternalObserver;
-
     /**
      * 运行在 UI 线程的 Handler, 用于运行监听器回调
      */
     private final Handler mUiHandler = new Handler(Looper.getMainLooper());
+    private Context mContext;
+    private OnScreenShotListener mListener;
+    private long mStartListenTime;
+    /**
+     * 内部存储器内容观察者
+     */
+    private MediaContentObserver mInternalObserver;
+    /**
+     * 外部存储器内容观察者
+     */
+    private MediaContentObserver mExternalObserver;
 
     private ScreenShotManager(Context context) {
         if (context == null) {
@@ -222,8 +216,8 @@ public class ScreenShotManager {
          * 判断依据二: 尺寸判断
          */
         // 如果图片尺寸超出屏幕, 则认为当前没有截屏
-        if (!((width <= RuntimeManager.getInstance().getWindowWidth() && height <=  RuntimeManager.getInstance().getWindowHeight())
-                || (height <= RuntimeManager.getInstance().getWindowWidth() && width <=RuntimeManager.getInstance().getWindowHeight()))) {
+        if (!((width <= RuntimeManager.getInstance().getWindowWidth() && height <= RuntimeManager.getInstance().getWindowHeight())
+                || (height <= RuntimeManager.getInstance().getWindowWidth() && width <= RuntimeManager.getInstance().getWindowHeight()))) {
             return false;
         }
 

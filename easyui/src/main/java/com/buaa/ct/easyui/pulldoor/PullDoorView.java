@@ -22,7 +22,6 @@ import com.buaa.ct.easyui.R;
 public class PullDoorView extends FrameLayout {
     private Context mContext;
     private Scroller mScroller;
-    private int mScreenHeight = 0;
     private int mLastDownY = 0;
     private boolean mCloseFlag = false;
     private ImageView mImgView;
@@ -42,14 +41,6 @@ public class PullDoorView extends FrameLayout {
     private void setupView() {
         BounceInterpolator polator = new BounceInterpolator();
         mScroller = new Scroller(mContext, polator);
-
-        // 获取屏幕分辨率
-        WindowManager wm = (WindowManager) (mContext
-                .getSystemService(Context.WINDOW_SERVICE));
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        mScreenHeight = RuntimeManager.getInstance().getScreenHeight();
-
         // 这里你一定要设置成透明背景,不然会影响你看到底层布局
         this.setBackgroundColor(Color.argb(0, 0, 0, 0));
         mImgView = new ImageView(mContext);
@@ -95,9 +86,9 @@ public class PullDoorView extends FrameLayout {
                 mCurrY = (int) event.getY();
                 mDelY = mCurrY - mLastDownY;
                 if (mDelY < 0) {
-                    if (Math.abs(mDelY) > mScreenHeight / 2) {
+                    if (Math.abs(mDelY) > RuntimeManager.getInstance().getScreenHeight() / 2) {
                         // 向上滑动超过半个屏幕高的时候 开启向上消失动画
-                        startBounceAnim(this.getScrollY(), mScreenHeight, 450);
+                        startBounceAnim(this.getScrollY(), RuntimeManager.getInstance().getScreenHeight(), 450);
                         mCloseFlag = true;
                     } else {
                         // 向上滑动未超过半个屏幕高的时候 开启向下弹动动画

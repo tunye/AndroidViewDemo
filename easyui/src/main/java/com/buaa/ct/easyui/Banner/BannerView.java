@@ -24,6 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
@@ -210,7 +211,7 @@ public class BannerView extends FrameLayout {
 
         @Override
         public void run() {
-            BannerView.this.post(new Runnable() {
+            ThreadUtils.postOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     bannerViewPager.setCurrentItem(currentItem + 1, true);

@@ -14,10 +14,6 @@ public class SpringUtil {
         mSpring.setOvershootClampingEnabled(true);
     }
 
-    private static class InstanceHelper {
-        private static SpringUtil instance = new SpringUtil();
-    }
-
     public static SpringUtil getInstance() {
         return InstanceHelper.instance;
     }
@@ -34,15 +30,19 @@ public class SpringUtil {
         mSpring.removeAllListeners();
     }
 
-    public void setCurrentValue(double value) {
-        mSpring.setCurrentValue(value);
-    }
-
     public void setEndValue(double value) {
         mSpring.setEndValue(value);
     }
 
     public double getCurrentValue() {
         return mSpring.getCurrentValue();
+    }
+
+    public void setCurrentValue(double value) {
+        mSpring.setCurrentValue(value);
+    }
+
+    private static class InstanceHelper {
+        private static SpringUtil instance = new SpringUtil();
     }
 }

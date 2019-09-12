@@ -148,6 +148,10 @@ public class CoreBaseActivity extends BaseSkinActivity {
             return;
         }
 
+        onRequestPermissionDenied(dialogContent, codes, permissions);
+    }
+
+    public void onRequestPermissionDenied(String dialogContent, final int[] codes, final String[] permissions) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.permission);
         builder.setMessage(dialogContent);

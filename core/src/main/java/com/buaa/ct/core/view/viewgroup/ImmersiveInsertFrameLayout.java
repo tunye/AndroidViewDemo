@@ -29,6 +29,14 @@ public class ImmersiveInsertFrameLayout extends FrameLayout {
         setFitsSystemWindows(true);
     }
 
+    public static void setMargins(View v, int l, int t, int r, int b) {
+        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
+            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
+            p.setMargins(l, t, r, b);
+            v.requestLayout();
+        }
+    }
+
     protected final boolean fitSystemWindows(Rect rect) {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
             rect.left = 0;
@@ -61,14 +69,6 @@ public class ImmersiveInsertFrameLayout extends FrameLayout {
                 statusBarHeight = RuntimeManager.getInstance().getWindowHeight() - outRect.height();
             }
             setMargins(this, 0, statusBarHeight, 0, 0);
-        }
-    }
-
-    public static void setMargins(View v, int l, int t, int r, int b) {
-        if (v.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) v.getLayoutParams();
-            p.setMargins(l, t, r, b);
-            v.requestLayout();
         }
     }
 }

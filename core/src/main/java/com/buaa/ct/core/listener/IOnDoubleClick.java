@@ -13,6 +13,7 @@ public class IOnDoubleClick implements View.OnTouchListener {
     private long firClick, secClick;
     private String failMsg;
     private IOnClickListener onClickListener;
+    private int DOUBLE_INTERVAL = 800;
 
     public IOnDoubleClick(IOnClickListener onClickListener, String msg) {
         this.onClickListener = onClickListener;
@@ -35,10 +36,10 @@ public class IOnDoubleClick implements View.OnTouchListener {
                             CustomToast.getInstance().showToast(failMsg);
                         }
                     }
-                }, 1000);
+                }, DOUBLE_INTERVAL);
             } else if (count == 2) {
                 secClick = System.currentTimeMillis();
-                if (secClick - firClick < 790) {
+                if (secClick - firClick < DOUBLE_INTERVAL) {
                     onClickListener.onClick(v, "click");
                 }
                 count = 0;
