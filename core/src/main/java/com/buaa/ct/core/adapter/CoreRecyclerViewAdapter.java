@@ -17,18 +17,14 @@ import java.util.List;
  */
 public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapter.MyViewHolder> extends RecyclerView.Adapter<V> {
     protected Context context;
-    private OnRecycleViewItemClickListener onRecycleViewItemClickListener;
+    protected OnRecycleViewItemClickListener onRecycleViewItemClickListener;
 
-    private List<T> datas;
-    private BaseEntityOp<T> baseEntityOp;
+    protected List<T> datas;
+    protected BaseEntityOp<T> baseEntityOp;
 
     public CoreRecyclerViewAdapter(Context context) {
         this.context = context;
         datas = new ArrayList<>();
-    }
-
-    public void setBaseEntityOp(BaseEntityOp<T> baseEntityOp) {
-        this.baseEntityOp = baseEntityOp;
     }
 
     public void setOnItemClickListener(OnRecycleViewItemClickListener onItemClickListener) {
@@ -63,7 +59,7 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
     public int addDatas(List<T> t) {
         int size = datas.size();
         datas.addAll(t);
-        notifyItemInserted(size - 1);
+        notifyItemRangeInserted(size, t.size());
         if (baseEntityOp != null) {
             baseEntityOp.saveData(t);
         }

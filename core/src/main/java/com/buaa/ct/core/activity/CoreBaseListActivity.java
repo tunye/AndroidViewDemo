@@ -90,11 +90,6 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
         return -1;
     }
 
-    public @StringRes
-    int getLoadAllToastResource() {
-        return -1;
-    }
-
     public void getNetData() {
 
     }
@@ -102,12 +97,13 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
     public void onNetDataReturnSuccess(List<T> netData) {
         swipeRefreshLayout.setRefreshing(false);
         if (isLastPage) {
-            if (getLoadAllToastResource() != -1) {
-                CustomToast.getInstance().showToast(getLoadAllToastResource());
+            if (getToastResource() != -1) {
+                CustomToast.getInstance().showToast(getToastResource());
             }
         } else {
             handleBeforeAddAdapter(netData);
             ownerAdapter.addDatas(netData);
+            owner.scrollToPosition(ownerAdapter.getItemCount() - netData.size());
             handleAfterAddAdapter(netData);
         }
     }
