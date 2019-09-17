@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.buaa.ct.core.bean.BaseEntityOp;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.listener.OnRecycleViewItemClickListener;
 import com.buaa.ct.core.view.recyclerview.RecycleViewHolder;
 
@@ -77,9 +78,9 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull final V holder, int position) {
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 onItemClick(holder.getAdapterPosition());
                 if (onRecycleViewItemClickListener != null) {
                     onRecycleViewItemClickListener.onItemClick(holder.itemView, holder.getAdapterPosition());

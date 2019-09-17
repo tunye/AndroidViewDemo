@@ -43,8 +43,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/text_color"
-                android:text="@string/multiple" />
+                android:text="@string/multiple"
+                android:textColor="@color/text_color" />
 
             <RadioButton
                 android:id="@+id/mode_single"
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/row_space_big"
                 android:layout_weight="1.5"
-                android:textColor="@color/text_color"
-                android:text="@string/single" />
+                android:text="@string/single"
+                android:textColor="@color/text_color" />
         </RadioGroup>
 
         <TextView
@@ -76,9 +76,9 @@
                 android:id="@+id/camera_yes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color"
                 android:layout_weight="1"
-                android:text="@string/yes" />
+                android:text="@string/yes"
+                android:textColor="@color/text_color" />
 
             <RadioButton
                 android:id="@+id/camera_no"
@@ -86,8 +86,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/row_space_big"
                 android:layout_weight="1.5"
-                android:textColor="@color/text_color"
-                android:text="@string/no" />
+                android:text="@string/no"
+                android:textColor="@color/text_color" />
         </RadioGroup>
 
         <TextView
@@ -111,8 +111,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/text_color"
-                android:text="@string/enable" />
+                android:text="@string/enable"
+                android:textColor="@color/text_color" />
 
             <RadioButton
                 android:id="@+id/preview_disable"
@@ -120,8 +120,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/row_space_big"
                 android:layout_weight="1.5"
-                android:textColor="@color/text_color"
-                android:text="@string/disable" />
+                android:text="@string/disable"
+                android:textColor="@color/text_color" />
         </RadioGroup>
 
         <TextView
@@ -146,17 +146,17 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:enabled="false"
-                android:textColor="@color/text_color"
-                android:text="@string/enable" />
+                android:text="@string/enable"
+                android:textColor="@color/text_color" />
 
             <RadioButton
                 android:id="@+id/crop_disable"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/row_space_big"
-                android:textColor="@color/text_color"
                 android:layout_weight="1.5"
-                android:text="@string/disable" />
+                android:text="@string/disable"
+                android:textColor="@color/text_color" />
         </RadioGroup>
 
         <Button

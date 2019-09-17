@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.SpringUtil;
@@ -95,9 +96,9 @@ public class ImagePreviewActivity extends CoreBaseActivity {
             public void onPageScrollStateChanged(int state) {
             }
         });
-        checkboxSelect.setOnClickListener(new View.OnClickListener() {
+        checkboxSelect.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 boolean isChecked = checkboxSelect.isChecked();
                 if (selectImages.size() >= maxSelectNum && isChecked) {
                     CustomToast.getInstance().showToast(getString(R.string.message_max_num, maxSelectNum), Toast.LENGTH_LONG);
@@ -120,9 +121,9 @@ public class ImagePreviewActivity extends CoreBaseActivity {
                 onSelectNumChange();
             }
         });
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 if (selectImages.isEmpty()) {
                     CustomToast.getInstance().showToast(R.string.message_min_num);
                 } else {

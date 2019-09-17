@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
@@ -55,9 +56,9 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
         viewHolder.name.setText(getDatas().get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
         viewHolder.root.setTag(i);
-        viewHolder.root.setOnClickListener(new View.OnClickListener() {
+        viewHolder.root.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 switch ((int) v.getTag()) {
                     case 0:
                         context.startActivity(new Intent(context, FlexibleTestActivity.class));

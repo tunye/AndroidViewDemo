@@ -29,6 +29,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.pudding.R;
 import com.buaa.ct.pudding.util.PuddingBuilder;
 import com.buaa.ct.pudding.util.ScreenUtil;
@@ -147,9 +148,9 @@ public class PuddingView extends FrameLayout {
         if (!TextUtils.isEmpty(puddingBuilder.getPositiveText())) {
             Button button = new AppCompatButton(new ContextThemeWrapper(getContext(),puddingBuilder.getPositiveStyle()), null, puddingBuilder.getPositiveStyle());
             button.setText(puddingBuilder.getPositiveText());
-            button.setOnClickListener(new OnClickListener() {
+            button.setOnClickListener(new INoDoubleClick() {
                 @Override
-                public void onClick(View v) {
+                public void activeClick(View v) {
                     hide(true);
                     puddingBuilder.getPositiveListener().onClick(v);
                 }
@@ -163,9 +164,9 @@ public class PuddingView extends FrameLayout {
         if (!TextUtils.isEmpty(puddingBuilder.getNegativeText())) {
             Button button = new AppCompatButton(new ContextThemeWrapper(getContext(),puddingBuilder.getNegativeStyle()), null, puddingBuilder.getNegativeStyle());
             button.setText(puddingBuilder.getNegativeText());
-            button.setOnClickListener(new OnClickListener() {
+            button.setOnClickListener(new INoDoubleClick() {
                 @Override
-                public void onClick(View v) {
+                public void activeClick(View v) {
                     hide(false);
                     puddingBuilder.getNegativeListener().onClick(v);
                 }
@@ -207,9 +208,9 @@ public class PuddingView extends FrameLayout {
                 }
             }, DISPLAY_TIME);
         }
-        root.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        root.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 hide(false);
             }
         });

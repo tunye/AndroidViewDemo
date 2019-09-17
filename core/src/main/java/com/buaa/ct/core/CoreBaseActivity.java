@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buaa.ct.appskin.BaseSkinActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.manager.ScreenShotManager;
@@ -85,10 +86,10 @@ public class CoreBaseActivity extends BaseSkinActivity {
     }
 
     public void setListener() {
-        back.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void activeClick(View v) {
+                onBackPressed();
             }
         });
     }

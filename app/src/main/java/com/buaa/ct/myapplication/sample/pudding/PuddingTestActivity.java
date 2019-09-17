@@ -7,11 +7,11 @@ package com.buaa.ct.myapplication.sample.pudding;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Toast;
 
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.view.CustomToast;
@@ -117,15 +117,15 @@ public class PuddingTestActivity extends BaseActivity {
                 .setBackgroundColor(GetAppColor.getInstance().getAppColorAccent())
                 .setEnableIconAnimation()
                 .setEnableInfiniteDuration()
-                .setPositive("确定", R.style.PuddingButton, new View.OnClickListener() {
+                .setPositive("确定", R.style.PuddingButton, new INoDoubleClick() {
                     @Override
-                    public void onClick(View v) {
+                    public void activeClick(View v) {
                         CustomToast.getInstance().showToast("确定");
                     }
                 })
-                .setNegative("取消", R.style.PuddingButton, new View.OnClickListener() {
+                .setNegative("取消", R.style.PuddingButton, new INoDoubleClick() {
                     @Override
-                    public void onClick(View v) {
+                    public void activeClick(View v) {
                         CustomToast.getInstance().showToast("取消");
                     }
                 })

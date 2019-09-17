@@ -67,7 +67,7 @@
             android:name="com.buaa.ct.myapplication.sample.copyboard.ListenClipboardService"
             android:enabled="true"
             android:exported="true"
-            android:process=":process"/>
+            android:process=":process" />
         <receiver
             android:name="com.buaa.ct.myapplication.sample.copyboard.BootCompletedReceiver"
             android:enabled="true"

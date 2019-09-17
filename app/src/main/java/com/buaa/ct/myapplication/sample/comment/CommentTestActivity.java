@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.buaa.ct.comment.CommentView;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.sample.base.BaseActivity;
 
@@ -59,15 +60,15 @@ public class CommentTestActivity extends BaseActivity {
 
             }
         });
-        textView.setOnClickListener(new View.OnClickListener() {
+        textView.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 startActivity(new Intent(CommentTestActivity.this, EmojiTestActivity.class));
             }
         });
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 startActivity(new Intent(CommentTestActivity.this, EmojiTestActivity.class));
             }
         });

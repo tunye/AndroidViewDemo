@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.buaa.ct.appskin.SkinManager;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.SPUtils;
 import com.buaa.ct.myapplication.ChangePropery;
@@ -35,15 +36,15 @@ public class SettingActivity extends BaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        findViewById(R.id.setting_app_color).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setting_app_color).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 startActivity(new Intent(context, SkinActivity.class));
             }
         });
-        findViewById(R.id.setting_app_language).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setting_app_language).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 int cur = getCurLanguage();
                 if (cur == 0) {
                     setCurLanguage(1);
@@ -55,9 +56,9 @@ public class SettingActivity extends BaseActivity {
                 sendBroadcast(intent);
             }
         });
-        findViewById(R.id.setting_app_night).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.setting_app_night).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 int cur = getCurNight();
                 if (cur == 0) {
                     setCurNight(1);

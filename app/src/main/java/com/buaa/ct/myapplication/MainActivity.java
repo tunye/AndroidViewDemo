@@ -5,6 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.view.image.DividerItemDecoration;
 import com.buaa.ct.myapplication.activity.SettingActivity;
 import com.buaa.ct.myapplication.adapter.EnterAdapter;
@@ -27,9 +28,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 startActivity(new Intent(context, SettingActivity.class));
             }
         });
@@ -39,7 +40,7 @@ public class MainActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         recyclerView.setAdapter(new EnterAdapter(this));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,true));
+        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
         recyclerView.addItemDecoration(new DividerItemDecoration(DividerItemDecoration.TYPE_WITH_BORDER));
         title.setText(R.string.app_name);
         back.setVisibility(View.INVISIBLE);

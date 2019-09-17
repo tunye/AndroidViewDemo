@@ -27,6 +27,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.qrcode.QRCode;
@@ -74,33 +75,33 @@ public class QRCodeTestActivity extends CoreBaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        enter1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        enter1.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 startScan(DEFAULT);
             }
         });
-        enter2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        enter2.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 startScan(DEFAULT_CUSTOM);
             }
         });
-        enter3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        enter3.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 startActivity(new Intent(QRCodeTestActivity.this, QRCodeProduceActivity.class));
             }
         });
-        enter4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        enter4.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 startScan(REMOTE);
             }
         });
-        enter5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        enter5.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 startActivityForResult(ScanUtil.getDocumentPickerIntent(ScanUtil.IMAGE), REQUEST_IMAGE);
             }
         });

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.easyui.R;
 import com.buaa.ct.easyui.share.listener.SimpleAnimationListener;
@@ -43,9 +44,9 @@ public class ShareDialogTestActivity extends CoreBaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View view) {
+            public void activeClick(View v) {
                 if (!shown) {
                     shown = true;
                     YoYo.with(Techniques.SlideInUp).interpolate(new AccelerateDecelerateInterpolator()).duration(200).withListener(new SimpleAnimationListener() {
@@ -85,9 +86,9 @@ public class ShareDialogTestActivity extends CoreBaseActivity {
                 }
             }
         });
-        cancel.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 fadeoutShareDialog();
             }
         });

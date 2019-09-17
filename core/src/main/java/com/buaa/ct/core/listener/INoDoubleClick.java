@@ -2,7 +2,7 @@ package com.buaa.ct.core.listener;
 
 import android.view.View;
 
-public class INoDoubleClick implements View.OnClickListener {
+public abstract class INoDoubleClick implements View.OnClickListener {
     public static long lastClickTime;
 
     public static boolean isFastDoubleClick() {
@@ -20,6 +20,8 @@ public class INoDoubleClick implements View.OnClickListener {
         if (isFastDoubleClick()) {
             return;
         }
-        // do real click
+        activeClick(v);
     }
+
+    public abstract void activeClick(View v);
 }

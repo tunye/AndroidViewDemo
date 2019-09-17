@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.core.view.CustomToast;
@@ -256,10 +257,10 @@ public class BannerView extends FrameLayout {
             ImageView iv = bannerImages.get(realPos);
             container.addView(iv);
             // 在这个方法里面设置图片的点击事件
-            iv.setOnClickListener(new OnClickListener() {
+            iv.setOnClickListener(new INoDoubleClick() {
 
                 @Override
-                public void onClick(View v) {
+                public void activeClick(View v) {
                     CustomToast.getInstance().showToast("第" + realPos + "张图");
                 }
             });

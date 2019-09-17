@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
@@ -12,10 +13,9 @@ public class BoundNumTestActivity extends CoreBaseActivity {
 
     private RiseNumberTextView number1, number2, number3, number4, number5;
     private Button start;
-    View.OnClickListener listener = new View.OnClickListener() {
-
+    View.OnClickListener listener = new INoDoubleClick() {
         @Override
-        public void onClick(View v) {
+        public void activeClick(View v) {
             if (v == start) {
                 initData();
             }

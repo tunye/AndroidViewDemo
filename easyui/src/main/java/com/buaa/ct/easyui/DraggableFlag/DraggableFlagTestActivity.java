@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.easyui.R;
 
 public class DraggableFlagTestActivity extends AppCompatActivity implements OnDraggableFlagViewListener {
@@ -18,12 +19,12 @@ public class DraggableFlagTestActivity extends AppCompatActivity implements OnDr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.draggable_flag_main);
         Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "一键退朝已清除", Snackbar.LENGTH_SHORT).setAction("恢复一键退朝", new View.OnClickListener() {
+            public void activeClick(View v) {
+                Snackbar.make(v, "一键退朝已清除", Snackbar.LENGTH_SHORT).setAction("恢复一键退朝", new INoDoubleClick() {
                     @Override
-                    public void onClick(View v) {
+                    public void activeClick(View v) {
                         buttonDraggableFlagView.reset();
                         draggableFlagView.reset();
                     }

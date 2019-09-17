@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
@@ -49,9 +50,9 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
         viewHolder.name.setText(getDatas().get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
         viewHolder.root.setTag(i);
-        viewHolder.root.setOnClickListener(new View.OnClickListener() {
+        viewHolder.root.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 switch ((int) v.getTag()) {
                     case 0:
                         context.startActivity(new Intent(context, BannerTestActivity.class));

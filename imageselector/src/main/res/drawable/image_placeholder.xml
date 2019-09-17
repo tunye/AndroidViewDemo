@@ -4,13 +4,13 @@
         <shape>
             <size
                 android:width="100dp"
-                android:height="100dp"/>
-            <solid android:color="@color/text_color"/>
+                android:height="100dp" />
+            <solid android:color="@color/text_color" />
         </shape>
     </item>
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_placeholder"/>
+            android:src="@drawable/ic_placeholder" />
     </item>
 </layer-list>

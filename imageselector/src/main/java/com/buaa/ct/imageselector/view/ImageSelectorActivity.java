@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.listener.OnRecycleViewItemClickListener;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
@@ -135,9 +136,9 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        folderLayout.setOnClickListener(new View.OnClickListener() {
+        folderLayout.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 if (folderPanel.getAlpha() == 1) {
                     folderDismiss();
                 } else {
@@ -145,15 +146,15 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 }
             }
         });
-        folderPanel.setOnClickListener(new View.OnClickListener() {
+        folderPanel.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 folderDismiss();
             }
         });
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 if (selectMode == MODE_MULTIPLE && imageAdapter.getSelectedImages().isEmpty()) {
                     CustomToast.getInstance().showToast(R.string.message_min_num);
                 } else {
@@ -161,9 +162,9 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 }
             }
         });
-        previewText.setOnClickListener(new View.OnClickListener() {
+        previewText.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 startPreview(0);
             }
         });

@@ -9,13 +9,11 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.buaa.ct.core.CoreBaseActivity;
-import com.buaa.ct.imageselector.MediaListManager;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.view.ImageSelectorActivity;
-import com.buaa.ct.imageselector.view.OnlyPreviewActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ImageSelectorTestActivity extends CoreBaseActivity {
     private ImageButton minus;
@@ -73,23 +71,23 @@ public class ImageSelectorTestActivity extends CoreBaseActivity {
                 }
             }
         });
-        minus.setOnClickListener(new View.OnClickListener() {
+        minus.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 maxSelectNum--;
                 selectNumText.setText(maxSelectNum + "");
             }
         });
-        plus.setOnClickListener(new View.OnClickListener() {
+        plus.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 maxSelectNum++;
                 selectNumText.setText(maxSelectNum + "");
             }
         });
-        selectPicture.setOnClickListener(new View.OnClickListener() {
+        selectPicture.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 int mode = selectMode.getCheckedRadioButtonId() == R.id.mode_multiple ? ImageSelectorActivity.MODE_MULTIPLE : ImageSelectorActivity.MODE_SINGLE;
                 boolean isShow = showCamera.getCheckedRadioButtonId() == R.id.camera_yes ? true : false;
                 boolean isPreview = enablePreview.getCheckedRadioButtonId() == R.id.preview_enable ? true : false;

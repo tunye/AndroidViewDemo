@@ -48,12 +48,15 @@ public class SkinAttrType implements ISkinAttrType {
             }
         }
     };
-
-    private String attrType;
     private static SkinAttrType[] types = new SkinAttrType[]{BACKGROUD, COLOR, PROGRESS, SRC};
+    private String attrType;
 
     SkinAttrType(String attrType) {
         this.attrType = attrType;
+    }
+
+    public static SkinAttrType[] values() {
+        return types;
     }
 
     public String getAttrType() {
@@ -62,10 +65,6 @@ public class SkinAttrType implements ISkinAttrType {
 
     ResourceManager getResourceManager() {
         return SkinManager.getInstance().getResourceManager();
-    }
-
-    public static SkinAttrType[] values() {
-        return types;
     }
 
     @Override

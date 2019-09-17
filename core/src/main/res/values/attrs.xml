@@ -28,7 +28,7 @@
         <attr name="border_color" format="color" />
         <attr name="cover_border_width" format="dimension" />
         <attr name="cover_border_color" format="color" />
-        <attr name="round_background" format="boolean"/>
+        <attr name="round_background" format="boolean" />
         <attr name="android:scaleType" />
     </declare-styleable>
 

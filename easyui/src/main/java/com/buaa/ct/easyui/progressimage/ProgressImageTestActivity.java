@@ -5,6 +5,7 @@ import android.os.Message;
 import android.view.View;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
@@ -47,23 +48,23 @@ public class ProgressImageTestActivity extends CoreBaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        findViewById(R.id.stop).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.stop).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 handler.removeMessages(1);
             }
         });
-        findViewById(R.id.reset).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.reset).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 progressImageView.reset();
                 progress = 0;
                 handler.removeMessages(1);
             }
         });
-        findViewById(R.id.start).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.start).setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 handler.sendEmptyMessage(0);
             }
         });

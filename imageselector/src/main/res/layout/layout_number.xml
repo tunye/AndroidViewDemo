@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:paddingTop="@dimen/row_space_big"
-              android:paddingBottom="@dimen/row_space_big">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/row_space_big"
+    android:paddingBottom="@dimen/row_space_big">
 
     <ImageButton
         android:id="@+id/minus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_minus"/>
+        android:src="@drawable/ic_minus" />
 
     <EditText
         android:id="@+id/select_num"
@@ -21,11 +21,11 @@
         android:focusable="false"
         android:gravity="center"
         android:inputType="number"
-        android:text="9"/>
+        android:text="9" />
 
     <ImageButton
         android:id="@+id/plus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus"/>
+        android:src="@drawable/ic_plus" />
 </LinearLayout>

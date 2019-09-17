@@ -14,6 +14,7 @@ import android.support.v4.content.FileProvider;
 import android.view.View;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.utils.CropUtil;
@@ -72,9 +73,9 @@ public class ImageCropActivity extends CoreBaseActivity {
     @Override
     public void setListener() {
         super.setListener();
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 ProgressDialog.show(
                         ImageCropActivity.this, null, getString(R.string.save_ing), true, false);
 

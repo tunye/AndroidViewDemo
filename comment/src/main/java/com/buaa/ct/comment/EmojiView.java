@@ -14,6 +14,7 @@ import com.buaa.ct.comment.emoji.EmojiIcon;
 import com.buaa.ct.comment.utils.CreateEmojiViewPagerData;
 import com.buaa.ct.comment.viewpage.CirclePageIndicator;
 import com.buaa.ct.comment.viewpager.EmojiViewPagerAdapter;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
 
@@ -143,9 +144,9 @@ public class EmojiView extends LinearLayout implements View.OnClickListener, Emo
 
     public void setmEtText(EditText mEtText) {
         this.mEtText = mEtText;
-        mEtText.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mEtText.setOnClickListener(new INoDoubleClick() {
+                @Override
+                public void activeClick(View v) {
                 if (mLyEmoji.isShown()) {
                     hideEmojiPanel();
                 }

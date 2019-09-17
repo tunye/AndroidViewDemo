@@ -7,10 +7,6 @@ import java.util.List;
 public class MediaListManager {
     private List<LocalMedia> mediaList;
 
-    private static class InstanceHelper {
-        private static MediaListManager instance = new MediaListManager();
-    }
-
     public static MediaListManager getInstance() {
         return InstanceHelper.instance;
     }
@@ -21,5 +17,9 @@ public class MediaListManager {
 
     public void setMediaList(List<LocalMedia> mediaList) {
         this.mediaList = mediaList;
+    }
+
+    private static class InstanceHelper {
+        private static MediaListManager instance = new MediaListManager();
     }
 }

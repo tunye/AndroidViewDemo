@@ -1,12 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.buaa.ct.imageselector">
+    package="com.buaa.ct.imageselector">
 
     <application>
-        <activity android:name=".sample.ImageSelectorTestActivity"/>
-        <activity android:name=".sample.SelectResultActivity"/>
-        <activity android:name=".view.ImageCropActivity"/>
-        <activity android:name=".view.ImagePreviewActivity"/>
-        <activity android:name=".view.ImageSelectorActivity"/>
+        <activity android:name=".sample.ImageSelectorTestActivity" />
+        <activity android:name=".sample.SelectResultActivity" />
+        <activity android:name=".view.ImageCropActivity" />
+        <activity android:name=".view.ImagePreviewActivity" />
+        <activity android:name=".view.ImageSelectorActivity" />
         <activity android:name=".view.OnlyPreviewActivity" />
     </application>
 </manifest>

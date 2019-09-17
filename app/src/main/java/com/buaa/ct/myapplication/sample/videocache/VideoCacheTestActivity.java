@@ -4,9 +4,9 @@ package com.buaa.ct.myapplication.sample.videocache;
 import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.videocache.core.CacheListener;
@@ -37,9 +37,9 @@ public class VideoCacheTestActivity extends CoreBaseActivity implements CacheLis
     @Override
     public void setListener() {
         super.setListener();
-        startPlay.setOnClickListener(new View.OnClickListener() {
+        startPlay.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View view) {
+            public void activeClick(View v) {
                 CustomToast.getInstance().showToast("已经开始播放");
                 HttpProxyCacheServer proxy = getProxy();
                 proxy.registerCacheListener(VideoCacheTestActivity.this, url);
@@ -54,9 +54,9 @@ public class VideoCacheTestActivity extends CoreBaseActivity implements CacheLis
                 }
             }
         });
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View v) {
+            public void activeClick(View v) {
                 HttpProxyCacheServer proxy = getProxy();
                 proxy.clearCache(url);
                 percent.setText("");
@@ -69,7 +69,7 @@ public class VideoCacheTestActivity extends CoreBaseActivity implements CacheLis
     public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.test_video_cache);
-       enableToolbarOper(R.string.test_video_cache_oper);
+        enableToolbarOper(R.string.test_video_cache_oper);
         mediaPlayer = new MediaPlayer();
         checkCachedState();
     }

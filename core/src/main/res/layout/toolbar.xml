@@ -55,8 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="@dimen/row_space_big"
                     android:paddingStart="@dimen/row_space_big"
+                    android:paddingEnd="@dimen/row_space_big"
                     android:textColor="@color/textcolor_on_appcolor"
                     android:textSize="@dimen/large_text" />
             </com.buaa.ct.core.view.MaterialRippleLayout>
@@ -73,8 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:paddingEnd="@dimen/row_space_big"
                     android:paddingStart="@dimen/row_space_big"
+                    android:paddingEnd="@dimen/row_space_big"
                     android:textColor="@color/textcolor_on_appcolor"
                     android:textSize="@dimen/large_text" />
             </com.buaa.ct.core.view.MaterialRippleLayout>

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.buaa.ct.appskin.SkinManager;
 import com.buaa.ct.appskin.sample.FlavorAdapter;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.view.CustomToast;
@@ -49,9 +50,9 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
     @Override
     public void setListener() {
         super.setListener();
-        toolbarOper.setOnClickListener(new View.OnClickListener() {
+        toolbarOper.setOnClickListener(new INoDoubleClick() {
             @Override
-            public void onClick(View view) {
+            public void activeClick(View v) {
                 if (!initSkin.equals(SkinManager.getInstance().getCurrSkin())) {
                     Intent intent = new Intent(ChangePropertyBroadcast.FLAG);
                     sendBroadcast(intent);

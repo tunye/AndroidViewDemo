@@ -1374,6 +1374,15 @@ public class CropImageView extends ImageView {
     // Save/Restore support ////////////////////////////////////////////////////////////////////////
 
     public static class SavedState extends BaseSavedState {
+        public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+            public SavedState createFromParcel(final Parcel inParcel) {
+                return new SavedState(inParcel);
+            }
+
+            public SavedState[] newArray(final int inSize) {
+                return new SavedState[inSize];
+            }
+        };
         Bitmap image;
         CropMode mode;
         int backgroundColor;
@@ -1447,15 +1456,5 @@ public class CropImageView extends ImageView {
             out.writeInt(guideColor);
             out.writeFloat(initialFrameScale);
         }
-
-        public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
-            public SavedState createFromParcel(final Parcel inParcel) {
-                return new SavedState(inParcel);
-            }
-
-            public SavedState[] newArray(final int inSize) {
-                return new SavedState[inSize];
-            }
-        };
     }
 }

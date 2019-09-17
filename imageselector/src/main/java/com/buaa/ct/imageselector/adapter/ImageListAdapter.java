@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.ImageUtil;
@@ -21,7 +22,6 @@ import com.buaa.ct.imageselector.model.LocalMedia;
 import com.buaa.ct.imageselector.view.ImageSelectorActivity;
 import com.bumptech.glide.request.RequestOptions;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,9 +86,9 @@ public class ImageListAdapter extends CoreRecyclerViewAdapter<LocalMedia, CoreRe
     public void onBindViewHolder(@NonNull final CoreRecyclerViewAdapter.MyViewHolder holder, int position) {
         if (getItemViewType(position) == TYPE_CAMERA) {
             HeaderViewHolder headerHolder = (HeaderViewHolder) holder;
-            headerHolder.headerView.setOnClickListener(new View.OnClickListener() {
+            headerHolder.headerView.setOnClickListener(new INoDoubleClick() {
                 @Override
-                public void onClick(View v) {
+                public void activeClick(View v) {
                     if (imageSelectChangedListener != null) {
                         imageSelectChangedListener.onTakePhoto();
                     }
@@ -105,16 +105,16 @@ public class ImageListAdapter extends CoreRecyclerViewAdapter<LocalMedia, CoreRe
             }
             selectImage(contentHolder, isSelected(image));
             if (enablePreview) {
-                contentHolder.check.setOnClickListener(new View.OnClickListener() {
+                contentHolder.check.setOnClickListener(new INoDoubleClick() {
                     @Override
-                    public void onClick(View v) {
+                    public void activeClick(View v) {
                         changeCheckboxState(contentHolder, image);
                     }
                 });
             }
-            contentHolder.contentView.setOnClickListener(new View.OnClickListener() {
+            contentHolder.contentView.setOnClickListener(new INoDoubleClick() {
                 @Override
-                public void onClick(View v) {
+                public void activeClick(View v) {
                     if ((selectMode == ImageSelectorActivity.MODE_SINGLE || enablePreview) && imageSelectChangedListener != null) {
                         imageSelectChangedListener.onPictureClick(image, showCamera ? holder.getAdapterPosition() - 1 : holder.getAdapterPosition());
                     } else {
@@ -154,13 +154,13 @@ public class ImageListAdapter extends CoreRecyclerViewAdapter<LocalMedia, CoreRe
         }
     }
 
-    public void setCheckBoxCheckedIcon(View checkBox){
+    public void setCheckBoxCheckedIcon(View checkBox) {
         Drawable selectDrawable = DrawableCompat.wrap(ContextCompat.getDrawable(context, R.drawable.ic_checked));
         DrawableCompat.setTint(selectDrawable, GetAppColor.getInstance().getAppColor());
         checkBox.setBackground(selectDrawable);
     }
 
-    public void setCheckBoxUnCheckedIcon(View checkBox){
+    public void setCheckBoxUnCheckedIcon(View checkBox) {
         checkBox.setBackgroundResource(R.drawable.ic_check);
     }
 

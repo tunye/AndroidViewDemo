@@ -13,15 +13,15 @@ public class ConfigManager {
         preferences = RuntimeManager.getInstance().getContext().getSharedPreferences(CONFIG_NAME, Activity.MODE_PRIVATE);
     }
 
-    private static class SingleInstanceHelper {
-        private static ConfigManager instance = new ConfigManager();
-    }
-
     public static ConfigManager getInstance() {
         return SingleInstanceHelper.instance;
     }
 
     public SharedPreferences getPreferences() {
         return preferences;
+    }
+
+    private static class SingleInstanceHelper {
+        private static ConfigManager instance = new ConfigManager();
     }
 }

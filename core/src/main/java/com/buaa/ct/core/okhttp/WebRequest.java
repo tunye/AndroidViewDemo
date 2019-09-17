@@ -36,10 +36,6 @@ public class WebRequest {
         okHttpClient = okHttpClientBuilder.build();
     }
 
-    public OkHttpClient getOkHttpClient() {
-        return okHttpClient;
-    }
-
     public static RequestBody getJSONRequestBody(String data) {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, data);
@@ -47,6 +43,10 @@ public class WebRequest {
 
     public static WebRequest getInstance() {
         return InstanceHelper.instance;
+    }
+
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
     }
 
     public Pair<String, String> getRequest(String url) {
