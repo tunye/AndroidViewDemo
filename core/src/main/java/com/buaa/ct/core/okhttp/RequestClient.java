@@ -40,11 +40,15 @@ public class RequestClient {
                     ThreadUtils.postOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            TResult parseResult = request.parse(result.second);
-                            if (parseResult != null) {
-                                callback.onSuccess(parseResult);
-                            } else {
-                                callback.onError(new ErrorInfoWrapper(2, request.getDataErrorMsg()));
+                            try {
+                                final TResult parseResult = request.parse(result.second);
+                                if (parseResult != null) {
+                                    callback.onSuccess(parseResult);
+                                } else {
+                                    callback.onError(new ErrorInfoWrapper(ErrorInfoWrapper.EMPTY_ERROR, request.getDataErrorMsg()));
+                                }
+                            } catch (Exception e) {
+                                callback.onError(new ErrorInfoWrapper(ErrorInfoWrapper.DATA_ERROR, ""));
                             }
                         }
                     });
