@@ -36,6 +36,10 @@ public class WebRequest {
         okHttpClient = okHttpClientBuilder.build();
     }
 
+    public OkHttpClient getOkHttpClient() {
+        return okHttpClient;
+    }
+
     public static RequestBody getJSONRequestBody(String data) {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         return RequestBody.create(JSON, data);

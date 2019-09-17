@@ -7,13 +7,16 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.buaa.ct.appskin.BaseSkinActivity;
@@ -28,8 +31,9 @@ import com.buaa.ct.core.view.swiperefresh.MySwipeRefreshLayout;
 public class CoreBaseActivity extends BaseSkinActivity {
     protected Context context;
     protected MaterialRippleLayout back;
+    protected ImageView backIcon;
     protected FrameLayout toolBarLayout;
-    protected TextView title, toolbarOper;
+    protected TextView title, toolbarOper, toolbarOperSub;
 
     protected ScreenShotManager screenShotManager;
 
@@ -72,6 +76,10 @@ public class CoreBaseActivity extends BaseSkinActivity {
         toolBarLayout = findViewById(R.id.toolbar_title_layout);
         title = findViewById(R.id.toolbar_title);
         toolbarOper = findViewById(R.id.toolbar_oper);
+        toolbarOperSub = findViewById(R.id.toolbar_oper_sub);
+        backIcon = findViewById(R.id.back_img);
+        findViewById(R.id.toolbar_oper_ripple).setVisibility(View.GONE);
+        findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.GONE);
     }
 
     public void setListener() {
@@ -128,6 +136,24 @@ public class CoreBaseActivity extends BaseSkinActivity {
         super.onDestroy();
         screenShotManager.stopListen();
         screenShotManager = null;
+    }
+
+    public void enableToolbarOper(@StringRes int text) {
+        toolbarOper.setText(text);
+        findViewById(R.id.toolbar_oper_ripple).setVisibility(View.VISIBLE);
+    }
+
+    public void enableToolbarOper(String text) {
+        toolbarOper.setText(text);
+        findViewById(R.id.toolbar_oper_ripple).setVisibility(View.VISIBLE);
+    }
+
+    public void enableToolbarOperSub(@StringRes int text) {
+        if (TextUtils.isEmpty(toolbarOper.getText())) {
+            throw new IllegalStateException("you must set toolbar oper first!");
+        }
+        toolbarOperSub.setText(text);
+        findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.VISIBLE);
     }
 
     public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions) {

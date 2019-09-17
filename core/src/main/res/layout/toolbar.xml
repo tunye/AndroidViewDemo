@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/skin_app_color"
-    android:fitsSystemWindows="true">
+    android:layout_height="wrap_content">
 
     <FrameLayout
         android:id="@+id/toolbar_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/skin_app_color"
+        android:fitsSystemWindows="true">
 
         <TextView
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center"
+            android:gravity="center"
             android:textColor="@color/textcolor_on_appcolor"
             android:textSize="@dimen/title_text" />
 
         <com.buaa.ct.core.view.MaterialRippleLayout
             android:id="@+id/back"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical"
             android:padding="@dimen/row_space_big"
             app:mrl_rippleColor="@color/toolbar_ripple_color"
@@ -35,13 +36,48 @@
                 android:background="@drawable/back" />
         </com.buaa.ct.core.view.MaterialRippleLayout>
 
-        <TextView
-            android:id="@+id/toolbar_oper"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_gravity="end|center_vertical"
-            android:paddingEnd="@dimen/row_space_big"
-            android:textColor="@color/textcolor_on_appcolor"
-            android:textSize="@dimen/large_text" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.buaa.ct.core.view.MaterialRippleLayout
+                android:id="@+id/toolbar_oper_sub_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:mrl_rippleColor="@color/toolbar_ripple_color"
+                app:mrl_rippleDuration="100">
+
+                <TextView
+                    android:id="@+id/toolbar_oper_sub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="@dimen/row_space_big"
+                    android:paddingStart="@dimen/row_space_big"
+                    android:textColor="@color/textcolor_on_appcolor"
+                    android:textSize="@dimen/large_text" />
+            </com.buaa.ct.core.view.MaterialRippleLayout>
+
+            <com.buaa.ct.core.view.MaterialRippleLayout
+                android:id="@+id/toolbar_oper_ripple"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:mrl_rippleColor="@color/toolbar_ripple_color"
+                app:mrl_rippleDuration="100">
+
+                <TextView
+                    android:id="@+id/toolbar_oper"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:paddingEnd="@dimen/row_space_big"
+                    android:paddingStart="@dimen/row_space_big"
+                    android:textColor="@color/textcolor_on_appcolor"
+                    android:textSize="@dimen/large_text" />
+            </com.buaa.ct.core.view.MaterialRippleLayout>
+        </LinearLayout>
     </FrameLayout>
-</FrameLayout>
+</merge>

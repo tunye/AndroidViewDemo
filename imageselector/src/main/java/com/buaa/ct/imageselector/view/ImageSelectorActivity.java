@@ -21,6 +21,7 @@ import com.buaa.ct.core.listener.OnRecycleViewItemClickListener;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.util.SpringUtil;
+import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.adapter.ImageFolderAdapter;
@@ -168,10 +169,10 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 toolbarOper.setEnabled(enable);
                 previewText.setEnabled(enable);
                 if (enable) {
-                    toolbarOper.setText(getString(R.string.done_num, selectImages.size(), maxSelectNum));
-                    previewText.setText(getString(R.string.preview_num, selectImages.size()));
+                    enableToolbarOper(getString(R.string.done_num, selectImages.size(), maxSelectNum));
+                    enableToolbarOper(getString(R.string.preview_num, selectImages.size()));
                 } else {
-                    toolbarOper.setText(R.string.done);
+                    enableToolbarOper(R.string.done);
                     previewText.setText(R.string.preview);
                 }
             }
@@ -229,9 +230,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         if (selectMode == MODE_MULTIPLE) {
-            toolbarOper.setText(R.string.done);
-        } else {
-            toolbarOper.setText("");
+            enableToolbarOper(R.string.done);
         }
         previewText.setVisibility(enablePreview ? View.VISIBLE : View.GONE);
         title.setText(R.string.picture);
@@ -316,8 +315,13 @@ public class ImageSelectorActivity extends CoreBaseActivity {
     }
 
     public void folderDismissWithoutAnim() {
-        folderPanel.setTranslationY(folderPanel.getMeasuredHeight());
         folderPanel.setAlpha(0);
+        ThreadUtils.postOnUiThreadDelay(new Runnable() {
+            @Override
+            public void run() {
+                folderPanel.setTranslationY(folderPanel.getMeasuredHeight());
+            }
+        }, 100);
     }
 
     public void folderDismiss() {

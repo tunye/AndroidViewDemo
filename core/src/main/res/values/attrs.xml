@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="MaterialRippleLayout">
-        <attr name="mrl_rippleColor" format="color" localization="suggested" />
-        <attr name="mrl_rippleDimension" format="dimension" localization="suggested" />
-        <attr name="mrl_rippleOverlay" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleAlpha" format="float" localization="suggested" />
-        <attr name="mrl_rippleDuration" format="integer" localization="suggested" />
-        <attr name="mrl_rippleFadeDuration" format="integer" localization="suggested" />
-        <attr name="mrl_rippleHover" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleBackground" format="color" localization="suggested" />
-        <attr name="mrl_rippleDelayClick" format="boolean" localization="suggested" />
-        <attr name="mrl_ripplePersistent" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleInAdapter" format="boolean" localization="suggested" />
-        <attr name="mrl_rippleRoundedCorners" format="dimension" localization="suggested" />
+        <attr name="mrl_rippleColor" format="color" />
+        <attr name="mrl_rippleDimension" format="dimension" />
+        <attr name="mrl_rippleOverlay" format="boolean" />
+        <attr name="mrl_rippleAlpha" format="float" />
+        <attr name="mrl_rippleDuration" format="integer" />
+        <attr name="mrl_rippleFadeDuration" format="integer" />
+        <attr name="mrl_rippleHover" format="boolean" />
+        <attr name="mrl_rippleBackground" format="color" />
+        <attr name="mrl_rippleDelayClick" format="boolean" />
+        <attr name="mrl_ripplePersistent" format="boolean" />
+        <attr name="mrl_rippleInAdapter" format="boolean" />
+        <attr name="mrl_rippleRoundedCorners" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="CircleImageView">
@@ -23,12 +23,12 @@
     </declare-styleable>
 
     <declare-styleable name="RoundedImageView">
-        <attr name="corner_radius" />
-        <attr name="border_width" />
-        <attr name="border_color" />
-        <attr name="cover_border_width" />
-        <attr name="cover_border_color" />
-        <attr name="round_background" />
+        <attr name="corner_radius" format="dimension" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="cover_border_width" format="dimension" />
+        <attr name="cover_border_color" format="color" />
+        <attr name="round_background" format="boolean"/>
         <attr name="android:scaleType" />
     </declare-styleable>
 

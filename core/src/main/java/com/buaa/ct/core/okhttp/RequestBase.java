@@ -31,6 +31,10 @@ public class RequestBase<T> {
         return "";
     }
 
+    public String getDataErrorMsg() {
+        return "";
+    }
+
     public Headers getHeader() {
         return null;
     }

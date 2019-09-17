@@ -1,8 +1,6 @@
 package com.buaa.ct.imageselector.sample;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,10 +9,13 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.view.ImageSelectorActivity;
+import com.buaa.ct.imageselector.view.OnlyPreviewActivity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ImageSelectorTestActivity extends CoreBaseActivity {
     private ImageButton minus;

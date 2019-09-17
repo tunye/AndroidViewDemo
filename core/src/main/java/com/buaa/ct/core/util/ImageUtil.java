@@ -3,9 +3,13 @@ package com.buaa.ct.core.util;
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.ExifInterface;
+import android.os.Environment;
 import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Pair;
 import android.widget.ImageView;
 
 import com.buaa.ct.core.manager.RuntimeManager;
@@ -20,6 +24,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.Target;
 
+import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -191,6 +196,52 @@ public class ImageUtil {
         requestOptions = requestOptions.placeholder(placeholderDrawableId);
         requestOptions = requestOptions.error(placeholderDrawableId);
         return requestOptions;
+    }
+
+    public static Pair<Integer, Integer> getImageFileWidthAndHeight(String imageFile) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(imageFile, options);
+        return new Pair<>(options.outWidth, options.outHeight);
+    }
+
+    public static Pair<Integer, Integer> getImageFileRealWidthAndHeight(String imageFile) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(imageFile, options);
+        if (getExifOrientation(imageFile) / 90 % 2 != 0) {
+            return new Pair<>(options.outHeight, options.outWidth);
+        } else {
+            return new Pair<>(options.outWidth, options.outHeight);
+        }
+    }
+
+    public static boolean isLocalPic(String path) {
+        return !TextUtils.isEmpty(path) && (Environment.getExternalStorageDirectory() != null && path.contains(Environment.getExternalStorageDirectory().getPath()));
+    }
+
+    public static int getExifOrientation(String filepath) {
+        int degree = 0;
+        try {
+            ExifInterface exif = new ExifInterface(filepath);
+            int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+            if (orientation != -1) {
+                switch (orientation) {
+                    case ExifInterface.ORIENTATION_ROTATE_90:
+                        degree = 90;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_180:
+                        degree = 180;
+                        break;
+                    case ExifInterface.ORIENTATION_ROTATE_270:
+                        degree = 270;
+                        break;
+                }
+            }
+        } catch (IOException ex) {
+            // do nothing
+        }
+        return degree;
     }
 
     public interface OnBitmapLoaded {

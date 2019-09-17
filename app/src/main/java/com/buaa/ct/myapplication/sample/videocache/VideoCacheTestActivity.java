@@ -69,7 +69,7 @@ public class VideoCacheTestActivity extends CoreBaseActivity implements CacheLis
     public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.test_video_cache);
-        toolbarOper.setText(R.string.test_video_cache_oper);
+       enableToolbarOper(R.string.test_video_cache_oper);
         mediaPlayer = new MediaPlayer();
         checkCachedState();
     }

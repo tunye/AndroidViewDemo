@@ -22,7 +22,6 @@ public class MainActivity extends BaseActivity {
     public void initWidget() {
         super.initWidget();
         recyclerView = findViewById(R.id.enter);
-        toolbarOper.setText(R.string.setting);
     }
 
     @Override
@@ -44,5 +43,6 @@ public class MainActivity extends BaseActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(DividerItemDecoration.TYPE_WITH_BORDER));
         title.setText(R.string.app_name);
         back.setVisibility(View.INVISIBLE);
+        enableToolbarOper(R.string.setting);
     }
 }

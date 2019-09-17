@@ -89,7 +89,7 @@ public class ImageCropActivity extends CoreBaseActivity {
         super.onActivityCreated();
         title.setText(R.string.crop);
         cropImageView.setHandleSizeInDp(10);
-        toolbarOper.setText(R.string.use);
+        enableToolbarOper(R.string.use);
         int exifRotation = CropUtil.getExifRotation(CropUtil.getFromMediaUri(this, getContentResolver(), sourceUri));
 
         InputStream is = null;

@@ -20,11 +20,14 @@ import android.widget.Toast;
 import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
+import com.buaa.ct.core.util.SpringUtil;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.model.LocalMedia;
 import com.buaa.ct.imageselector.widget.PreviewViewPager;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +49,12 @@ public class ImagePreviewActivity extends CoreBaseActivity {
     private CheckBox checkboxSelect;
     private PreviewViewPager viewPager;
 
-
     private int position;
     private int maxSelectNum;
     private List<LocalMedia> images = new ArrayList<>();
     private List<LocalMedia> selectImages = new ArrayList<>();
 
-
     private boolean isShowBar = true;
-
 
     public static void startPreview(Activity context, List<LocalMedia> selectImages, int maxSelectNum, int position) {
         Intent intent = new Intent(context, ImagePreviewActivity.class);
@@ -79,6 +79,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
 
     @Override
     public void setListener() {
+        super.setListener();
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -144,7 +145,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         layoutParams.setMargins(RuntimeManager.getInstance().dip2px(44), 0, 0, 0);
         title.setText((position + 1) + "/" + images.size());
 
-        toolbarOper.setText(R.string.done);
+        enableToolbarOper(R.string.done);
         onSelectNumChange();
         onImageSwitch(position);
         viewPager.setAdapter(new SimpleFragmentAdapter(getSupportFragmentManager()));
@@ -161,9 +162,9 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         boolean enable = selectImages.size() != 0;
         toolbarOper.setEnabled(enable);
         if (enable) {
-            toolbarOper.setText(getString(R.string.done_num, selectImages.size(), maxSelectNum));
+            enableToolbarOper(getString(R.string.done_num, selectImages.size(), maxSelectNum));
         } else {
-            toolbarOper.setText(R.string.done);
+            enableToolbarOper(R.string.done);
         }
     }
 
@@ -208,9 +209,26 @@ public class ImagePreviewActivity extends CoreBaseActivity {
     }
 
     public void switchBarVisibility() {
-        // todo  add anim
-        toolBarLayout.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
-        selectBarLayout.setVisibility(isShowBar ? View.GONE : View.VISIBLE);
+        SpringUtil.getInstance().addListener(new SimpleSpringListener() {
+            @Override
+            public void onSpringUpdate(Spring spring) {
+                super.onSpringUpdate(spring);
+                toolBarLayout.setTranslationY((float) spring.getCurrentValue());
+                float alpha = 1 - Math.abs(toolBarLayout.getTranslationY() / toolBarLayout.getMeasuredHeight());
+                toolBarLayout.setAlpha(alpha);
+                selectBarLayout.setAlpha(alpha);
+                selectBarLayout.setTranslationY((float) (Math.abs(spring.getCurrentValue()) * selectBarLayout.getMeasuredHeight() / toolBarLayout.getMeasuredHeight()));
+            }
+
+            @Override
+            public void onSpringAtRest(Spring spring) {
+                super.onSpringAtRest(spring);
+                SpringUtil.getInstance().destory();
+            }
+        });
+        SpringUtil.getInstance().setCurrentValue(toolBarLayout.getTranslationY());
+        SpringUtil.getInstance().setEndValue(isShowBar ? -toolBarLayout.getMeasuredHeight() : 0);
+
         if (isShowBar) {
             hideStatusBar();
         } else {

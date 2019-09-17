@@ -44,7 +44,7 @@ public class RequestClient {
                             if (parseResult != null) {
                                 callback.onSuccess(parseResult);
                             } else {
-                                callback.onError(ErrorInfoWrapper.parseOkhttpError(""));
+                                callback.onError(new ErrorInfoWrapper(2, request.getDataErrorMsg()));
                             }
                         }
                     });

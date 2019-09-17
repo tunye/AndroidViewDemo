@@ -77,7 +77,7 @@ public class CommentTestActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.test_comment);
-        toolbarOper.setText(R.string.test_comment_oper);
+        enableToolbarOper(R.string.test_comment_oper);
     }
 
     @Override

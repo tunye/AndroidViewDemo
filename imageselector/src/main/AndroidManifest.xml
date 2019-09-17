@@ -7,5 +7,6 @@
         <activity android:name=".view.ImageCropActivity"/>
         <activity android:name=".view.ImagePreviewActivity"/>
         <activity android:name=".view.ImageSelectorActivity"/>
+        <activity android:name=".view.OnlyPreviewActivity" />
     </application>
 </manifest>

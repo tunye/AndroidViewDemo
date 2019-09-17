@@ -42,7 +42,7 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
         super.onActivityCreated();
         setRecyclerViewProperty(recyclerView);
         title.setText(R.string.test_skin);
-        toolbarOper.setText(R.string.test_skin_oper);
+        enableToolbarOper(R.string.test_skin_oper);
         initSkin = SkinManager.getInstance().getCurrSkin();
     }
 
