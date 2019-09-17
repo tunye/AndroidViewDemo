@@ -19,9 +19,7 @@ import java.util.Map;
  */
 public class SkinManager {
     private Context mContext;
-    private ResourceManager mResourceManager;
 
-    private boolean usePlugin;
     /**
      * 换肤资源后缀
      */
@@ -55,13 +53,11 @@ public class SkinManager {
     }
 
     public boolean needChangeSkin() {
-        return usePlugin || !TextUtils.isEmpty(mSuffix);
+        return !TextUtils.isEmpty(mSuffix);
     }
 
     public ResourceManager getResourceManager() {
-        if (!usePlugin) {
-            mResourceManager = new ResourceManager(mContext.getResources(), mContext.getPackageName(), mSuffix);
-        }
+        ResourceManager mResourceManager = new ResourceManager(mContext.getResources(), mContext.getPackageName(), mSuffix);
         return mResourceManager;
     }
 
@@ -82,7 +78,6 @@ public class SkinManager {
     }
 
     private void clearPluginInfo() {
-        usePlugin = false;
         mSuffix = null;
         PrefUtils.getInstance().clear();
     }

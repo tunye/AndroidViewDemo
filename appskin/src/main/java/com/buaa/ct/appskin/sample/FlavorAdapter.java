@@ -52,6 +52,7 @@ public class FlavorAdapter extends RecyclerView.Adapter<FlavorAdapter.FlavorView
         notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
     public FlavorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new FlavorViewHolder(LayoutInflater.from(context).inflate(R.layout.item_layout_flavor, parent, false));

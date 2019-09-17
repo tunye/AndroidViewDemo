@@ -123,7 +123,11 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         toolbarOper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onDoneClick(true);
+                if (selectImages.isEmpty()) {
+                    CustomToast.getInstance().showToast(R.string.message_min_num);
+                } else {
+                    onDoneClick(true);
+                }
             }
         });
     }
@@ -160,7 +164,6 @@ public class ImagePreviewActivity extends CoreBaseActivity {
 
     public void onSelectNumChange() {
         boolean enable = selectImages.size() != 0;
-        toolbarOper.setEnabled(enable);
         if (enable) {
             enableToolbarOper(getString(R.string.done_num, selectImages.size(), maxSelectNum));
         } else {

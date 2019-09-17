@@ -1,5 +1,6 @@
 package com.buaa.ct.easyui.progressimage;
 
+import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +18,8 @@ import android.support.v7.widget.AppCompatImageView;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.animation.AccelerateInterpolator;
+
+import com.buaa.ct.easyui.share.listener.SimpleAnimationListener;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -59,7 +62,7 @@ public class ProgressImageView extends AppCompatImageView {
         progress = 0;
         textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
-        textPaint.setStyle(Paint.Style.STROKE);
+        textPaint.setStyle(Paint.Style.FILL);
         textPaint.setTextSize(dp2px(16));
         textPaint.setColor(Color.parseColor("#eeeeee"));
         paint.setAntiAlias(true);
@@ -94,6 +97,14 @@ public class ProgressImageView extends AppCompatImageView {
             public void onAnimationUpdate(ValueAnimator animation) {
                 currFinishAnimValue = (float) animation.getAnimatedValue();
                 postInvalidateOnAnimation();
+            }
+        });
+        valueAnimator.addListener(new SimpleAnimationListener() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                state = READY;
+                progress = 0;
             }
         });
         valueAnimator.start();

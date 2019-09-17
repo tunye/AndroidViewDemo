@@ -78,15 +78,17 @@ public class CoreBaseActivity extends BaseSkinActivity {
         toolbarOper = findViewById(R.id.toolbar_oper);
         toolbarOperSub = findViewById(R.id.toolbar_oper_sub);
         backIcon = findViewById(R.id.back_img);
-        findViewById(R.id.toolbar_oper_ripple).setVisibility(View.GONE);
-        findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.GONE);
+        if (toolBarLayout != null) {
+            findViewById(R.id.toolbar_oper_ripple).setVisibility(View.GONE);
+            findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.GONE);
+        }
     }
 
     public void setListener() {
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
     }
@@ -205,6 +207,9 @@ public class CoreBaseActivity extends BaseSkinActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (grantResults.length == 0) {
+            return;
+        }
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             //授权成功
             onAccreditSucceed(requestCode);

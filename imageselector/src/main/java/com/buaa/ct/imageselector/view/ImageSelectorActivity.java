@@ -22,6 +22,7 @@ import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.util.SpringUtil;
 import com.buaa.ct.core.util.ThreadUtils;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.imageselector.MediaListManager;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.adapter.ImageFolderAdapter;
@@ -153,7 +154,11 @@ public class ImageSelectorActivity extends CoreBaseActivity {
         toolbarOper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onSelectDone(imageAdapter.getSelectedImages());
+                if (selectMode == MODE_MULTIPLE && imageAdapter.getSelectedImages().isEmpty()) {
+                    CustomToast.getInstance().showToast(R.string.message_min_num);
+                } else {
+                    onSelectDone(imageAdapter.getSelectedImages());
+                }
             }
         });
         previewText.setOnClickListener(new View.OnClickListener() {
@@ -170,7 +175,7 @@ public class ImageSelectorActivity extends CoreBaseActivity {
                 previewText.setEnabled(enable);
                 if (enable) {
                     enableToolbarOper(getString(R.string.done_num, selectImages.size(), maxSelectNum));
-                    enableToolbarOper(getString(R.string.preview_num, selectImages.size()));
+                    previewText.setText(getString(R.string.preview_num, selectImages.size()));
                 } else {
                     enableToolbarOper(R.string.done);
                     previewText.setText(R.string.preview);

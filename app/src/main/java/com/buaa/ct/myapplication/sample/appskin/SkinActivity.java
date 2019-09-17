@@ -69,6 +69,7 @@ public class SkinActivity extends BaseActivity implements FlavorAdapter.OnItemCl
             if (position == 0) {
                 ImmersiveManager.getInstance().updateImmersiveStatus(this, true);
                 getWindow().setStatusBarColor(getResources().getColor(R.color.skin_app_color));
+                toolBarLayout.setBackgroundColor(getResources().getColor(R.color.skin_app_color));
             } else {
                 ImmersiveManager.getInstance().updateImmersiveStatus(this, ImmersiveManager.getInstance().isBrightTheme(getResource("skin_app_color_" + item)));
                 getWindow().setStatusBarColor(getResources().getColor(getResource("skin_app_color_" + item)));

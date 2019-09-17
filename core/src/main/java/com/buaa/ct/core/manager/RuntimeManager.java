@@ -29,7 +29,7 @@ public class RuntimeManager {
     public void initRuntimeManager(Application application) {
         this.application = application;
         context = application.getApplicationContext();
-        displayMetrics = application.getResources().getDisplayMetrics();
+        displayMetrics = getResource().getDisplayMetrics();
     }
 
     public Application getApplication() {
@@ -41,11 +41,11 @@ public class RuntimeManager {
     }
 
     public Resources getResource() {
-        return application.getResources();
+        return context.getResources();
     }
 
     public String getString(int resourcesID) {
-        return getContext().getString(resourcesID);
+        return context.getString(resourcesID);
     }
 
     public DisplayMetrics getDisplayMetrics() {

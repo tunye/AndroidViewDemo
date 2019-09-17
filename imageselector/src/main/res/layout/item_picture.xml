@@ -14,5 +14,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="top|end"
-        android:layout_margin="@dimen/row_space_default" />
+        android:padding="@dimen/row_space_default" />
 </com.buaa.ct.imageselector.widget.SquareLayout>
