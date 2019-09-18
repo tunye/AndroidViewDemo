@@ -103,7 +103,6 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
         } else {
             handleBeforeAddAdapter(netData);
             ownerAdapter.addDatas(netData);
-            owner.scrollToPosition(ownerAdapter.getItemCount() - netData.size());
             handleAfterAddAdapter(netData);
         }
     }
@@ -113,6 +112,8 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
     }
 
     public void handleAfterAddAdapter(List<T> netData) {
-
+        if (curPage != 1) {
+            owner.scrollToPosition(ownerAdapter.getDatas().size() - netData.size());
+        }
     }
 }

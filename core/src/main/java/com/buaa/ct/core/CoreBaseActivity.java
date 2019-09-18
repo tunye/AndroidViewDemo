@@ -79,8 +79,10 @@ public class CoreBaseActivity extends BaseSkinActivity {
         toolbarOper = findViewById(R.id.toolbar_oper);
         toolbarOperSub = findViewById(R.id.toolbar_oper_sub);
         backIcon = findViewById(R.id.back_img);
-        if (toolBarLayout != null) {
+        if (findViewById(R.id.toolbar_oper_ripple) != null) {
             findViewById(R.id.toolbar_oper_ripple).setVisibility(View.GONE);
+        }
+        if (findViewById(R.id.toolbar_oper_sub_ripple) != null) {
             findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.GONE);
         }
     }

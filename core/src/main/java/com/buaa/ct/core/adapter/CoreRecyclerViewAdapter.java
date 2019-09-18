@@ -43,7 +43,7 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
 
     public void addData(T t) {
         datas.add(t);
-        notifyItemInserted(datas.size() - 1);
+        notifyItemInserted(getItemCount() - 1);
     }
 
     public void addData(int pos, T t) {
@@ -58,7 +58,7 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
      * @return
      */
     public int addDatas(List<T> t) {
-        int size = datas.size();
+        int size = getItemCount();
         datas.addAll(t);
         notifyItemRangeInserted(size, t.size());
         if (baseEntityOp != null) {
