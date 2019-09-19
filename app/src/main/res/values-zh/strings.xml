@@ -3,6 +3,7 @@
     <string name="app_name">测试应用</string>
     <string name="ui">UI相关页面展示</string>
     <string name="setting">设置</string>
+    <string name="welcome_escape_ad">跳过</string>
 
     <string name="test_skin">皮肤适配</string>
     <string name="test_comment">仿微信评论框</string>

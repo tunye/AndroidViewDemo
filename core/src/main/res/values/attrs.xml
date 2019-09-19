@@ -32,6 +32,20 @@
         <attr name="android:scaleType" />
     </declare-styleable>
 
+    <declare-styleable name="RoundProgressBar">
+        <attr name="cp_circleColor" format="color" />
+        <attr name="cp_circleProgressColor" format="color" />
+        <attr name="cp_circleWidth" format="dimension" />
+        <attr name="cp_textColor" format="color" />
+        <attr name="cp_textSize" format="dimension" />
+        <attr name="cp_max" format="integer" />
+        <attr name="cp_textIsDisplayable" format="boolean" />
+        <attr name="cp_style">
+            <enum name="STROKE" value="0" />
+            <enum name="FILL" value="1" />
+        </attr>
+    </declare-styleable>
+
     <declare-styleable name="MySwipeRefreshLayout">
         <attr name="direction">
             <enum name="top" value="0" />

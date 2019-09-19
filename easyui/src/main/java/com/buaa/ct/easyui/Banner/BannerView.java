@@ -158,9 +158,6 @@ public class BannerView extends FrameLayout {
         }
         bannerTitle.setText("第0张图");
         myAdapter.notifyDataSetChanged();
-
-        if (isAutoStart)
-            startAd();
     }
 
     public void startAd() {
@@ -176,6 +173,33 @@ public class BannerView extends FrameLayout {
             isLooping = false;
             scheduledExecutorService.shutdown();
         }
+    }
+
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility == View.VISIBLE) {
+            startAd();
+        } else {
+            stopAd();
+        }
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        stopAd();
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        if (isAutoStart)
+            startAd();
+    }
+
+    public void setSelectItemColor(int selectItemColor) {
+        this.selectItemColor = selectItemColor;
     }
 
     private Drawable createPoint(int color) {

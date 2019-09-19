@@ -36,7 +36,7 @@
         android:supportsRtl="true"
         android:theme="@style/MyAppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".MainActivity">
+        <activity android:name=".WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -52,6 +52,7 @@
         <activity android:name=".sample.copyboard.CopyboardTestActivity" />
         <activity android:name=".sample.pudding.PuddingTestActivity" />
         <activity android:name=".sample.videocache.VideoCacheTestActivity" />
+        <activity android:name=".MainActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
