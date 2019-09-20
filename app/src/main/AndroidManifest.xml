@@ -29,6 +29,7 @@
 
     <application
         android:name=".MyApplication"
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -49,10 +50,10 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".sample.comment.CommentTestActivity" />
         <activity android:name=".sample.comment.EmojiTestActivity" />
-        <activity android:name=".sample.copyboard.CopyboardTestActivity" />
         <activity android:name=".sample.pudding.PuddingTestActivity" />
         <activity android:name=".sample.videocache.VideoCacheTestActivity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".activity.BingPicActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -63,20 +64,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <service
-            android:name="com.buaa.ct.myapplication.sample.copyboard.ListenClipboardService"
-            android:enabled="true"
-            android:exported="true"
-            android:process=":process" />
-        <receiver
-            android:name="com.buaa.ct.myapplication.sample.copyboard.BootCompletedReceiver"
-            android:enabled="true"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
     </application>
 
 </manifest>

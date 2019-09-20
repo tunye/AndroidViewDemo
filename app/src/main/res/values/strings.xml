@@ -4,11 +4,19 @@
     <string name="setting">Setting</string>
     <string name="welcome_escape_ad">跳过</string>
 
+    <string name="test_bing">Bing Picture</string>
+    <string name="test_meizhi">Meizhi</string>
+    <string name="test_animation">Animation</string>
+    <string name="test_material_edittext">Material Edittext</string>
+    <string name="test_indicator">Indicator</string>
     <string name="test_skin">APP Skin test</string>
     <string name="test_comment">Comment test</string>
     <string name="test_copyboard">UC Copyboard test</string>
     <string name="test_pudding">Pudding test</string>
     <string name="test_video_cache">Video Cache test</string>
+
+    <string name="test_bing_load_all">Bing Picture has been loaded all.</string>
+    <string name="test_bing_info">Info</string>
 
     <string name="app_no_change">The app skin color is not changed.</string>
     <string name="test_skin_oper">Use</string>
@@ -17,9 +25,6 @@
 
     <string name="test_video_cache_oper">Clear</string>
     <string name="test_video_cache_play">Play</string>
-
-    <string name="tip">This is the clipboard content, Click to see：</string>
-    <string name="init_tip">Copy content in any application, and the copied text will be displayed at the top of the screen. After clicking, the content will be displayed here.</string>
 
     <string name="setting_app_color">App Color</string>
     <string name="setting_app_language">Language</string>

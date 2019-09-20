@@ -2,6 +2,7 @@ package com.buaa.ct.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,7 +31,11 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
             "一键退朝",
             RuntimeManager.getInstance().getString(R.string.bound_num_test),
             RuntimeManager.getInstance().getString(R.string.progress_test),
-            RuntimeManager.getInstance().getString(R.string.share_test), "另一种一键退朝",
+            RuntimeManager.getInstance().getString(R.string.share_test),
+            "另一种一键退朝",
+            RuntimeManager.getInstance().getString(R.string.test_indicator),
+            RuntimeManager.getInstance().getString(R.string.test_animation),
+            RuntimeManager.getInstance().getString(R.string.test_material_edittext),
             RuntimeManager.getInstance().getString(R.string.pull_door_test),
             RuntimeManager.getInstance().getString(R.string.qq_send_pic_test)};
 
@@ -73,9 +78,18 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
                         context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
                         break;
                     case 6:
-                        context.startActivity(new Intent(context, PullDoorTestActivity.class));
+                        MusicTools.goMusicTools(context,"iyumusic://eggshell/indicator");
                         break;
                     case 7:
+                        MusicTools.goMusicTools(context,"iyumusic://eggshell/animation");
+                        break;
+                    case 8:
+                        MusicTools.goMusicTools(context,"iyumusic://eggshell/material_edittext");
+                        break;
+                    case 9:
+                        context.startActivity(new Intent(context, PullDoorTestActivity.class));
+                        break;
+                    case 10:
                         context.startActivity(new Intent(context, ProgressImageTestActivity.class));
                         break;
                     default:

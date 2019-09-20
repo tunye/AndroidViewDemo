@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/bing_pic_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="#34000000"
+            android:paddingStart="@dimen/row_space_large"
+            android:paddingTop="@dimen/row_space_medium"
+            android:paddingEnd="@dimen/row_space_large"
+            android:paddingBottom="@dimen/row_space_medium">
+
+            <TextView
+                android:id="@+id/bing_pic_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#dcdcdc"
+                android:textSize="@dimen/medium_text" />
+        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/row_space_large">
+
+        <TextView
+            android:id="@+id/bing_pic_copyright"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:ellipsize="end"
+            android:lineSpacingMultiplier="1.2"
+            android:maxLines="2"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/medium_text" />
+
+        <TextView
+            android:id="@+id/bing_pic_copyright_url"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="end"
+            android:layout_gravity="center_vertical"
+            android:text="@string/test_bing_info"
+            android:textColor="@color/skin_app_color"
+            android:textSize="@dimen/medium_text" />
+    </LinearLayout>
+
+</LinearLayout>

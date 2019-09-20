@@ -113,7 +113,6 @@ public class RoundedDrawable extends Drawable {
                 for (int i = 0; i < num; i++) {
                     Drawable d = td.getDrawable(i);
                     if (d instanceof ColorDrawable) {
-                        // TODO skip colordrawables for now
                         drawableList[i] = d;
                     } else {
                         Bitmap bm = drawableToBitmap(drawable);

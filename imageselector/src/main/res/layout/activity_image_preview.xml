@@ -19,7 +19,6 @@
         android:background="@color/bar_grey_90"
         android:gravity="center_vertical">
 
-
         <CheckBox
             android:id="@+id/checkbox_select"
             android:layout_width="wrap_content"
@@ -32,4 +31,13 @@
             android:textColor="@color/textcolor_on_appcolor"
             android:textSize="@dimen/large_text" />
     </FrameLayout>
+
+    <ImageView
+        android:id="@+id/save_local"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:padding="@dimen/row_space_large"
+        android:src="@drawable/img_save_file"
+        android:visibility="gone" />
 </FrameLayout>

@@ -102,7 +102,11 @@ public abstract class CoreBaseListActivity<T> extends CoreBaseActivity implement
             }
         } else {
             handleBeforeAddAdapter(netData);
-            ownerAdapter.addDatas(netData);
+            if (curPage == 1) {
+                ownerAdapter.setDataSet(netData);
+            } else {
+                ownerAdapter.addDatas(netData);
+            }
             handleAfterAddAdapter(netData);
         }
     }

@@ -3,7 +3,6 @@ package com.buaa.ct.imageselector.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,6 +10,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.buaa.ct.core.CoreBaseActivity;
+import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.SpringUtil;
 import com.buaa.ct.imageselector.R;
 import com.buaa.ct.imageselector.widget.PreviewViewPager;
@@ -26,10 +26,14 @@ import java.util.List;
 public class OnlyPreviewActivity extends CoreBaseActivity {
     public static final String EXTRA_PREVIEW_LIST = "previewList";
     public static final String EXTRA_INIT_POS = "extra_init_pos";
+    public static final String EXTRA_SAVE_FUNC = "extra_save_func";
     private List<String> images;
     private int initPos;
     private PreviewViewPager viewPager;
+    private View saveLocal;
+    private SimpleFragmentAdapter fragmentAdapter;
     private boolean isShowBar = true;
+    private boolean enableSave;
 
     public static void startPreview(Context context, String image) {
         List<String> images = new ArrayList<>();
@@ -42,9 +46,14 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
     }
 
     public static void startPreview(Context context, List<String> images, int initPos) {
+        startPreview(context, images, initPos, false);
+    }
+
+    public static void startPreview(Context context, List<String> images, int initPos, boolean enableSave) {
         Intent intent = new Intent(context, OnlyPreviewActivity.class);
         intent.putExtra(EXTRA_PREVIEW_LIST, (ArrayList) images);
         intent.putExtra(EXTRA_INIT_POS, initPos);
+        intent.putExtra(EXTRA_SAVE_FUNC, enableSave);
         context.startActivity(intent);
     }
 
@@ -57,6 +66,7 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
     public void beforeSetLayout(Bundle saveBundle) {
         super.beforeSetLayout(saveBundle);
         images = (List<String>) getIntent().getSerializableExtra(EXTRA_PREVIEW_LIST);
+        enableSave = getIntent().getBooleanExtra(EXTRA_SAVE_FUNC, false);
         initPos = getIntent().getIntExtra(EXTRA_INIT_POS, 0);
     }
 
@@ -64,12 +74,19 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
     public void initWidget() {
         super.initWidget();
         viewPager = findViewById(R.id.preview_pager);
+        saveLocal = findViewById(R.id.save_local);
         findViewById(R.id.select_bar_layout).setVisibility(View.GONE);
     }
 
     @Override
     public void setListener() {
         super.setListener();
+        saveLocal.setOnClickListener(new INoDoubleClick() {
+            @Override
+            public void activeClick(View v) {
+                fragmentAdapter.getItem(viewPager.getCurrentItem()).save();
+            }
+        });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -91,12 +108,18 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
     @Override
     public void onActivityCreated() {
         super.onActivityCreated();
-        viewPager.setAdapter(new SimpleFragmentAdapter(getSupportFragmentManager()));
+        fragmentAdapter = new SimpleFragmentAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(fragmentAdapter);
         viewPager.setCurrentItem(initPos);
         if (images.size() != 1) {
             enableToolbarOper((initPos + 1) + "/" + images.size());
         }
         title.setText(R.string.preview);
+        if (enableSave) {
+            saveLocal.setVisibility(View.VISIBLE);
+        } else {
+            saveLocal.setVisibility(View.GONE);
+        }
     }
 
     private void hideStatusBar() {
@@ -144,7 +167,7 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public ImagePreviewFragment getItem(int position) {
             return ImagePreviewFragment.getInstance(images.get(position));
         }
 

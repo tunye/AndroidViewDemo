@@ -46,4 +46,10 @@ public class MainActivity extends BaseActivity {
         back.setVisibility(View.INVISIBLE);
         enableToolbarOper(R.string.setting);
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ((MyApplication) getApplication()).clearActivityList();
+    }
 }

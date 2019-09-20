@@ -322,7 +322,7 @@ public final class EmojiconHandler {
         sEmojisMap.put(0x1f30f, R.drawable.emoji_1f30f);
         sEmojisMap.put(0x1f30b, R.drawable.emoji_1f30b);
         sEmojisMap.put(0x1f30c, R.drawable.emoji_1f30c);
-        sEmojisMap.put(0x1f320, R.drawable.emoji_1f303); // TODO (rockerhieu) review this emoji
+        sEmojisMap.put(0x1f320, R.drawable.emoji_1f303);
         sEmojisMap.put(0x2b50, R.drawable.emoji_2b50);
         sEmojisMap.put(0x2600, R.drawable.emoji_2600);
         sEmojisMap.put(0x26c5, R.drawable.emoji_26c5);
@@ -377,7 +377,7 @@ public final class EmojiconHandler {
         sEmojisMap.put(0x1f4fb, R.drawable.emoji_1f4fb);
         sEmojisMap.put(0x1f50a, R.drawable.emoji_1f50a);
         sEmojisMap.put(0x1f509, R.drawable.emoji_1f509);
-        sEmojisMap.put(0x1f508, R.drawable.emoji_1f508); // TODO (rockerhieu): review this emoji
+        sEmojisMap.put(0x1f508, R.drawable.emoji_1f508);
         sEmojisMap.put(0x1f507, R.drawable.emoji_1f507);
         sEmojisMap.put(0x1f514, R.drawable.emoji_1f514);
         sEmojisMap.put(0x1f515, R.drawable.emoji_1f515);
@@ -620,7 +620,7 @@ public final class EmojiconHandler {
         sEmojisMap.put(0x1f688, R.drawable.emoji_1f688);
         sEmojisMap.put(0x1f687, R.drawable.emoji_1f687);
         sEmojisMap.put(0x1f69d, R.drawable.emoji_1f69d);
-        sEmojisMap.put(0x1f68b, R.drawable.emoji_1f68b); // TODO (rockerhieu) review this emoji
+        sEmojisMap.put(0x1f68b, R.drawable.emoji_1f68b);
         sEmojisMap.put(0x1f683, R.drawable.emoji_1f683);
         sEmojisMap.put(0x1f68e, R.drawable.emoji_1f68e);
         sEmojisMap.put(0x1f68c, R.drawable.emoji_1f68c);

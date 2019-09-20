@@ -101,19 +101,8 @@ public class ImageUtil {
         requestBuilder.preload();
     }
 
-    public static void downLoadImage(String imageUrl, ImageView imageView, RequestOptions requestOptions, OnBitmapLoaded onBitmapLoaded) {
-        if (imageView == null) {
-            return;
-        } else if (TextUtils.isEmpty(imageUrl)) {
-            if (requestOptions != null) {
-                imageView.setImageResource(requestOptions.getErrorId());
-            }
-            return;
-        }
-        Context context;
-        if (Looper.myLooper() == Looper.getMainLooper()) {
-            context = imageView.getContext();
-        } else {
+    public static void downLoadImage(String imageUrl,Context context, RequestOptions requestOptions, OnBitmapLoaded onBitmapLoaded) {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
             context = RuntimeManager.getInstance().getContext();
         }
         RequestBuilder<Bitmap> requestBuilder = Glide.with(context).asBitmap().load(imageUrl);

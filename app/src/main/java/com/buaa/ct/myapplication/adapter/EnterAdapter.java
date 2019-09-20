@@ -2,6 +2,7 @@ package com.buaa.ct.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,11 +16,11 @@ import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.sample.ImageSelectorTestActivity;
 import com.buaa.ct.myapplication.R;
+import com.buaa.ct.myapplication.activity.BingPicActivity;
 import com.buaa.ct.myapplication.activity.TestActivity;
 import com.buaa.ct.myapplication.activity.UIActivity;
 import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
-import com.buaa.ct.myapplication.sample.copyboard.CopyboardTestActivity;
 import com.buaa.ct.myapplication.sample.pudding.PuddingTestActivity;
 import com.buaa.ct.myapplication.sample.videocache.VideoCacheTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
@@ -27,7 +28,7 @@ import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 import java.util.Arrays;
 
 public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.ItemViewHolder> {
-    private static final int count = 9;
+    private static final int count = 10;
 
     public EnterAdapter(Context context) {
         super(context);
@@ -39,7 +40,8 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                 RuntimeManager.getInstance().getString(R.string.qr_code_test),
                 RuntimeManager.getInstance().getString(R.string.test_comment),
                 RuntimeManager.getInstance().getString(R.string.test_pudding),
-                RuntimeManager.getInstance().getString(R.string.test_copyboard)};
+                RuntimeManager.getInstance().getString(R.string.test_bing),
+                RuntimeManager.getInstance().getString(R.string.test_meizhi)};
         addDatas(Arrays.asList(nameList));
         addData(context.getResources().getString(R.string.ui));
     }
@@ -82,7 +84,10 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                         context.startActivity(new Intent(context, PuddingTestActivity.class));
                         break;
                     case 7:
-                        context.startActivity(new Intent(context, CopyboardTestActivity.class));
+                        context.startActivity(new Intent(context, BingPicActivity.class));
+                        break;
+                    case 8:
+                        MusicTools.goMusicTools(context,"iyumusic://eggshell/meizhi");
                         break;
                     case count - 1:
                         context.startActivity(new Intent(context, UIActivity.class));
