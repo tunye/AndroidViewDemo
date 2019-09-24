@@ -54,6 +54,14 @@
         <activity android:name=".sample.videocache.VideoCacheTestActivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.BingPicActivity" />
+        <activity android:name=".sample.swipe.SwipeTestActivity" />
+        <activity android:name=".sample.swipe.SwipeTestForDoor" />
+        <activity android:name=".sample.swipe.SwipeTestForStay" />
+        <activity android:name=".sample.swipe.SwipeTestForSlide" />
+        <activity android:name=".sample.swipe.SwipeTestForBezier" />
+        <activity android:name=".sample.swipe.SwipeTestForShutters" />
+        <activity android:name=".sample.swipe.SwipeTestForDrawer" />
+        <activity android:name=".sample.swipe.SwipeTestListActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

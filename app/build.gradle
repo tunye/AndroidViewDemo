@@ -19,6 +19,7 @@ android {
 
 dependencies {
     api project(path: ':core')
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
     implementation project(path: ':videocache')
     implementation project(path: ':imageselector')

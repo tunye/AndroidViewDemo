@@ -119,8 +119,8 @@ public class WelcomeActivity extends BaseActivity {
                                 public void finish() {
                                     if (palette.getPalette().getLightVibrantSwatch() != null) {
                                         picCopyRight.setTextColor(palette.getPalette().getLightVibrantSwatch().getBodyTextColor());
-                                    } else if (palette.getPalette().getMutedSwatch() != null) {
-                                        picCopyRight.setTextColor(palette.getPalette().getMutedSwatch().getBodyTextColor());
+                                    } else if (palette.getPalette().getLightMutedSwatch() != null) {
+                                        picCopyRight.setTextColor(palette.getPalette().getLightMutedSwatch().getBodyTextColor());
                                     } else {
                                         for (Palette.Swatch swatch : palette.getPalette().getSwatches()) {
                                             if (swatch != null) {

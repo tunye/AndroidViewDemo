@@ -27,6 +27,19 @@
     <string name="test_video_cache_oper">清除缓存</string>
     <string name="test_video_cache_play">点击播放</string>
 
+    <string name="test_swipe">滑动框架展示页</string>
+    <string name="test_swipe_list">列表效果</string>
+    <string name="test_swipe_bezier">贝塞尔效果</string>
+    <string name="test_swipe_qq_stay">qq退出效果</string>
+    <string name="test_swipe_door">推门效果</string>
+    <string name="test_swipe_wechat_slide">微信退出效果</string>
+    <string name="test_swipe_shutters">百叶窗效果</string>
+    <string name="test_swipe_drawer">侧边栏</string>
+    <string name="test_swipe_drawer_mode_drawer">抽屉模式</string>
+    <string name="test_swipe_drawer_mode_slide">滑动模式</string>
+    <string name="test_swipe_drawer_edge">有效边缘尺寸</string>
+    <string name="test_swipe_drawer_factor">关联移动因子</string>
+
     <string name="setting_app_color">应用皮肤</string>
     <string name="setting_app_language">应用语言</string>
     <string name="setting_app_night">夜间模式</string>

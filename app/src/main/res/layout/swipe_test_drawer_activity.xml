@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <RadioGroup
+        android:id="@+id/swipe_test_drawer_mode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/swipe_test_drawer_mode_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_swipe_drawer_mode_drawer"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/big_text" />
+
+        <RadioButton
+            android:id="@+id/swipe_test_drawer_mode_slide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin_large"
+            android:checked="true"
+            android:text="@string/test_swipe_drawer_mode_slide"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/big_text" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_swipe_drawer_edge"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/big_text" />
+
+        <TextView
+            android:id="@+id/swipe_test_drawer_egde"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:textColor="@color/skin_app_color"
+            android:textSize="@dimen/big_text" />
+
+        <SeekBar
+            android:id="@+id/swipe_test_drawer_egde_seekbar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="400" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/swipe_test_drawer_factor_ly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/test_swipe_drawer_factor"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/big_text" />
+
+        <TextView
+            android:id="@+id/swipe_test_drawer_factor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_weight="1"
+            android:textColor="@color/skin_app_color"
+            android:textSize="@dimen/big_text" />
+
+        <SeekBar
+            android:id="@+id/swipe_test_drawer_factor_seekbar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:max="100" />
+    </LinearLayout>
+</LinearLayout>

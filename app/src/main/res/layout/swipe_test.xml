@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <Button
+        android:id="@+id/go_list"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_list"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_drawer"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_drawer"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_bezier"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_bezier"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_door"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_door"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_stay"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_qq_stay"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_slide"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_wechat_slide"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <Button
+        android:id="@+id/go_shutters"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:background="@color/background_dark"
+        android:text="@string/test_swipe_shutters"
+        android:textColor="@color/text_color"
+        android:textSize="@dimen/big_text" />
+
+    <com.buaa.ct.swipe.SmartSwipeWrapper
+        android:id="@+id/swipe_example_view"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_margin="@dimen/activity_horizontal_margin_large">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:swipe_gravity="right|left">
+
+            <com.like.LikeButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#15BABA"
+                app:icon_size="25dp"
+                app:icon_type="heart" />
+
+            <com.like.LikeButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#CBECCC"
+                app:icon_size="25dp"
+                app:icon_type="Star" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/background_dark"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/title_text"
+            android:gravity="center"
+            android:text="@string/app_name" />
+
+        <com.like.LikeButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#15BABA"
+            app:icon_size="25dp"
+            app:icon_type="heart"
+            app:swipe_gravity="top" />
+
+        <com.like.LikeButton
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="#CBECCC"
+            app:icon_size="25dp"
+            app:icon_type="Thumb"
+            app:swipe_gravity="bottom" />
+    </com.buaa.ct.swipe.SmartSwipeWrapper>
+
+</LinearLayout>

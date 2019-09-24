@@ -26,6 +26,19 @@
     <string name="test_video_cache_oper">Clear</string>
     <string name="test_video_cache_play">Play</string>
 
+    <string name="test_swipe">Swipe Frame Test</string>
+    <string name="test_swipe_list">Recycler Item</string>
+    <string name="test_swipe_bezier">Bezier</string>
+    <string name="test_swipe_qq_stay">QQ Exit</string>
+    <string name="test_swipe_door">Pull Door</string>
+    <string name="test_swipe_wechat_slide">Wechat Exit</string>
+    <string name="test_swipe_shutters">Shutters</string>
+    <string name="test_swipe_drawer">Drawer</string>
+    <string name="test_swipe_drawer_mode_drawer">Drawer Mode</string>
+    <string name="test_swipe_drawer_mode_slide">Slide Mode</string>
+    <string name="test_swipe_drawer_edge">Effect edge size</string>
+    <string name="test_swipe_drawer_factor">Relative factor</string>
+
     <string name="setting_app_color">App Color</string>
     <string name="setting_app_language">Language</string>
     <string name="setting_app_night">Night</string>

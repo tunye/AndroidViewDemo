@@ -22,13 +22,14 @@ import com.buaa.ct.myapplication.activity.UIActivity;
 import com.buaa.ct.myapplication.sample.appskin.SkinActivity;
 import com.buaa.ct.myapplication.sample.comment.CommentTestActivity;
 import com.buaa.ct.myapplication.sample.pudding.PuddingTestActivity;
+import com.buaa.ct.myapplication.sample.swipe.SwipeTestActivity;
 import com.buaa.ct.myapplication.sample.videocache.VideoCacheTestActivity;
 import com.buaa.ct.qrcode.sample.QRCodeTestActivity;
 
 import java.util.Arrays;
 
 public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.ItemViewHolder> {
-    private static final int count = 10;
+    private static final int count = 11;
 
     public EnterAdapter(Context context) {
         super(context);
@@ -41,6 +42,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                 RuntimeManager.getInstance().getString(R.string.test_comment),
                 RuntimeManager.getInstance().getString(R.string.test_pudding),
                 RuntimeManager.getInstance().getString(R.string.test_bing),
+                RuntimeManager.getInstance().getString(R.string.test_swipe),
                 RuntimeManager.getInstance().getString(R.string.test_meizhi)};
         addDatas(Arrays.asList(nameList));
         addData(context.getResources().getString(R.string.ui));
@@ -87,6 +89,9 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
                         context.startActivity(new Intent(context, BingPicActivity.class));
                         break;
                     case 8:
+                        context.startActivity(new Intent(context, SwipeTestActivity.class));
+                        break;
+                    case 9:
                         MusicTools.goMusicTools(context,"iyumusic://eggshell/meizhi");
                         break;
                     case count - 1:
