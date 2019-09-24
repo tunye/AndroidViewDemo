@@ -46,5 +46,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.buaa.ct.easyui.pulldown.FlexibleView>
+
+        <FrameLayout
+            android:id="@+id/load_progress_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_default"
+            android:background="#ededed">
+
+            <ProgressBar
+                android:id="@+id/load_progress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_default"
+                android:indeterminate="false"
+                android:progressDrawable="@color/skin_color_accent" />
+        </FrameLayout>
     </FrameLayout>
 </LinearLayout>

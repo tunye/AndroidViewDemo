@@ -10,5 +10,6 @@
         <activity android:name=".share.ShareDialogTestActivity" />
         <activity android:name=".progresssbar.NumberProgressbarTestActivity" />
         <activity android:name=".progressimage.ProgressImageTestActivity" />
+        <activity android:name=".FallStar.FallSnowTestActivity" />
     </application>
 </manifest>

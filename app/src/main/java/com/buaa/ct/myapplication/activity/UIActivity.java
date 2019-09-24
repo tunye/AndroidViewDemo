@@ -27,9 +27,8 @@ public class UIActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         title.setText(R.string.ui);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
-        recyclerView.addItemDecoration(new DividerItemDecoration(DividerItemDecoration.TYPE_WITH_BORDER));
         recyclerView.setAdapter(new UIEnterAdapter(this));
+        setRecyclerViewProperty(recyclerView);
     }
 
     @Override

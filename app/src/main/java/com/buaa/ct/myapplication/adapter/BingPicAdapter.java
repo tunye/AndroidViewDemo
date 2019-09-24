@@ -1,8 +1,6 @@
 package com.buaa.ct.myapplication.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.ImageUtil;
+import com.buaa.ct.easyui.pulldown.FlexibleTestActivity;
 import com.buaa.ct.imageselector.view.OnlyPreviewActivity;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.entity.BingPic;
@@ -40,9 +39,7 @@ public class BingPicAdapter extends CoreRecyclerViewAdapter<BingPic, BingPicAdap
         holder.copyrightDetail.setOnClickListener(new INoDoubleClick() {
             @Override
             public void activeClick(View v) {
-                Uri uri = Uri.parse(item.copyRightUrl);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                context.startActivity(intent);
+                FlexibleTestActivity.start(context, item.copyRightUrl);
             }
         });
         ImageUtil.loadImage("http://s.cn.bing.net" + item.urlBase + "_640x360.jpg&rf=LaDigue_640x360.jpg", holder.pic);

@@ -40,8 +40,7 @@ public class MainActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         recyclerView.setAdapter(new EnterAdapter(this));
-        recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, true));
-        recyclerView.addItemDecoration(new DividerItemDecoration(DividerItemDecoration.TYPE_WITH_BORDER));
+        setRecyclerViewProperty(recyclerView);
         title.setText(R.string.app_name);
         back.setVisibility(View.INVISIBLE);
         enableToolbarOper(R.string.setting);

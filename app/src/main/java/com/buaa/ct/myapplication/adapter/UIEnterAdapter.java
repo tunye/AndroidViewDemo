@@ -15,6 +15,7 @@ import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.easyui.Banner.BannerTestActivity;
 import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
+import com.buaa.ct.easyui.FallStar.FallSnowTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
 import com.buaa.ct.easyui.progressimage.ProgressImageTestActivity;
 import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
@@ -37,6 +38,7 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
             RuntimeManager.getInstance().getString(R.string.test_animation),
             RuntimeManager.getInstance().getString(R.string.test_material_edittext),
             RuntimeManager.getInstance().getString(R.string.pull_door_test),
+            RuntimeManager.getInstance().getString(R.string.fall_test),
             RuntimeManager.getInstance().getString(R.string.qq_send_pic_test)};
 
     public UIEnterAdapter(Context context) {
@@ -90,6 +92,9 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
                         context.startActivity(new Intent(context, PullDoorTestActivity.class));
                         break;
                     case 10:
+                        context.startActivity(new Intent(context, FallSnowTestActivity.class));
+                        break;
+                    case 11:
                         context.startActivity(new Intent(context, ProgressImageTestActivity.class));
                         break;
                     default:

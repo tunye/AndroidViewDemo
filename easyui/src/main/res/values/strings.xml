@@ -7,6 +7,7 @@
     <string name="progress_test">Number Progress</string>
     <string name="qq_send_pic_test">QQ Send Pic</string>
     <string name="pull_door_test">Pull Door Effect</string>
+    <string name="fall_test">Fall Star Effect</string>
     <string name="share_test">Share Dialog</string>
     <string name="web_flexible_test">Web Flexible test</string>
 </resources>
