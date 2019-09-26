@@ -1,4 +1,4 @@
-package com.buaa.ct.appskin.sample;
+package com.buaa.ct.myapplication.sample.appskin;
 
 import android.content.Context;
 import android.graphics.PorterDuff;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.buaa.ct.appskin.R;
+import com.buaa.ct.myapplication.R;
 
 import java.util.ArrayList;
 import java.util.List;

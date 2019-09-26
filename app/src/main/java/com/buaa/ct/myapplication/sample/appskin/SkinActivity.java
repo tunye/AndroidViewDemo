@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.buaa.ct.appskin.SkinManager;
-import com.buaa.ct.appskin.sample.FlavorAdapter;
 import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.ImmersiveManager;
 import com.buaa.ct.core.util.GetAppColor;

@@ -29,6 +29,8 @@ import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.easyui.R;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -227,6 +229,7 @@ public class BannerView extends FrameLayout {
         return super.dispatchTouchEvent(ev);
     }
 
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef(flag = true, value = {LEFT, RIGHT, CENTER})
     @interface Align {
 

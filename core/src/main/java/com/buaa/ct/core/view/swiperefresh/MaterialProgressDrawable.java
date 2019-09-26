@@ -385,7 +385,7 @@ class MaterialProgressDrawable extends Drawable implements Animatable {
         mAnimation = animation;
     }
 
-    @Retention(RetentionPolicy.CLASS)
+    @Retention(RetentionPolicy.SOURCE)
     @IntDef({LARGE, DEFAULT})
     public @interface ProgressDrawableSize {
     }
