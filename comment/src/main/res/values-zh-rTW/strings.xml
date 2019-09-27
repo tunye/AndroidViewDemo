@@ -1,0 +1,16 @@
+<resources>
+    <string name="durationformatshort">%2$d\'%5$02d\'\'</string>
+    <string name="durationformatlong">%1$d\'%3$02d\'%5$02d\'\'</string>
+    <string name="presstalk">按住 說話</string>
+    <string name="letoff">松開 結束</string>
+    <string name="cancelsend">松開手指，取消發送</string>
+    <string name="uptocancelsend">手指上劃，取消發送</string>
+    <string name="recordfinish">錄音完成</string>
+    <string name="recordshort">錄音時間太短</string>
+    <string name="stopRecordFail">錄音停止失敗</string>
+    <string name="recordError"> 錄音啟動失敗，請檢查剩余存儲空間大小 或 是否被其他程序占用</string>
+    <string name="prepardError">錄音準備失敗</string>
+    <string name="storageError">本地存儲損壞，無法寫入文件</string>
+    <string name="volumeTips">請打開音量收聽</string>
+    <string name="comment_send">發送</string>
+</resources>

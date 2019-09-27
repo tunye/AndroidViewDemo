@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.graphics.Palette;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +26,7 @@ import com.buaa.ct.core.okhttp.SimpleRequestCallBack;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.ImageUtil;
 import com.buaa.ct.core.util.MyPalette;
+import com.buaa.ct.core.util.NotchUtils;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.progressbar.RoundProgressBar;
 import com.buaa.ct.myapplication.entity.BingPic;
@@ -44,8 +48,14 @@ public class WelcomeActivity extends BaseActivity {
     public void beforeSetLayout(Bundle saveBundle) {
         super.beforeSetLayout(saveBundle);
         palette = new MyPalette();
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getBannerPic();
+        Window window = getWindow();
+        window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
     }
 
     @Override
@@ -56,25 +66,34 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     public void onActivityCreated() {
         super.onActivityCreated();
-        requestMultiPermission(new int[]{PermissionPool.CAMERA, PermissionPool.WRITE_EXTERNAL_STORAGE}, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA});
+        requestMultiPermission(new int[]{PermissionPool.CAMERA, PermissionPool.WRITE_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
     }
 
     @Override
     public void onAccreditSucceed(int requestCode) {
-        super.onAccreditSucceed(requestCode);
-        initWelcomeAdProgress();
+        if (requestCode == PermissionPool.WRITE_EXTERNAL_STORAGE) {
+            initWelcomeAdProgress();
+        }
     }
 
     @Override
     public void onAccreditFailure(int requestCode) {
-        super.onAccreditFailure(requestCode);
-        finish();
+        boolean hasStoragePermission = hasPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        onRequestPermissionDenied(RuntimeManager.getInstance().getString(hasStoragePermission ? R.string.camera_permission_content : R.string.storage_permission_content),
+                new int[]{PermissionPool.CAMERA, PermissionPool.WRITE_EXTERNAL_STORAGE},
+                new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE});
     }
 
     @Override
     public void initWidget() {
         welcomeAdProgressbar = findViewById(R.id.welcome_ad_progressbar);
         escapeAd = findViewById(R.id.welcome_escape_ad);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && NotchUtils.hasNotchScreen())) {
+            FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) escapeAd.getLayoutParams();
+            layoutParams.topMargin += NotchUtils.getNotchOffset();
+            escapeAd.setLayoutParams(layoutParams);
+        }
         img = findViewById(R.id.welcome_img);
         picCopyRight = findViewById(R.id.welcome_pic_copyright);
     }
@@ -97,6 +116,7 @@ public class WelcomeActivity extends BaseActivity {
         welcomeAdProgressbar.setCricleProgressColor(GetAppColor.getInstance().getAppColor());
         welcomeAdProgressbar.setProgress(150);                  // 为progress设置一个初始值
         welcomeAdProgressbar.setMax(4000);                      // 总计等待4s
+        handler.removeMessages(HANDLER_AD_PROGRESS);
         handler.sendEmptyMessageDelayed(HANDLER_AD_PROGRESS, 500);                // 半秒刷新进度
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ct的核心庫</string>
+    <string name="permission">權限請求</string>
+    <string name="sure">好的</string>
+    <string name="cancel">取消</string>
+    <string name="storage_permission_content">應用需求請求您的存儲權限</string>
+    <string name="camera_permission_content">應用需求請求您的相機權限</string>
+    <string name="audio_permission_content">應用需求請求您的錄音權限</string>
+    <string name="location_permission_content">應用需求請求您的位置權限</string>
+    <string name="phone_state_permission_content">應用需求請求您的手機狀態權限</string>
+
+    <string name="swipe_hint">請再用力拖拽</string>
+    <string name="list_double">雙擊返回列表頭部</string>
+</resources>

@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Pudding</string>
+    <string name="default_pudding">默認彈框</string>
+    <string name="color_background">彩色背景彈框</string>
+    <string name="icon_custom">自定義圖標彈框</string>
+    <string name="verbose_text">長文本彈框</string>
+    <string name="infinite_pudding">不自動消失彈框</string>
+    <string name="start_activity">新Activity</string>
+    <string name="start_dialog">普通dialog</string>
+    <string name="start_dialog_fancy">融合dialog</string>
+    <string name="loading">加載中彈框</string>
+    <string name="swipe_dismiss">滑動消失彈框</string>
+    <string name="listener">帶監聽器彈框</string>
+    <string name="verbose_text_text">This is a verbose text . And has a lot of words . You can see this text is so long . 男人最怕的就是短啊。 所以長壹點最好了，我喜歡，^_^</string>
+    <string name="with_button">帶按鈕彈框</string>
+
+    <string name="pudding_title">這是壹個標題</string>
+    <string name="pudding_content">這是壹個默認文案</string>
+</resources>

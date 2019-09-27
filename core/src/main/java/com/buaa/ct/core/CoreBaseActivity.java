@@ -22,12 +22,14 @@ import android.widget.TextView;
 import com.buaa.ct.appskin.BaseSkinActivity;
 import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.ImmersiveManager;
-import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.manager.ScreenShotManager;
 import com.buaa.ct.core.util.PermissionPool;
 import com.buaa.ct.core.view.MaterialRippleLayout;
 import com.buaa.ct.core.view.image.DividerItemDecoration;
 import com.buaa.ct.core.view.swiperefresh.MySwipeRefreshLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CoreBaseActivity extends BaseSkinActivity {
     protected Context context;
@@ -161,28 +163,29 @@ public class CoreBaseActivity extends BaseSkinActivity {
         findViewById(R.id.toolbar_oper_sub_ripple).setVisibility(View.VISIBLE);
     }
 
-    public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions) {
-        requestMultiPermission(codes, permissions, RuntimeManager.getInstance().getString(R.string.storage_permission_content));
+    public boolean hasPermission(String permissionName) {
+        return ContextCompat.checkSelfPermission(this, permissionName) == PackageManager.PERMISSION_GRANTED;
     }
 
-    public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions, String dialogContent) {
+    public void requestMultiPermission(@PermissionPool.PermissionCode final int[] codes, @PermissionPool.PermissionName final String[] permissions) {
         boolean result = true;
         int i = 0;
+        List<String> denyPermissions = new ArrayList<>();
         for (String permission : permissions) {
             result = result && (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED);
-            if (result) {
-                onAccreditSucceed(codes[i]);
+            if (!result) {
+                denyPermissions.add(permission);
             }
             i++;
         }
-        if (this.isFinishing() || result) {
-            return;
+        if (result) {
+            onAccreditSucceed(codes[i - 1]);
+        } else {
+            ActivityCompat.requestPermissions(this, denyPermissions.toArray(new String[]{}), codes[i - 1]);
         }
-
-        onRequestPermissionDenied(dialogContent, codes, permissions);
     }
 
-    public void onRequestPermissionDenied(String dialogContent, final int[] codes, final String[] permissions) {
+    public void onRequestPermissionDenied(String dialogContent, final @PermissionPool.PermissionCode int[] codes, final @PermissionPool.PermissionName String[] permissions) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.permission);
         builder.setMessage(dialogContent);
@@ -190,9 +193,7 @@ public class CoreBaseActivity extends BaseSkinActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                for (int i = 0; i < codes.length; i++) {
-                    permissionDispose(codes[i], permissions[i]);
-                }
+                requestMultiPermission(codes, permissions);
             }
         });
         builder.show();
@@ -213,11 +214,17 @@ public class CoreBaseActivity extends BaseSkinActivity {
         if (grantResults.length == 0) {
             return;
         }
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        boolean hasFailed = false;
+        for (int item : grantResults) {
+            if (item == PackageManager.PERMISSION_DENIED) {
+                hasFailed = true;
+            }
+        }
+
+        if (!hasFailed) {
             //授权成功
             onAccreditSucceed(requestCode);
-        } else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-            //授权失败
+        } else {
             onAccreditFailure(requestCode);
         }
     }

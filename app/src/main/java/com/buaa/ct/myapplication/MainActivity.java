@@ -1,12 +1,10 @@
 package com.buaa.ct.myapplication;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.buaa.ct.core.listener.INoDoubleClick;
-import com.buaa.ct.core.view.image.DividerItemDecoration;
 import com.buaa.ct.myapplication.activity.SettingActivity;
 import com.buaa.ct.myapplication.adapter.EnterAdapter;
 import com.buaa.ct.myapplication.sample.base.BaseActivity;

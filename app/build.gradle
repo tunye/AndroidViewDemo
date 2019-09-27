@@ -21,11 +21,11 @@ dependencies {
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
     implementation 'com.buaa.ct:videocache:1.0.0'
-    implementation 'com.buaa.ct:image-selector:1.0.0'
-    implementation 'com.buaa.ct:pudding:1.0.0'
-    implementation 'com.buaa.ct:qrcode:1.0.0'
-    implementation 'com.buaa.ct:comment:1.0.0'
+    implementation 'com.buaa.ct:image-selector:1.1.0'
+    implementation 'com.buaa.ct:pudding:1.0.1'
+    implementation 'com.buaa.ct:qrcode:1.0.1'
+    implementation 'com.buaa.ct:comment:1.0.1'
 
-    implementation project(path: ':easyui')
+    api project(path: ':easyui')
     implementation project(path: ':stickydot')
 }

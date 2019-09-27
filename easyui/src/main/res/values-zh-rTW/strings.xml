@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">EasyUi</string>
+    <string name="draggable_text">8</string>
+
+    <string name="banner_test">輪播圖</string>
+    <string name="bound_num_test">數字效果</string>
+    <string name="progress_test">數字進度條</string>
+    <string name="qq_send_pic_test">QQ發圖效果</string>
+    <string name="pull_door_test">推門效果</string>
+    <string name="fall_test">下落效果</string>
+    <string name="share_test">分享彈框</string>
+    <string name="web_flexible_test">網頁回彈效果</string>
+</resources>

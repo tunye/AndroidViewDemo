@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">測試應用</string>
+    <string name="ui">UI相關頁面展示</string>
+    <string name="setting">設置</string>
+    <string name="welcome_escape_ad">跳過</string>
+
+    <string name="test_bing">Bing每日壹圖</string>
+    <string name="test_meizhi">妹紙</string>
+    <string name="test_animation">動畫</string>
+    <string name="test_material_edittext">Material輸入框</string>
+    <string name="test_indicator">指示器</string>
+    <string name="test_skin">皮膚適配</string>
+    <string name="test_comment">仿微信評論框</string>
+    <string name="test_copyboard">仿UC 剪貼板</string>
+    <string name="test_pudding">頁面內toast</string>
+    <string name="test_video_cache">視頻緩存</string>
+
+    <string name="test_bing_load_all">Bing圖片已經加載完畢</string>
+    <string name="test_bing_info">詳情</string>
+
+    <string name="app_no_change">應用皮膚沒有改變</string>
+    <string name="test_skin_oper">應用</string>
+
+    <string name="test_comment_oper">emoji選擇器</string>
+
+    <string name="test_video_cache_oper">清除緩存</string>
+    <string name="test_video_cache_play">點擊播放</string>
+
+    <string name="test_swipe">滑動框架展示頁</string>
+    <string name="test_swipe_list">列表效果</string>
+    <string name="test_swipe_bezier">貝塞爾效果</string>
+    <string name="test_swipe_qq_stay">qq退出效果</string>
+    <string name="test_swipe_door">推門效果</string>
+    <string name="test_swipe_wechat_slide">微信退出效果</string>
+    <string name="test_swipe_shutters">百葉窗效果</string>
+    <string name="test_swipe_drawer">側邊欄</string>
+    <string name="test_swipe_drawer_mode_drawer">抽屜模式</string>
+    <string name="test_swipe_drawer_mode_slide">滑動模式</string>
+    <string name="test_swipe_drawer_edge">有效邊緣尺寸</string>
+    <string name="test_swipe_drawer_factor">關聯移動因子</string>
+
+    <string name="setting_app_color">應用皮膚</string>
+    <string name="setting_app_language">應用語言</string>
+    <string name="setting_app_night">夜間模式</string>
+    <string name="setting_app_night_on">啟用</string>
+    <string name="setting_app_night_off">停用</string>
+    <string name="setting_app_language_system">跟隨系統</string>
+    <string name="setting_app_language_zh">簡體中文</string>
+    <string name="setting_app_language_zh_tw">繁體中文</string>
+    <string name="setting_app_language_en">英文</string>
+</resources>

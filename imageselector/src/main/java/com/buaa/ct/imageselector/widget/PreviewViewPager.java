@@ -9,7 +9,7 @@ import android.view.MotionEvent;
  * Created by dee on 15/11/24.
  */
 public class PreviewViewPager extends ViewPager {
-
+    private boolean lock;
     public PreviewViewPager(Context context) {
         super(context);
     }
@@ -21,7 +21,11 @@ public class PreviewViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         try {
-            return super.onTouchEvent(ev);
+            if (lock) {
+                return false;
+            } else {
+                return super.onTouchEvent(ev);
+            }
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
         }
@@ -31,10 +35,18 @@ public class PreviewViewPager extends ViewPager {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         try {
-            return super.onInterceptTouchEvent(ev);
+            if (lock) {
+                return false;
+            } else {
+                return super.onInterceptTouchEvent(ev);
+            }
         } catch (IllegalArgumentException ex) {
             ex.printStackTrace();
         }
         return false;
+    }
+
+    public void setLock(boolean lock) {
+        this.lock = lock;
     }
 }

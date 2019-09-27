@@ -5,6 +5,10 @@
     <string name="sure">sure</string>
     <string name="cancel">cancel</string>
     <string name="storage_permission_content">This app needs your phone storage</string>
+    <string name="camera_permission_content">This app needs your phone camera</string>
+    <string name="audio_permission_content">This app needs your phone microphone</string>
+    <string name="location_permission_content">This app needs your phone gps location</string>
+    <string name="phone_state_permission_content">This app needs your phone state</string>
 
     <string name="swipe_hint">Swipe more harder</string>
     <string name="list_double">Double click to return list top</string>

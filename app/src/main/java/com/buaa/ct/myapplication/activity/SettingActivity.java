@@ -45,12 +45,8 @@ public class SettingActivity extends BaseActivity {
         findViewById(R.id.setting_app_language).setOnClickListener(new INoDoubleClick() {
             @Override
             public void activeClick(View v) {
-                int cur = getCurLanguage();
-                if (cur == 0) {
-                    setCurLanguage(1);
-                } else {
-                    setCurLanguage(0);
-                }
+                int cur = (getCurLanguage() + 1) % 4;
+                setCurLanguage(cur);
                 ChangePropery.updateLanguageMode(cur);
                 Intent intent = new Intent(ChangePropertyBroadcast.FLAG);
                 sendBroadcast(intent);
@@ -76,7 +72,20 @@ public class SettingActivity extends BaseActivity {
     public void onActivityCreated() {
         super.onActivityCreated();
         appColorValue.setText(getAppColorName());
-        appLanguageValue.setText(getCurLanguage() == 0 ? R.string.setting_app_language_zh : R.string.setting_app_language_en);
+        switch (getCurLanguage()) {
+            case 0:
+                appLanguageValue.setText(R.string.setting_app_language_system);
+                break;
+            case 1:
+                appLanguageValue.setText(R.string.setting_app_language_zh);
+                break;
+            case 2:
+                appLanguageValue.setText(R.string.setting_app_language_en);
+                break;
+            case 3:
+                appLanguageValue.setText(R.string.setting_app_language_zh_tw);
+                break;
+        }
         nightValue.setText(getCurNight() == 1 ? R.string.setting_app_night_on : R.string.setting_app_night_off);
         title.setText(R.string.setting);
     }

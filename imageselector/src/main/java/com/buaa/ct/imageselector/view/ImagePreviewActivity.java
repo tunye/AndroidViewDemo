@@ -3,6 +3,7 @@ package com.buaa.ct.imageselector.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -47,6 +48,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
     public static final String OUTPUT_ISDONE = "isDone";
 
     private View selectBarLayout;
+    private View root;
     private CheckBox checkboxSelect;
     private PreviewViewPager viewPager;
 
@@ -63,6 +65,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         intent.putExtra(EXTRA_POSITION, position);
         intent.putExtra(EXTRA_MAX_SELECT_NUM, maxSelectNum);
         context.startActivityForResult(intent, REQUEST_PREVIEW);
+        context.overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
     }
 
     @Override
@@ -73,6 +76,7 @@ public class ImagePreviewActivity extends CoreBaseActivity {
     @Override
     public void initWidget() {
         super.initWidget();
+        root = findViewById(R.id.preview_root);
         checkboxSelect = findViewById(R.id.checkbox_select);
         viewPager = findViewById(R.id.preview_pager);
         selectBarLayout = findViewById(R.id.select_bar_layout);
@@ -140,6 +144,11 @@ public class ImagePreviewActivity extends CoreBaseActivity {
         selectImages = (List<LocalMedia>) getIntent().getSerializableExtra(EXTRA_PREVIEW_SELECT_LIST);
         maxSelectNum = getIntent().getIntExtra(EXTRA_MAX_SELECT_NUM, 9);
         position = getIntent().getIntExtra(EXTRA_POSITION, 1);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
     }
 
     @Override
@@ -198,6 +207,19 @@ public class ImagePreviewActivity extends CoreBaseActivity {
             }
         }
         return false;
+    }
+
+    public void scale(float dx, float dy, float ratio) {
+        root.setTranslationX(dx);
+        root.setTranslationY(dy);
+        root.setScaleX(ratio);
+        root.setScaleY(ratio);
+        root.setAlpha(ratio);
+        if (ratio == 0) {
+            viewPager.setLock(false);
+        } else {
+            viewPager.setLock(true);
+        }
     }
 
     private void hideStatusBar() {

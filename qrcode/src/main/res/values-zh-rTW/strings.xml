@@ -1,0 +1,6 @@
+<resources>
+    <string name="qr_code_test">二維碼</string>
+    <string name="xqrcode_pay_attention">註意</string>
+    <string name="xqrcode_not_get_permission">照相機打開失敗，請檢查權限是否未獲取！</string>
+    <string name="xqrcode_submit">確定</string>
+</resources>

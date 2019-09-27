@@ -23,7 +23,7 @@ android {
 
 dependencies {
     implementation 'com.android.support:design:28.0.0'
-    api 'com.buaa.ct:core:1.0.0'
+    api 'com.buaa.ct:core:1.1.0'
 
     implementation 'com.daimajia.easing:library:2.1@aar'
     implementation 'com.daimajia.androidanimations:library:2.3@aar'
