@@ -68,7 +68,14 @@ public abstract class CoreRecyclerViewAdapter<T, V extends CoreRecyclerViewAdapt
     }
 
     public void setDataSet(List<T> t) {
+        setDataSet(t, false);
+    }
+
+    public void setDataSet(List<T> t, boolean saveDataToOP) {
         datas = new ArrayList<>(t);
+        if (saveDataToOP && baseEntityOp != null) {
+            baseEntityOp.saveData(t);
+        }
         notifyDataSetChanged();
     }
 

@@ -44,6 +44,8 @@
     <string name="setting_app_night">Night</string>
     <string name="setting_app_night_on">On</string>
     <string name="setting_app_night_off">Off</string>
-    <string name="setting_app_language_zh">Chinese</string>
+    <string name="setting_app_language_system">System</string>
+    <string name="setting_app_language_zh">Simple Chinese</string>
+    <string name="setting_app_language_zh_tw">Traditional Chinese</string>
     <string name="setting_app_language_en">English</string>
 </resources>

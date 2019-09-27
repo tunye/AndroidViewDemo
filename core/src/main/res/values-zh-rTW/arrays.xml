@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="flavors">
+        <item>系統默認</item>
+        <item>火熱紅</item>
+        <item>玫瑰紅</item>
+        <item>櫻花粉</item>
+        <item>誘惑紫</item>
+        <item>皇家藍</item>
+        <item>四季青</item>
+        <item>鴨翅綠</item>
+        <item>青草綠</item>
+        <item>檸檬黃</item>
+        <item>陽光橙</item>
+        <item>典雅灰</item>
+    </string-array>
+    <string-array name="flavors_def">
+        <item>default</item>
+        <item>red</item>
+        <item>rose</item>
+        <item>pink</item>
+        <item>purple</item>
+        <item>indigo</item>
+        <item>cyan</item>
+        <item>teal</item>
+        <item>lgreen</item>
+        <item>lime</item>
+        <item>orange</item>
+        <item>gray</item>
+    </string-array>
+</resources>

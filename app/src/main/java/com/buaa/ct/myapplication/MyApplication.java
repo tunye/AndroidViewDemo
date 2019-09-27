@@ -12,6 +12,8 @@ import com.buaa.ct.appskin.SkinManager;
 import com.buaa.ct.appskin.callback.ISkinChangedListener;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
+import com.buaa.ct.core.util.SPUtils;
+import com.buaa.ct.myapplication.activity.SettingActivity;
 import com.buaa.ct.myapplication.receiver.ChangePropertyBroadcast;
 import com.buaa.ct.myapplication.sample.swipe.SwipeTestForDrawer;
 import com.buaa.ct.swipe.SmartSwipeBack;
@@ -34,6 +36,7 @@ public class MyApplication extends Application {
             StrictMode.setVmPolicy(builder.build());
         }
         RuntimeManager.getInstance().initRuntimeManager(this);
+        ChangePropery.updateLanguageMode(SPUtils.loadInt(ConfigManager.getInstance().getPreferences(), SettingActivity.LANGUAGE, 0));
         SmartSwipeBack.activityBezierBack(this, activitySwipeBackFilter);
         if (shouldInit()) {
             activityList = new ArrayList<>();

@@ -22,13 +22,17 @@ import android.widget.ImageView;
 import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.ImageUtil;
+import com.buaa.ct.core.util.SpringUtil;
 import com.buaa.ct.core.util.ThreadPoolUtil;
 import com.buaa.ct.core.util.ThreadUtils;
 import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.imageselector.R;
+import com.buaa.ct.imageselector.photo.PhotoView;
+import com.buaa.ct.imageselector.photo.listener.OnPhotoTapListener;
+import com.buaa.ct.imageselector.photo.listener.OnSingleFingerMoveListener;
 import com.bumptech.glide.request.RequestOptions;
-import com.github.chrisbanes.photoview.OnPhotoTapListener;
-import com.github.chrisbanes.photoview.PhotoView;
+import com.facebook.rebound.SimpleSpringListener;
+import com.facebook.rebound.Spring;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -43,7 +47,7 @@ import java.util.Locale;
 public class ImagePreviewFragment extends Fragment {
     public static final String PATH = "path";
     private PhotoView photoView;
-
+    private boolean enableCloseListener;
     public static ImagePreviewFragment getInstance(String path) {
         ImagePreviewFragment fragment = new ImagePreviewFragment();
         Bundle bundle = new Bundle();
@@ -57,6 +61,7 @@ public class ImagePreviewFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View contentView = inflater.inflate(R.layout.fragment_image_preview, container, false);
         photoView = contentView.findViewById(R.id.preview_image);
+        photoView.setImageAlpha(255);
         if (getArguments() == null) {
             return container;
         } else {
@@ -76,16 +81,88 @@ public class ImagePreviewFragment extends Fragment {
             photoView.setOnPhotoTapListener(new OnPhotoTapListener() {
                 @Override
                 public void onPhotoTap(ImageView view, float x, float y) {
-                    CoreBaseActivity activity = (CoreBaseActivity) getActivity();
-                    if (activity instanceof ImagePreviewActivity) {
-                        ((ImagePreviewActivity) activity).switchBarVisibility();
-                    } else if (activity instanceof OnlyPreviewActivity) {
-                        ((OnlyPreviewActivity) activity).switchBarVisibility();
+                    hideToolBar();
+                }
+            });
+            photoView.setOnSingleFingerMoveListener(new OnSingleFingerMoveListener() {
+                @Override
+                public void move(float diffX, float diffY) {
+                    float ratio = diffY / RuntimeManager.getInstance().getScreenHeight() * 2;
+                    if (Math.abs(diffY) > 2 * Math.abs(diffX) && diffY > 0) {
+                        enableCloseListener = true;
                     }
+                    if (enableCloseListener) {
+                        scale(diffX, diffY, ratio);
+                    }
+                }
+
+                @Override
+                public void release(final float diffX, final float diffY, boolean cancel) {
+                    float ratio = diffY / RuntimeManager.getInstance().getScreenHeight() * 2;
+                    if (enableCloseListener)
+                        if (cancel || (diffY > 0 && ratio < 0.2)) {
+                            SpringUtil.getInstance().addListener(new SimpleSpringListener() {
+                                @Override
+                                public void onSpringUpdate(Spring spring) {
+                                    super.onSpringUpdate(spring);
+                                    float ratio = (float) spring.getCurrentValue();
+                                    scale(diffX * ratio, diffY * ratio, ratio);
+                                }
+
+                                @Override
+                                public void onSpringAtRest(Spring spring) {
+                                    super.onSpringAtRest(spring);
+                                    SpringUtil.getInstance().destory();
+                                }
+                            });
+                            SpringUtil.getInstance().setCurrentValue(ratio);
+                            SpringUtil.getInstance().setEndValue(0);
+                        } else if (diffY > 0) {
+                            SpringUtil.getInstance().addListener(new SimpleSpringListener() {
+                                @Override
+                                public void onSpringUpdate(Spring spring) {
+                                    super.onSpringUpdate(spring);
+                                    float ratio = (float) spring.getCurrentValue();
+                                    scale(diffX * ratio, diffY * ratio, ratio);
+                                }
+
+                                @Override
+                                public void onSpringAtRest(Spring spring) {
+                                    super.onSpringAtRest(spring);
+                                    SpringUtil.getInstance().destory();
+                                    getActivity().finish();
+                                    getActivity().overridePendingTransition(R.anim.fade_in, R.anim.fade_out_fast);
+                                }
+                            });
+                            SpringUtil.getInstance().setCurrentValue(ratio);
+                            SpringUtil.getInstance().setEndValue(1);
+                        }
+
+                    enableCloseListener = false;
                 }
             });
         }
         return contentView;
+    }
+
+    private void scale(final float diffX, final float diffY, float ratio) {
+        CoreBaseActivity activity = (CoreBaseActivity) getActivity();
+        if (activity instanceof ImagePreviewActivity) {
+            // 选图界面不建议增加下滑返回
+//            ((ImagePreviewActivity) activity).scale(diffX, diffY, 1 - ratio);
+        } else if (activity instanceof OnlyPreviewActivity) {
+            ((OnlyPreviewActivity) activity).scale(diffX, diffY, 1 - ratio);
+            photoView.setImageAlpha((int) ((1 - ratio) * 255));
+        }
+    }
+
+    private void hideToolBar() {
+        CoreBaseActivity activity = (CoreBaseActivity) getActivity();
+        if (activity instanceof ImagePreviewActivity) {
+            ((ImagePreviewActivity) activity).switchBarVisibility();
+        } else if (activity instanceof OnlyPreviewActivity) {
+            ((OnlyPreviewActivity) activity).switchBarVisibility();
+        }
     }
 
     public void save() {

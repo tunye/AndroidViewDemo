@@ -8,7 +8,7 @@
     <dimen name="title_padding">2dp</dimen>
 
     <dimen name="action_button_height">32dp</dimen>
-    <dimen name="action_button_text_size">14sp</dimen>
+    <dimen name="action_button_text_size">14dp</dimen>
     <dimen name="action_button_min_width">56dp</dimen>
     <dimen name="action_button_padding_horizontal">4dp</dimen>
 
@@ -31,11 +31,11 @@
     <dimen name="line_default">1dp</dimen>
     <dimen name="line_thick">2dp</dimen>
 
-    <dimen name="small_text">8sp</dimen>
-    <dimen name="default_text">10sp</dimen>
-    <dimen name="medium_text">12sp</dimen>
-    <dimen name="big_text">14sp</dimen>
-    <dimen name="large_text">16sp</dimen>
-    <dimen name="title_text">20sp</dimen>
-    <dimen name="extreme_large_text">32sp</dimen>
+    <dimen name="small_text">8dp</dimen>
+    <dimen name="default_text">10dp</dimen>
+    <dimen name="medium_text">12dp</dimen>
+    <dimen name="big_text">14dp</dimen>
+    <dimen name="large_text">16dp</dimen>
+    <dimen name="title_text">20dp</dimen>
+    <dimen name="extreme_large_text">32dp</dimen>
 </resources>

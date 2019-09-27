@@ -1,7 +1,9 @@
 package com.buaa.ct.imageselector.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -31,6 +33,7 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
     private int initPos;
     private PreviewViewPager viewPager;
     private View saveLocal;
+    private View root;
     private SimpleFragmentAdapter fragmentAdapter;
     private boolean isShowBar = true;
     private boolean enableSave;
@@ -55,6 +58,7 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
         intent.putExtra(EXTRA_INIT_POS, initPos);
         intent.putExtra(EXTRA_SAVE_FUNC, enableSave);
         context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(R.anim.fade_out, R.anim.fade_in);
     }
 
     @Override
@@ -68,11 +72,18 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
         images = (List<String>) getIntent().getSerializableExtra(EXTRA_PREVIEW_LIST);
         enableSave = getIntent().getBooleanExtra(EXTRA_SAVE_FUNC, false);
         initPos = getIntent().getIntExtra(EXTRA_INIT_POS, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            getWindow().setAttributes(lp);
+        }
     }
 
     @Override
     public void initWidget() {
         super.initWidget();
+        findViewById(android.R.id.content).setBackgroundColor(0x44000000);
+        root = findViewById(R.id.preview_root);
         viewPager = findViewById(R.id.preview_pager);
         saveLocal = findViewById(R.id.save_local);
         findViewById(R.id.select_bar_layout).setVisibility(View.GONE);
@@ -120,6 +131,14 @@ public class OnlyPreviewActivity extends CoreBaseActivity {
         } else {
             saveLocal.setVisibility(View.GONE);
         }
+    }
+
+    public void scale(float dx, float dy, float ratio) {
+        root.setTranslationX(dx);
+        root.setTranslationY(dy);
+        root.setScaleX(ratio);
+        root.setScaleY(ratio);
+        root.setAlpha(ratio);
     }
 
     private void hideStatusBar() {

@@ -5,6 +5,10 @@
     <string name="sure">好的</string>
     <string name="cancel">取消</string>
     <string name="storage_permission_content">应用需求请求您的存储权限</string>
+    <string name="camera_permission_content">应用需求请求您的相机权限</string>
+    <string name="audio_permission_content">应用需求请求您的录音权限</string>
+    <string name="location_permission_content">应用需求请求您的位置权限</string>
+    <string name="phone_state_permission_content">应用需求请求您的手机状态权限</string>
 
     <string name="swipe_hint">请再用力拖拽</string>
     <string name="list_double">双击返回列表头部</string>

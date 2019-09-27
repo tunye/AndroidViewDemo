@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ImageSelector</string>
+    <string name="all_image">所有圖片</string>
+    <string name="picture">圖片</string>
+    <string name="take_picture">拍攝照片</string>
+    <string name="preview">預覽</string>
+    <string name="preview_num">預覽(%1$d)</string>
+    <string name="choose">選擇</string>
+    <string name="done">完成</string>
+    <string name="save_success">圖片已保存，位置是 </string>
+    <string name="use">使用</string>
+    <string name="done_num">完成(%1$d/%2$d)</string>
+    <string name="num_postfix">%1$d張</string>
+    <string name="message_max_num">妳最多可以選擇%1$d張圖片</string>
+    <string name="message_min_num">請最少選擇1張圖片</string>
+    <string name="save_ing">保存圖片中…</string>
+    <string name="no_pic">系統中無照片</string>
+    <string name="crop">裁剪</string>
+
+    <string name="max_select_num">可選擇圖片數量</string>
+    <string name="select_picture">選擇圖片</string>
+    <string name="select_mode">選擇模式</string>
+    <string name="single">單選</string>
+    <string name="multiple">多選</string>
+    <string name="show_camera">顯示拍照選項</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="enable_preview">打開預覽選項</string>
+    <string name="enable_crop">打開剪切選項</string>
+    <string name="enable">打開</string>
+    <string name="disable">關閉</string>
+
+    <string name="test_select_image">照片選擇器</string>
+</resources>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.buaa.ct.core.CoreBaseActivity;
 import com.buaa.ct.core.manager.RuntimeManager;
+import com.buaa.ct.core.util.LanguageUtil;
 import com.buaa.ct.myapplication.ChangePropery;
 import com.buaa.ct.myapplication.MyApplication;
 
