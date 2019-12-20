@@ -8,6 +8,7 @@ import com.buaa.ct.appskin.SkinManager;
 import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.SPUtils;
+import com.buaa.ct.core.view.CustomToast;
 import com.buaa.ct.myapplication.ChangePropery;
 import com.buaa.ct.myapplication.ConfigManager;
 import com.buaa.ct.myapplication.R;
@@ -55,6 +56,10 @@ public class SettingActivity extends BaseActivity {
         findViewById(R.id.setting_app_night).setOnClickListener(new INoDoubleClick() {
             @Override
             public void activeClick(View v) {
+                if (ChangePropery.isSystemDark()) {
+                    CustomToast.getInstance().showToast("当前系统设定为全局暗黑模式。解除全局设置后，可以设定应用内夜间模式");
+                    return;
+                }
                 int cur = getCurNight();
                 if (cur == 0) {
                     setCurNight(1);
@@ -86,7 +91,11 @@ public class SettingActivity extends BaseActivity {
                 appLanguageValue.setText(R.string.setting_app_language_zh_tw);
                 break;
         }
-        nightValue.setText(getCurNight() == 1 ? R.string.setting_app_night_on : R.string.setting_app_night_off);
+        if (ChangePropery.isSystemDark()) {
+            nightValue.setText(R.string.setting_app_night_on);
+        } else {
+            nightValue.setText(getCurNight() == 1 ? R.string.setting_app_night_on : R.string.setting_app_night_off);
+        }
         title.setText(R.string.setting);
     }
 

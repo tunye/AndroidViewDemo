@@ -20,13 +20,17 @@ android {
 dependencies {
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
-    implementation project(path: ':videocache')
-    implementation project(path: ':imageselector')
-    implementation project(path: ':pudding')
-    implementation project(path: ':qrcode')
-    implementation project(path: ':comment')
-
-    api project(path: ':core')
-    api project(path: ':easyui')
+//    implementation project(path: ':videocache')
+//    implementation project(path: ':imageselector')
+//    implementation project(path: ':pudding')
+//    implementation project(path: ':qrcode')
+//    implementation project(path: ':comment')
+    implementation 'com.buaa.ct:videocache:1.0.0'
+    implementation 'com.buaa.ct:image-selector:1.1.4'
+    implementation 'com.buaa.ct:pudding:1.0.5'
+    implementation 'com.buaa.ct:qrcode:1.0.5'
+    implementation 'com.buaa.ct:comment:1.1.3'
+//    api project(path: ':core')
+    implementation project(path: ':easyui')
     implementation project(path: ':stickydot')
 }
