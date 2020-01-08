@@ -69,6 +69,12 @@ public class SwipeTestListActivity extends BaseActivity {
             public void activeClick(View v) {
                 if (swipeAdapter.getCurConsumer() == 1) {
                     swipeAdapter = new SwipeAdapter(context);
+                    swipeAdapter.setOnItemClickListener(new OnRecycleViewItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            CustomToast.getInstance().showToast("点击了" + position + "位置");
+                        }
+                    });
                     swipeAdapter.setDataSet(datas);
                     recyclerView.setAdapter(swipeAdapter);
                     recyclerView.scrollToPosition(0);
@@ -76,6 +82,12 @@ public class SwipeTestListActivity extends BaseActivity {
                     CustomToast.getInstance().showToast("拉伸效果");
                 } else {
                     swipeAdapter = new SwipeAdapter(context, 1);
+                    swipeAdapter.setOnItemClickListener(new OnRecycleViewItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+                            CustomToast.getInstance().showToast("点击了" + position + "位置");
+                        }
+                    });
                     swipeAdapter.setDataSet(datas);
                     recyclerView.setAdapter(swipeAdapter);
                     recyclerView.scrollToPosition(0);

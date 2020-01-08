@@ -66,7 +66,7 @@ public class ImmersiveInsertFrameLayout extends FrameLayout {
             if (statusBarHeight == 0) {
                 Rect outRect = new Rect();
                 window.getDecorView().getWindowVisibleDisplayFrame(outRect);
-                statusBarHeight = RuntimeManager.getInstance().getWindowHeight() - outRect.height();
+                statusBarHeight = RuntimeManager.getInstance().getScreenHeight() - outRect.height();
             }
             setMargins(this, 0, statusBarHeight, 0, 0);
         }

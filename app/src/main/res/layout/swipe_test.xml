@@ -91,19 +91,17 @@
             android:orientation="horizontal"
             app:swipe_gravity="right|left">
 
-            <com.like.LikeButton
+            <View
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#15BABA"
-                app:icon_size="25dp"
-                app:icon_type="heart" />
+                android:layout_weight="1" />
 
-            <com.like.LikeButton
+            <View
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="#CBECCC"
-                app:icon_size="25dp"
-                app:icon_type="Star" />
+                android:layout_weight="1" />
         </LinearLayout>
 
         <TextView
@@ -115,20 +113,16 @@
             android:gravity="center"
             android:text="@string/app_name" />
 
-        <com.like.LikeButton
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#15BABA"
-            app:icon_size="25dp"
-            app:icon_type="heart"
             app:swipe_gravity="top" />
 
-        <com.like.LikeButton
+        <View
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="#CBECCC"
-            app:icon_size="25dp"
-            app:icon_type="Thumb"
             app:swipe_gravity="bottom" />
     </com.buaa.ct.swipe.SmartSwipeWrapper>
 

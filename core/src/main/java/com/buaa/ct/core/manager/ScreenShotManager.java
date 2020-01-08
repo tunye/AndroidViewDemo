@@ -216,8 +216,8 @@ public class ScreenShotManager {
          * 判断依据二: 尺寸判断
          */
         // 如果图片尺寸超出屏幕, 则认为当前没有截屏
-        if (!((width <= RuntimeManager.getInstance().getWindowWidth() && height <= RuntimeManager.getInstance().getWindowHeight())
-                || (height <= RuntimeManager.getInstance().getWindowWidth() && width <= RuntimeManager.getInstance().getWindowHeight()))) {
+        if (!((width <= RuntimeManager.getInstance().getScreenWidth() && height <= RuntimeManager.getInstance().getScreenHeight())
+                || (height <= RuntimeManager.getInstance().getScreenWidth() && width <= RuntimeManager.getInstance().getScreenHeight()))) {
             return false;
         }
 

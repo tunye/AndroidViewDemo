@@ -64,7 +64,7 @@ public class FlexibleTestActivity extends CoreBaseActivity {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int progress = (int) animation.getAnimatedValue();
-                loadProgress.getLayoutParams().width = (int) (progress / 100f * RuntimeManager.getInstance().getWindowWidth());
+                loadProgress.getLayoutParams().width = (int) (progress / 100f * RuntimeManager.getInstance().getScreenWidth());
                 loadProgress.requestLayout();
             }
         });

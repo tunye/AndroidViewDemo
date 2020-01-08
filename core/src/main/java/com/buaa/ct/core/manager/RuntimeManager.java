@@ -52,14 +52,6 @@ public class RuntimeManager {
         return displayMetrics;
     }
 
-    public int getWindowWidth() {
-        return getDisplayMetrics().widthPixels;
-    }
-
-    public int getWindowHeight() {
-        return getDisplayMetrics().heightPixels;
-    }
-
     public int getScreenWidth() {
         WindowManager wm = (WindowManager) context.getSystemService(WINDOW_SERVICE);
         Point p = new Point();
