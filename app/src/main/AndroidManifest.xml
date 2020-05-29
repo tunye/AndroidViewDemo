@@ -52,6 +52,7 @@
         <activity android:name=".sample.comment.EmojiTestActivity" />
         <activity android:name=".sample.pudding.PuddingTestActivity" />
         <activity android:name=".sample.videocache.VideoCacheTestActivity" />
+        <activity android:name=".activity.TouchScrollRecyclerActivity"/>
         <activity android:name=".MainActivity" />
         <activity android:name=".activity.BingPicActivity" />
         <activity android:name=".sample.swipe.SwipeTestActivity" />

@@ -2,7 +2,6 @@ package com.buaa.ct.myapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
 import com.buaa.ct.myapplication.R;
 import com.buaa.ct.myapplication.activity.TestActivity;
+import com.buaa.ct.myapplication.activity.TouchScrollRecyclerActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 
 import java.util.Arrays;
@@ -39,7 +39,8 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
             RuntimeManager.getInstance().getString(R.string.test_material_edittext),
             RuntimeManager.getInstance().getString(R.string.pull_door_test),
             RuntimeManager.getInstance().getString(R.string.fall_test),
-            RuntimeManager.getInstance().getString(R.string.qq_send_pic_test)};
+            RuntimeManager.getInstance().getString(R.string.qq_send_pic_test),
+            RuntimeManager.getInstance().getString(R.string.test_touch_scroll)};
 
     public UIEnterAdapter(Context context) {
         super(context);
@@ -80,13 +81,13 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
                         context.startActivity(new Intent(context, DraggableFlagTestActivity.class));
                         break;
                     case 6:
-                        MusicTools.goMusicTools(context,"iyumusic://eggshell/indicator");
+                        MusicTools.goMusicTools(context, "iyumusic://eggshell/indicator");
                         break;
                     case 7:
-                        MusicTools.goMusicTools(context,"iyumusic://eggshell/animation");
+                        MusicTools.goMusicTools(context, "iyumusic://eggshell/animation");
                         break;
                     case 8:
-                        MusicTools.goMusicTools(context,"iyumusic://eggshell/material_edittext");
+                        MusicTools.goMusicTools(context, "iyumusic://eggshell/material_edittext");
                         break;
                     case 9:
                         context.startActivity(new Intent(context, PullDoorTestActivity.class));
@@ -96,6 +97,9 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
                         break;
                     case 11:
                         context.startActivity(new Intent(context, ProgressImageTestActivity.class));
+                        break;
+                    case 12:
+                        context.startActivity(new Intent(context, TouchScrollRecyclerActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));

@@ -60,9 +60,9 @@ public class SmartSwipeBack {
             activitySwipeBackListener = new ActivitySwipeBackListener(factory, filter);
         } else {
             application.unregisterActivityLifecycleCallbacks(activitySwipeBackListener);
-            activitySwipeBackListener.mFactory = factory;
-            activitySwipeBackListener.mFilter = filter;
         }
+        activitySwipeBackListener.mFactory = factory;
+        activitySwipeBackListener.mFilter = filter;
         application.registerActivityLifecycleCallbacks(activitySwipeBackListener);
     }
 
@@ -304,7 +304,7 @@ public class SmartSwipeBack {
         boolean onFilter(Activity activity);
     }
 
-    public static interface IPreviousFinder {
+    public interface IPreviousFinder {
         /**
          * find the previous activity for the given activity
          *
