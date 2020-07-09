@@ -2,14 +2,24 @@
     package="com.buaa.ct.easyui">
 
     <application>
-        <activity android:name=".DraggableFlag.DraggableFlagTestActivity" />
-        <activity android:name=".Banner.BannerTestActivity" />
+        <activity android:name=".draggableflag.DraggableFlagTestActivity" />
+        <activity android:name=".banner.BannerTestActivity" />
         <activity android:name=".pulldown.FlexibleTestActivity" />
         <activity android:name=".pulldoor.PullDoorTestActivity" />
         <activity android:name=".boundnumber.BoundNumTestActivity" />
         <activity android:name=".share.ShareDialogTestActivity" />
         <activity android:name=".progresssbar.NumberProgressbarTestActivity" />
         <activity android:name=".progressimage.ProgressImageTestActivity" />
-        <activity android:name=".FallStar.FallSnowTestActivity" />
+        <activity android:name=".fallstar.FallSnowTestActivity" />
+
+        <activity android:name=".recycler.EchelonTestActivity"/>
+        <activity android:name=".recycler.SlideTestActivity"/>
+        <activity android:name=".recycler.BannerTestActivity"/>
+        <activity android:name=".recycler.SkidTestActivity"/>
+        <activity android:name=".recycler.SkidDetailActivity"/>
+        <activity android:name=".recycler.PickerTestActivity"/>
+        <activity android:name=".recycler.ViewPagerTestActivity"/>
+        <activity android:name=".recycler.TouchScrollActivity"/>
+        <activity android:name=".recycler.MultiUserTestActivity"/>
     </application>
 </manifest>

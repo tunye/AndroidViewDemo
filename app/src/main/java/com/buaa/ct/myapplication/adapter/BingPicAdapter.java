@@ -42,7 +42,7 @@ public class BingPicAdapter extends CoreRecyclerViewAdapter<BingPic, BingPicAdap
                 FlexibleTestActivity.start(context, item.copyRightUrl);
             }
         });
-        ImageUtil.loadImage("http://s.cn.bing.net" + item.urlBase + "_640x360.jpg&rf=LaDigue_640x360.jpg", holder.pic);
+        ImageUtil.loadImage(BingPic.URL + item.urlBase + "_640x360.jpg&rf=LaDigue_640x360.jpg", holder.pic);
         holder.pic.setOnClickListener(new INoDoubleClick() {
             @Override
             public void activeClick(View v) {
@@ -54,7 +54,7 @@ public class BingPicAdapter extends CoreRecyclerViewAdapter<BingPic, BingPicAdap
     private List<String> getPicUrls() {
         List<String> urls = new ArrayList<>();
         for (BingPic pic : getDatas()) {
-            urls.add("http://s.cn.bing.net" + pic.url);
+            urls.add(BingPic.URL + pic.url);
         }
         return urls;
     }

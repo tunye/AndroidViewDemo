@@ -6,28 +6,26 @@ import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.buaa.ct.core.adapter.CoreRecyclerViewAdapter;
 import com.buaa.ct.core.listener.INoDoubleClick;
 import com.buaa.ct.core.manager.RuntimeManager;
-import com.buaa.ct.easyui.Banner.BannerTestActivity;
-import com.buaa.ct.easyui.DraggableFlag.DraggableFlagTestActivity;
-import com.buaa.ct.easyui.FallStar.FallSnowTestActivity;
+import com.buaa.ct.easyui.banner.BannerTestActivity;
+import com.buaa.ct.easyui.draggableflag.DraggableFlagTestActivity;
+import com.buaa.ct.easyui.fallstar.FallSnowTestActivity;
 import com.buaa.ct.easyui.boundnumber.BoundNumTestActivity;
 import com.buaa.ct.easyui.progressimage.ProgressImageTestActivity;
 import com.buaa.ct.easyui.progresssbar.NumberProgressbarTestActivity;
 import com.buaa.ct.easyui.pulldoor.PullDoorTestActivity;
 import com.buaa.ct.easyui.share.ShareDialogTestActivity;
 import com.buaa.ct.myapplication.R;
+import com.buaa.ct.myapplication.activity.RecyclerActivity;
 import com.buaa.ct.myapplication.activity.TestActivity;
-import com.buaa.ct.myapplication.activity.TouchScrollRecyclerActivity;
 import com.buaa.ct.stickydot.StickyDotTestActivity;
 
 import java.util.Arrays;
 
-public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapter.ItemViewHolder> {
+public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.ItemViewHolder> {
     private String[] names = {RuntimeManager.getInstance().getString(R.string.banner_test),
             "一键退朝",
             RuntimeManager.getInstance().getString(R.string.bound_num_test),
@@ -40,7 +38,7 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
             RuntimeManager.getInstance().getString(R.string.pull_door_test),
             RuntimeManager.getInstance().getString(R.string.fall_test),
             RuntimeManager.getInstance().getString(R.string.qq_send_pic_test),
-            RuntimeManager.getInstance().getString(R.string.test_touch_scroll)};
+            RuntimeManager.getInstance().getString(R.string.test_recycler)};
 
     public UIEnterAdapter(Context context) {
         super(context);
@@ -49,12 +47,12 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
 
     @NonNull
     @Override
-    public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-        return new ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.enter_item_view, parent, false));
+    public EnterAdapter.ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        return new EnterAdapter.ItemViewHolder(LayoutInflater.from(context).inflate(R.layout.enter_item_view, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull EnterAdapter.ItemViewHolder viewHolder, int i) {
         viewHolder.name.setText(getDatas().get(i));
         viewHolder.icon.setBackground(context.getResources().getDrawable(context.getResources().getIdentifier("test_icon_" + (i % 4 + 1), "drawable", context.getPackageName())));
         viewHolder.root.setTag(i);
@@ -99,7 +97,7 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
                         context.startActivity(new Intent(context, ProgressImageTestActivity.class));
                         break;
                     case 12:
-                        context.startActivity(new Intent(context, TouchScrollRecyclerActivity.class));
+                        context.startActivity(new Intent(context, RecyclerActivity.class));
                         break;
                     default:
                         context.startActivity(new Intent(context, TestActivity.class));
@@ -112,18 +110,5 @@ public class UIEnterAdapter extends CoreRecyclerViewAdapter<String, UIEnterAdapt
     @Override
     public int getItemCount() {
         return names.length;
-    }
-
-    class ItemViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
-        ImageView icon;
-        TextView name;
-        View root;
-
-        ItemViewHolder(View itemView) {
-            super(itemView);
-            root = itemView.findViewById(R.id.root);
-            icon = itemView.findViewById(R.id.enter_item_icon);
-            name = itemView.findViewById(R.id.enter_item_name);
-        }
     }
 }

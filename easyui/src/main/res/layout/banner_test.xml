@@ -8,7 +8,7 @@
 
     <include layout="@layout/toolbar" />
 
-    <com.buaa.ct.easyui.Banner.BannerView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.buaa.ct.easyui.banner.BannerView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

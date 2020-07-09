@@ -13,6 +13,8 @@ import com.buaa.ct.appskin.callback.ISkinChangedListener;
 import com.buaa.ct.core.manager.RuntimeManager;
 import com.buaa.ct.core.util.GetAppColor;
 import com.buaa.ct.core.util.SPUtils;
+import com.buaa.ct.easyui.recycler.MultiUserTestActivity;
+import com.buaa.ct.easyui.recycler.SkidTestActivity;
 import com.buaa.ct.myapplication.activity.SettingActivity;
 import com.buaa.ct.myapplication.receiver.ChangePropertyBroadcast;
 import com.buaa.ct.myapplication.sample.swipe.SwipeTestForDrawer;
@@ -94,7 +96,11 @@ public class MyApplication extends Application {
     private SmartSwipeBack.ActivitySwipeBackFilter activitySwipeBackFilter = new SmartSwipeBack.ActivitySwipeBackFilter() {
         @Override
         public boolean onFilter(Activity activity) {
-            return !(activity instanceof MainActivity) && !(activity instanceof WelcomeActivity) && !(activity instanceof SwipeTestForDrawer);
+            return !(activity instanceof MainActivity)
+                    && !(activity instanceof WelcomeActivity)
+                    && !(activity instanceof SwipeTestForDrawer)
+                    && !(activity instanceof SkidTestActivity)
+                    && !(activity instanceof MultiUserTestActivity);
         }
     };
 }

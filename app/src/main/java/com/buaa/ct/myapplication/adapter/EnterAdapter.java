@@ -110,7 +110,7 @@ public class EnterAdapter extends CoreRecyclerViewAdapter<String, EnterAdapter.I
         return count;
     }
 
-    public static class ItemViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
+    static class ItemViewHolder extends CoreRecyclerViewAdapter.MyViewHolder {
         ImageView icon;
         TextView name;
         View root;

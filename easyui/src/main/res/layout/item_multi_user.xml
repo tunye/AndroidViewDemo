@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="304dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.buaa.ct.core.view.image.CircleImageView
+        android:id="@+id/user_avatar"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:scaleType="centerCrop"
+        app:civ_border_color="@color/skin_app_color"
+        app:civ_border_overlay="true"
+        app:civ_border_width="2dp" />
+
+    <LinearLayout
+        android:id="@+id/nick_layout"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lines="1"
+            android:textColor="@color/text_complementary"
+            android:textSize="@dimen/big_text" />
+
+        <TextView
+            android:id="@+id/user_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/row_space_default"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lines="1"
+            android:maxWidth="200dp"
+            android:textColor="@color/text_complementary"
+            android:textSize="@dimen/medium_text" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/user_follow"
+        android:layout_width="70dp"
+        android:layout_height="28dp"
+        android:gravity="center"
+        android:layout_gravity="end|center_vertical"
+        android:text="关注"
+        android:textColor="@color/text_color"
+        android:background="@drawable/multi_user_follow_bg"
+        android:textSize="@dimen/big_text"/>
+</LinearLayout>

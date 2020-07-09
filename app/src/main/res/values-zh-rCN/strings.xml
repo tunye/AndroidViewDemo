@@ -15,7 +15,7 @@
     <string name="test_copyboard">仿UC 剪贴板</string>
     <string name="test_pudding">页面内toast</string>
     <string name="test_video_cache">视频缓存</string>
-    <string name="test_touch_scroll">列表滑动排序</string>
+    <string name="test_recycler">RecyclerView 相关</string>
 
     <string name="test_bing_load_all">Bing图片已经加载完毕</string>
     <string name="test_bing_info">详情</string>

@@ -132,7 +132,7 @@ public class WelcomeActivity extends BaseActivity {
                         bingPic.copyRight = section[0] + "\n(" + section[1];
                     }
                     picCopyRight.setText(bingPic.copyRight);
-                    ImageUtil.loadImage("http://s.cn.bing.net" + bingPic.urlBase+"_768x1280.jpg&rf=LaDigue_768x1280.jpg", img, null, new ImageUtil.OnBitmapLoaded() {
+                    ImageUtil.loadImage(BingPic.URL + bingPic.urlBase+"_768x1280.jpg&rf=LaDigue_768x1280.jpg", img, null, new ImageUtil.OnBitmapLoaded() {
                         @Override
                         public void onImageLoaded(Bitmap bitmap) {
                             palette.getByBitmap(bitmap, new MyPalette.PaletteFinish() {

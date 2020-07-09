@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:elevation="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:transitionName="img_view_1" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/tv_bottom"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="10dp"
+            android:text="Confidence"
+            android:textColor="@android:color/white"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:transitionName="title_1" />
+
+        <TextView
+            android:id="@+id/tv_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Do one thing at a time, and do well.Keep on going never give up.
+        Whatever is worth doing is worth doing well.I can because i think i can.Jack of all trades and master of none.
+    Whatever is worth doing is worth doing well.Keep on going never give up."
+            android:textColor="@android:color/white"
+            android:transitionName="tv_bottom" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

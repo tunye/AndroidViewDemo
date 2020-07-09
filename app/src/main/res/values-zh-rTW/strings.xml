@@ -15,7 +15,7 @@
     <string name="test_copyboard">仿UC 剪貼板</string>
     <string name="test_pudding">頁面內toast</string>
     <string name="test_video_cache">視頻緩存</string>
-    <string name="test_touch_scroll">列表滑動排序</string>
+    <string name="test_recycler">列表相關</string>
 
     <string name="test_bing_load_all">Bing圖片已經加載完畢</string>
     <string name="test_bing_info">詳情</string>

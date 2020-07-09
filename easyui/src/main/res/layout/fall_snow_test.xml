@@ -16,7 +16,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/fall_cover" />
 
-        <com.buaa.ct.easyui.FallStar.FallingView
+        <com.buaa.ct.easyui.fallstar.FallingView
             android:id="@+id/fall_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

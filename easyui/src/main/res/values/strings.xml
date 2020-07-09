@@ -10,4 +10,13 @@
     <string name="fall_test">Fall Star Effect</string>
     <string name="share_test">Share Dialog</string>
     <string name="web_flexible_test">Web Flexible test</string>
+
+    <string name="recycler_echelon">梯形滚动</string>
+    <string name="recycler_slide">滑动移出</string>
+    <string name="recycler_banner">轮播实现</string>
+    <string name="recycler_skid">窗栅侧滑</string>
+    <string name="recycler_picker">时间选择器</string>
+    <string name="recycler_view_pager">抖音流</string>
+    <string name="recycler_touch_scroll">Touch scroll RecyclerView test</string>
+    <string name="recycler_multi_user">多用户列表</string>
 </resources>
